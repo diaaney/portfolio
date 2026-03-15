@@ -1,0 +1,62 @@
+.wrap {
+  width: 100%;
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  transform: translate(-50%, -140%);
+  background: var(--white);
+  border: 1px solid var(--light);
+  color: var(--black);
+  font-family: var(--font-display), 'Georgia', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  padding: 5px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  z-index: 10;
+}
+
+.scroll {
+  overflow: visible;
+}
+
+/* hide scrollbar but keep scroll */
+.scroll::-webkit-scrollbar { height: 3px; }
+.scroll::-webkit-scrollbar-track { background: transparent; }
+.scroll::-webkit-scrollbar-thumb { background: var(--light); border-radius: 2px; }
+
+.monthText {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  fill: var(--gray);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: var(--gray);
+  letter-spacing: 0.04em;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 9px;
+}
+
+.legendCell {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+}
