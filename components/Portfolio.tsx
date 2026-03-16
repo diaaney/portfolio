@@ -190,10 +190,10 @@ export default function Portfolio({ active }: { active: boolean }) {
               hi, i&apos;m diane. i&apos;m an undergrad ml engineering student fascinated by one thing: how machines can process enormous amounts of data and find patterns humans would never see.
             </p>
             <p className={styles.p}>
-              what excites me is taking that into the real world — specifically defense. building systems that can detect objects at extreme distances is one of the things that fascinates me most, despite how brutally complex it is.
+              what excites me is taking that into the real world, specifically on defense. building systems that can detect objects at extreme distances is one of the things that fascinates me most, despite how brutally complex it is.
             </p>
             <p className={styles.p}>
-              right now i&apos;m learning by doing — building projects that touch both, getting my hands dirty with the things that excite me most.
+              right now i&apos;m learning by doing, building projects that touch both and getting my hands dirty with the things that excite me most.
             </p>
           </div>
         </section>
