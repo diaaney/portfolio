@@ -60,3 +60,9 @@
   height: 18px;
   border-radius: 3px;
 }
+
+/* ── responsive ── */
+@media (max-width: 768px) {
+  .scroll { overflow-x: auto; }
+  .footer { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
