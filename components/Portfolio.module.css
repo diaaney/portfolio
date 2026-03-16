@@ -214,10 +214,25 @@
 .sticker:active { cursor: grabbing; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.13)); }
 
 /* ── responsive ── */
-@media (max-width: 680px) {
+
+/* tablet & small desktop — hide sidebar, tighten padding */
+@media (max-width: 768px) {
   .layout { padding: 0 24px; }
   .sidebar { display: none; }
   .content { padding: 0 0 60px; }
+  .sticker { display: none; }
+}
+
+/* mobile */
+@media (max-width: 480px) {
+  .layout { padding: 0 18px; }
+  .hero { padding: 36px 0 28px; }
+  .heroBio { font-size: 12px; letter-spacing: 0.1em; }
+  .heroSocial { margin-top: 12px; }
+  .sec { padding: 32px 0; }
+  .content { padding: 0 0 48px; }
   .aboutImgWrap { float: none; margin: 0 0 16px 0; }
-  .aboutImg { width: 100%; max-width: 260px; margin: 0 auto; }
+  .aboutImg { width: 100%; max-width: 220px; margin: 0 auto; }
+  .p { font-size: 14px; }
+  .projDesc { font-size: 12px; }
 }
