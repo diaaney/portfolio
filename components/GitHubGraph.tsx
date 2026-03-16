@@ -20,7 +20,7 @@ const COLORS = [
 const MONTHS   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
 
-type Cell = { level: number; label: string }
+type Cell = { level: number; label: string; future: boolean }
 
 function getGridStart() {
   const today = new Date()
@@ -31,21 +31,24 @@ function getGridStart() {
 
 function buildGrid(start: Date, byDate: Record<string, { count: number; level: number }> = {}) {
   const grid: Cell[][] = []
+  const today = new Date()
+  today.setHours(23, 59, 59, 999)
   let total = 0
   for (let w = 0; w < WEEKS; w++) {
     const week: Cell[] = []
     for (let d = 0; d < DAYS; d++) {
       const date = new Date(start)
       date.setDate(date.getDate() + w * 7 + d)
-      const key = date.toISOString().slice(0, 10)
+      const future = date > today
+      const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
       const entry = byDate[key]
       const count = entry?.count ?? 0
-      total += count
+      if (!future) total += count
       const dayName = DAY_NAMES[date.getDay()]
       const label = count > 0
         ? `${count} contribution${count > 1 ? 's' : ''} · ${dayName}, ${MONTHS[date.getMonth()]} ${date.getDate()}`
         : `${dayName}, ${MONTHS[date.getMonth()]} ${date.getDate()}`
-      week.push({ level: entry?.level ?? 0, label })
+      week.push({ level: entry?.level ?? 0, label, future })
     }
     grid.push(week)
   }
@@ -104,7 +107,7 @@ export default function GitHubGraph() {
             <text key={name} x={x} y={10} className={styles.monthText}>{name}</text>
           ))}
           {grid.map((week, wi) =>
-            week.map((cell, di) => (
+            week.map((cell, di) => cell.future ? null : (
               <rect
                 key={`${wi}-${di}`}
                 x={wi * STEP}
