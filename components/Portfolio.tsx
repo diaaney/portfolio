@@ -4,18 +4,43 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Portfolio.module.css'
 import GitHubGraph from './GitHubGraph'
 
-function DraggableSticker({ src, alt, initialX, initialY, fromRight, width, rotate = 0, containerRef }: {
-  src: string; alt: string; initialX?: number; initialY: number; fromRight?: number; width: number; rotate?: number
+function DraggableSticker({ src, alt, initialY, fromRight, width, rotate = 0, containerRef }: {
+  src: string; alt: string; initialY: number; fromRight?: number; width: number; rotate?: number
   containerRef: React.RefObject<HTMLDivElement | null>
 }) {
-  const [pos, setPos] = useState(() => ({
-    x: fromRight != null ? (typeof window !== 'undefined' ? window.innerWidth - width - fromRight : 800) : (initialX ?? 0),
-    y: initialY,
-  }))
+  const isRight = fromRight != null
+
+  const calcState = () => {
+    if (typeof window === 'undefined') return { x: isRight ? 800 : 0, y: initialY, w: width }
+    const vw = window.innerWidth
+    const layoutW = Math.min(780, vw - 64)
+    const layoutLeft = (vw - layoutW) / 2
+    const available = Math.max(0, layoutLeft - 40)
+    const w = Math.max(120, Math.min(width, available))
+    const x = isRight ? layoutLeft + layoutW + 20 : layoutLeft - w - 20
+    return { x, y: initialY, w }
+  }
+
+  const [pos, setPos] = useState(() => { const s = calcState(); return { x: s.x, y: s.y } })
+  const [displayW, setDisplayW] = useState(() => calcState().w)
+  const dragged  = useRef(false)
   const dragging = useRef(false)
   const offset   = useRef({ x: 0, y: 0 })
 
+  useEffect(() => {
+    const onResize = () => {
+      if (!dragged.current) {
+        const s = calcState()
+        setPos({ x: s.x, y: s.y })
+        setDisplayW(s.w)
+      }
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   const onMouseDown = (e: React.MouseEvent) => {
+    dragged.current  = true
     dragging.current = true
     const el = containerRef.current
     const rect = el?.getBoundingClientRect()
@@ -46,7 +71,7 @@ function DraggableSticker({ src, alt, initialX, initialY, fromRight, width, rota
     <img
       src={src} alt={alt}
       className={styles.sticker}
-      style={{ left: pos.x, top: pos.y, width, transform: `rotate(${rotate}deg)` }}
+      style={{ left: pos.x, top: pos.y, width: displayW, transform: `rotate(${rotate}deg)` }}
       onMouseDown={onMouseDown}
       draggable={false}
     />
@@ -107,8 +132,8 @@ export default function Portfolio({ active }: { active: boolean }) {
       className={`${styles.wrap} ${active ? styles.on : ''}`}
     >
       {active && <>
-        <DraggableSticker src="/media/onigiri.png" alt="onigiri" initialX={200}  initialY={900}  width={300} rotate={-12} containerRef={wrapRef} />
-        <DraggableSticker src="/media/su57.png"    alt="su-57"   fromRight={120} initialY={1300} width={320} containerRef={wrapRef} />
+        <DraggableSticker src="/media/onigiri.png" alt="onigiri" initialY={900}  width={300} rotate={-12} containerRef={wrapRef} />
+        <DraggableSticker src="/media/su57.png"    alt="su-57"   fromRight={0}   initialY={1300} width={320} containerRef={wrapRef} />
       </>}
       <div className={styles.layout}>
 
