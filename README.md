@@ -1,25 +1,17 @@
-# diane
+# ✨ diane
 
-interactive portfolio with intro animation, github graph visualization, draggable stickers, and chat interface.
+interactive portfolio with animations, github visualization, and playful stickers.
 
-## features
+## 🎨 features
 
-- intro animation sequence
-- github activity graph
-- draggable stickers
-- chat phase
-- fully responsive (mobile, tablet, desktop)
+- 🎬 animated intro sequence
+- 📊 github activity graph
+- 🎯 draggable stickers
+- 💬 interactive chat
+- 📱 fully responsive design
 
-## tech stack
+## 🛠️ built with
 
-- next.js 15
-- typescript
-- tailwind css
-
-## getting started
-
-```bash
-npm run dev
-```
-
-open [http://localhost:3000](http://localhost:3000)
+- ⚡ next.js 15
+- 💙 typescript
+- 🎨 tailwind css
