@@ -79,9 +79,8 @@ function DraggableSticker({ src, alt, initialY, fromRight, width, rotate = 0, co
 }
 
 const PROJECTS = [
-  { id: '01', title: 'project name', desc: 'Short punchy description of what this does and why it matters.', tags: ['TypeScript','React','LLM'] },
-  { id: '02', title: 'project name', desc: 'Another project. What makes it interesting?', tags: ['Python','FastAPI'] },
-  { id: '03', title: 'project name', desc: 'Third project. You have work — put it here.', tags: ['Node.js','Postgres'] },
+  { id: '01', title: 'openglow', desc: 'glowup & welness tracking app', tags: ['TypeScript','React','AI'] },
+  { id: '02', title: 'lumiose', desc: 'web design agency for local businesess', tags: ['TypeScript','React','PostgreSQL'] },
 ]
 
 const SECTIONS = ['about','work']
