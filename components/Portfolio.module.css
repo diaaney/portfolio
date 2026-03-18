@@ -2,7 +2,7 @@
 .wrap {
   opacity: 0; pointer-events: none;
   transition: opacity 0.9s ease;
-  height: 100vh; overflow-y: auto;
+  height: 100vh; overflow-y: auto; overflow-x: hidden;
   scroll-behavior: smooth;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   background: var(--white);
