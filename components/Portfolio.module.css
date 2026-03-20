@@ -213,6 +213,143 @@
 }
 .sticker:active { cursor: grabbing; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.13)); }
 
+/* ── transition overlay ── */
+.transitionOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--white);
+  opacity: 0;
+  animation: smoothFade 0.6s ease;
+}
+
+@keyframes smoothFade {
+  0% { opacity: 0; }
+  40% { opacity: 1; }
+  60% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ── gallery view ── */
+.galleryView {
+  min-height: 100vh;
+  background: var(--white);
+  padding: 0;
+  opacity: 1;
+}
+
+.galleryGrid {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 52px 32px 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.galleryBack {
+  position: sticky;
+  top: 32px;
+  display: inline-block;
+  margin-bottom: 44px;
+  background: none;
+  border: none;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s, opacity 0.4s ease, transform 0.45s cubic-bezier(.4,0,.2,1);
+  z-index: 10;
+  align-self: flex-start;
+  opacity: 0;
+  transform: translateX(-18px);
+  animation: backFadeIn 0.5s ease 0.3s forwards;
+}
+
+.galleryBack:hover {
+  color: var(--black);
+}
+
+@keyframes backFadeIn {
+  from { opacity: 0; transform: translateX(-18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.galleryHeader {
+  text-align: center;
+  margin-bottom: 44px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--light);
+}
+
+.galleryTitle {
+  font-family: var(--font-display), 'Georgia', serif;
+  font-size: clamp(52px, 9vw, 96px);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.gallerySubtitle {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--gray);
+}
+
+.galleryIntro {
+  font-size: 15px;
+  line-height: 1.78;
+  color: #333;
+  margin-bottom: 56px;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.galleryFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.post {
+  padding-top: 0;
+}
+
+.postCaption {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.postImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postImage img {
+  max-width: 45%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--light);
+}
+
+@keyframes galleryFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* ── responsive ── */
 
 /* tablet & small desktop — hide sidebar, tighten padding */

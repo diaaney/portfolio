@@ -83,11 +83,13 @@ const PROJECTS = [
   { id: '02', title: 'lumiose', desc: 'web design agency for local businesess', tags: ['TypeScript','React','PostgreSQL'] },
 ]
 
-const SECTIONS = ['about','work']
+const SECTIONS = ['about','work','gallery']
 
 export default function Portfolio({ active }: { active: boolean }) {
   const [scrolled, setScrolled]       = useState(false)
   const [activeSection, setActive]    = useState('about')
+  const [galleryMode, setGalleryMode] = useState(false)
+  const [transitioning, setTransitioning] = useState(false)
   const wrapRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -97,8 +99,8 @@ export default function Portfolio({ active }: { active: boolean }) {
 
     const onScroll = () => {
       setScrolled(el.scrollTop > 130)
-      // active section
-      for (const id of [...SECTIONS].reverse()) {
+      // active section (exclude gallery from auto-activation)
+      for (const id of [...SECTIONS].reverse().filter(s => s !== 'gallery')) {
         const sec = el.querySelector(`#${id}`) as HTMLElement | null
         if (sec && el.scrollTop + 120 >= sec.offsetTop) { setActive(id); break }
       }
@@ -112,6 +114,35 @@ export default function Portfolio({ active }: { active: boolean }) {
       if (!target) return
       const id = target.getAttribute('href')?.slice(1)
       if (!id) return
+      // handle gallery separately - trigger transition
+      if (id === 'gallery') {
+        e.preventDefault()
+        if (galleryMode) return // already in gallery
+        setTransitioning(true)
+        setTimeout(() => {
+          setActive('gallery')
+          el.scrollTo({ top: 0, behavior: 'auto' })
+          setGalleryMode(true)
+        }, 300)
+        setTimeout(() => setTransitioning(false), 600)
+        return
+      }
+      // if in gallery mode and clicking other links, exit gallery
+      if (galleryMode && id !== 'gallery') {
+        e.preventDefault()
+        setTransitioning(true)
+        setTimeout(() => {
+          el.scrollTo({ top: 0, behavior: 'auto' })
+          setGalleryMode(false)
+          setActive(id)
+        }, 300)
+        setTimeout(() => {
+          setTransitioning(false)
+          const sec = el.querySelector(`#${id}`) as HTMLElement | null
+          if (sec) el.scrollTo({ top: sec.offsetTop, behavior: 'smooth' })
+        }, 600)
+        return
+      }
       const sec = el.querySelector(`#${id}`) as HTMLElement | null
       if (!sec) return
       e.preventDefault()
@@ -128,12 +159,17 @@ export default function Portfolio({ active }: { active: boolean }) {
   return (
     <div
       ref={wrapRef}
-      className={`${styles.wrap} ${active ? styles.on : ''}`}
+      className={`${styles.wrap} ${active ? styles.on : ''} ${transitioning ? styles.transitioning : ''}`}
     >
-      {active && <>
+      {active && !galleryMode && <>
         <DraggableSticker src="/media/onigiri.png" alt="onigiri" initialY={900}  width={300} rotate={-12} containerRef={wrapRef} />
         <DraggableSticker src="/media/su57.png"    alt="su-57"   fromRight={0}   initialY={1300} width={320} containerRef={wrapRef} />
       </>}
+
+      {/* Transition overlay */}
+      {transitioning && <div className={styles.transitionOverlay} />}
+
+      {!galleryMode ? (
       <div className={styles.layout}>
 
       {/* ── Sticky sidebar (appears on scroll) ── */}
@@ -182,6 +218,7 @@ export default function Portfolio({ active }: { active: boolean }) {
           <nav className={styles.heroNav}>
             <a href="#about">about</a>
             <a href="#work">work</a>
+            <a href="#gallery">gallery</a>
           </nav>
           <div className={styles.heroSocial}>
             <a href="https://github.com/diaaney" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -248,11 +285,89 @@ export default function Portfolio({ active }: { active: boolean }) {
           </div>
         </section>
 
-
         <footer className={styles.footer}>diane. © 2026</footer>
       </div>
 
       </div>
+      ) : (
+      <div className={styles.galleryView}>
+        <div className={styles.galleryGrid}>
+          <button
+            className={styles.galleryBack}
+            onClick={() => {
+              setTransitioning(true)
+              const el = wrapRef.current
+              setTimeout(() => {
+                if (el) el.scrollTo({ top: 0, behavior: 'auto' })
+                setGalleryMode(false)
+                setActive('work')
+              }, 300)
+              setTimeout(() => setTransitioning(false), 600)
+            }}
+          >
+            ← back
+          </button>
+
+          <header className={styles.galleryHeader}>
+            <h1 className={styles.galleryTitle}>gallery.</h1>
+            <p className={styles.gallerySubtitle}>cool pics</p>
+          </header>
+
+          <p className={styles.galleryIntro}>
+            woOw you made it here! you must really wanna see some cool pics. don&apos;t worry, i got u.
+          </p>
+
+          {/* Blog-style feed */}
+          <div className={styles.galleryFeed}>
+
+            <article className={styles.post}>
+              <p className={styles.postCaption}>
+                me if i was a router
+              </p>
+              <div className={styles.postImage}>
+                <img src="/gallery/1.png" alt="meme" />
+              </div>
+            </article>
+
+            <article className={styles.post}>
+              <p className={styles.postCaption}>
+                this is ACTUALLY me
+              </p>
+              <div className={styles.postImage}>
+                <img src="/gallery/2.jpg" alt="photo" />
+              </div>
+            </article>
+
+            <article className={styles.post}>
+              <p className={styles.postCaption}>
+              </p>
+              <div className={styles.postImage}>
+                <img src="/gallery/4.png" alt="photo" />
+              </div>
+            </article>
+
+            <article className={styles.post}>
+              <p className={styles.postCaption}>
+                bro
+              </p>
+              <div className={styles.postImage}>
+                <img src="/gallery/5.png" alt="photo" />
+              </div>
+            </article>
+
+            <article className={styles.post}>
+              <p className={styles.postCaption}>
+                take care of them...
+              </p>
+              <div className={styles.postImage}>
+                <img src="/gallery/6.png" alt="photo" />
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+      )}
     </div>
   )
 }
