@@ -57,7 +57,7 @@ export default function ChatPhase({ active, onDone }: Props) {
         setMessages(prev => [...prev, { role: c.role, text: c.text, typed: '', done: false, isTyping: true }])
         await sleep(c.think)
         setMessages(prev => prev.map((m, j) => j === i ? { ...m, isTyping: false } : m))
-        await typeMsg(i, c.text, c.role === '?' ? 42 : 22)
+        await typeMsg(i, c.text, c.role === '?' ? 25 : 15)
         await sleep(200)
       }
       await sleep(500)
