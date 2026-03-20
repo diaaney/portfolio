@@ -14,6 +14,9 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: 'diane.',
   description: 'software engineer — building at the intersection of ai and human experience',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
