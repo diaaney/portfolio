@@ -9,55 +9,44 @@
 .off { opacity: 0; pointer-events: none; }
 
 .inner {
-  width: min(520px, 88vw);
+  width: min(480px, 88vw);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
 .frame {
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   flex-shrink: 0;
-  animation: pop 0.16s cubic-bezier(.4,0,.2,1) both;
-}
-@keyframes pop {
-  from { transform: scale(0.88); opacity: 0.3; }
-  to   { transform: scale(1);    opacity: 1; }
+  will-change: transform, opacity;
 }
 
-.chat { width: 100%; }
-
-.msgs { display: flex; flex-direction: column; gap: 20px; }
-
-.msg {
-  display: flex; gap: 14px;
-  animation: up 0.3s ease forwards;
+.chat {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
-@keyframes up { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
 
-.role {
-  font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--gray); padding-top: 2px; min-width: 26px; flex-shrink: 0;
+.text {
+  font-size: 14px;
+  line-height: 1.72;
+  color: #6b5f58;
+  margin: 0;
+  min-height: 1em;
+  text-align: center;
 }
-.you .role { color: var(--black); }
-
-.text { font-size: 14px; line-height: 1.65; color: var(--black); flex: 1; }
 
 .caret {
-  display: inline-block; width: 7px; height: 13px;
-  background: var(--black); margin-left: 1px; vertical-align: middle;
-  animation: blink .75s infinite;
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  background: #6b5f58;
+  margin-left: 1px;
+  vertical-align: middle;
+  animation: blink 0.75s infinite;
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-.dots { display: inline-flex; gap: 3px; align-items: center; }
-.dots i {
-  display: block; width: 4px; height: 4px; border-radius: 50%;
-  background: var(--gray); animation: b 1s infinite; font-style: normal;
-}
-.dots i:nth-child(2){animation-delay:.15s}
-.dots i:nth-child(3){animation-delay:.3s}
-@keyframes b { 0%,100%{transform:translateY(0);opacity:.4} 50%{transform:translateY(-3px);opacity:1} }
