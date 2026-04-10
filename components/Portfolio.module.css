@@ -5,7 +5,7 @@
   height: 100vh; overflow-y: auto; overflow-x: hidden;
   scroll-behavior: smooth;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  background: var(--white);
+  background: transparent;
   position: relative;
 }
 .on { opacity: 1; pointer-events: all; }
@@ -17,6 +17,8 @@
   margin: 0 auto;
   padding: 0 32px;
   align-items: flex-start;
+  position: relative;
+  z-index: 10;
 }
 
 /* ── sidebar ── */
@@ -31,6 +33,7 @@
   display: flex; flex-direction: column; gap: 0;
   opacity: 0;
   pointer-events: none;
+  z-index: 10;
 }
 .sidebarOn { opacity: 1; pointer-events: all; }
 
@@ -63,6 +66,7 @@
 .sidebarOn .sNav a:nth-child(1) { transition-delay: 0.08s; }
 .sidebarOn .sNav a:nth-child(2) { transition-delay: 0.13s; }
 .sidebarOn .sNav a:nth-child(3) { transition-delay: 0.18s; }
+.sidebarOn .sNav a:nth-child(4) { transition-delay: 0.23s; }
 .sNav a:hover { color: var(--black); }
 .sActive { color: var(--black) !important; }
 
@@ -78,7 +82,7 @@
   display: flex; align-items: center;
   transition: color 0.2s;
 }
-.sSocial a:hover { color: var(--black); }
+.sSocial a:hover { color: #e8869a; }
 
 /* ── content ── */
 .content { flex: 1; min-width: 0; padding: 0 0 80px; }
@@ -109,7 +113,30 @@
   font-family: 'Courier New', monospace;
   font-size: 14px; color: var(--gray);
   letter-spacing: 0.18em;
-  margin-bottom: 28px;
+  margin-bottom: 8px;
+}
+.heroEmail {
+  display: inline-flex;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  margin-bottom: 22px;
+  color: var(--gray);
+}
+.heroEmail span {
+  display: inline-block;
+  animation: emailWave 3s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+.heroEmail:hover span {
+  animation: emailReturn 0.5s cubic-bezier(0.37, 0, 0.63, 1) forwards;
+}
+@keyframes emailWave {
+  0%, 100% { transform: translateY(0px);  color: #aaa; }
+  50%       { transform: translateY(-5px); color: #f9c8d4; }
+}
+@keyframes emailReturn {
+  to { transform: translateY(0px); color: #aaa; }
 }
 .heroNav {
   display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
@@ -136,7 +163,66 @@
   display: flex; align-items: center;
   transition: color 0.2s;
 }
-.heroSocial a:hover { color: var(--black); }
+.heroSocial a:hover { color: #e8869a; }
+
+/* ── email copy tooltip ── */
+.emailWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.emailBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.emailBtn:hover { color: #e8869a; }
+.emailWrapCopied .emailBtn { color: #e8869a; }
+
+.emailTooltip {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  background: var(--white);
+  border: 1px solid #e8e8e6;
+  padding: 5px 11px;
+  border-radius: 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  color: var(--gray);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  z-index: 50;
+}
+.emailTooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-right-color: #e8e8e6;
+}
+.emailWrap:hover .emailTooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+.emailWrapCopied .emailTooltip {
+  color: #e8869a;
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
 
 /* ── sections ── */
 .sec { padding: 44px 0; border-top: 1px solid var(--light); }
@@ -202,6 +288,29 @@
   font-size: 10px; color: var(--gray); letter-spacing: 0.1em;
 }
 
+/* ── dot field ── */
+.dotField {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.fieldDot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  animation: dotPop 320ms ease-out forwards;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes dotPop {
+  0%   { opacity: 0;   scale: 0.5; }
+  20%  { opacity: 0.9; scale: 1;   }
+  60%  { opacity: 0.8; scale: 1;   }
+  100% { opacity: 0;   scale: 0.85; }
+}
+
 /* ── draggable stickers ── */
 .sticker {
   position: absolute;
@@ -234,9 +343,11 @@
 /* ── gallery view ── */
 .galleryView {
   min-height: 100vh;
-  background: var(--white);
+  background: transparent;
   padding: 0;
   opacity: 1;
+  position: relative;
+  z-index: 10;
 }
 
 .galleryGrid {
@@ -343,6 +454,54 @@
   height: auto;
   display: block;
   border: 1px solid var(--light);
+}
+
+/* ── blog ── */
+.blogFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.blogEmpty {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--gray);
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.blogPost {
+  padding: 28px 0;
+  border-top: 1px solid var(--light);
+}
+
+.blogPostMeta {
+  margin-bottom: 8px;
+}
+
+.blogPostDate {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.blogPostTitle {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.blogPostExcerpt {
+  font-size: 14px;
+  line-height: 1.78;
+  color: #555;
 }
 
 @keyframes galleryFadeIn {
