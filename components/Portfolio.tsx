@@ -79,10 +79,15 @@ function DraggableSticker({ src, alt, initialY, fromRight, width, rotate = 0, co
   )
 }
 
-const PROJECTS = [
-  { id: '01', title: 'openpseint', desc: 'open source web simulator for pseint, pseudocode in the browser with no install needed', tags: ['TypeScript','React','Open Source'] },
+const PROJECTS: {
+  id: string
+  title: string
+  desc: string
+  tags: string[]
+  href?: string
+}[] = [
+  { id: '01', title: 'lumiose', desc: 'web design agency for local businesses', tags: ['TypeScript','React','PostgreSQL'], href: 'https://lumiose.studio' },
   { id: '02', title: 'soju network', desc: 'minecraft server where i learn gcp, multi-region infra, and java the hard way', tags: ['Java','Google Cloud','Networking'] },
-  { id: '03', title: 'lumiose', desc: 'web design agency for local businesses', tags: ['TypeScript','React','PostgreSQL'] },
 ]
 
 const SECTIONS = ['about','work','gallery','blog']
@@ -394,7 +399,7 @@ export default function Portfolio({ active }: { active: boolean }) {
         <header className={`${styles.hero} ${scrolled ? styles.heroOut : ''}`}>
           <span className={styles.heroDeco}>✦ ✦ ✦</span>
           <h1 className={styles.heroName} data-small-dots>diane.</h1>
-          <p className={styles.heroBio} data-small-dots>aerospace undergrad & insane vibecoder</p>
+          <p className={styles.heroBio} data-small-dots>ml undergrad & insane vibecoder</p>
           <nav className={styles.heroNav}>
             <a href="#about">about</a>
             <a href="#work">work</a>
@@ -434,13 +439,34 @@ export default function Portfolio({ active }: { active: boolean }) {
             </div>
             <h2 className={styles.secH}>ABOUT ME</h2>
             <p className={styles.p}>
-              hi, i&apos;m diane. aerospace engineering student, and also someone who picked up coding as a hobby and kinda likes it. (it&apos;s an excuse to not pay attention in class).
+              hi, i&apos;m diane. ml engineering student, i&apos;m currently working @{' '}
+              <a
+                href="https://lumiose.studio"
+                target="_blank"
+                rel="noreferrer"
+                className={styles.lumioseLink}
+              >
+                <svg
+                  className={styles.lumioseMark}
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden
+                >
+                  <g transform="rotate(30 12 12)">
+                    <rect x="11" y="2" width="2" height="20" rx="1" />
+                    <rect x="11" y="2" width="2" height="20" rx="1" transform="rotate(60 12 12)" />
+                    <rect x="11" y="2" width="2" height="20" rx="1" transform="rotate(-60 12 12)" />
+                  </g>
+                </svg>
+                Lumiose Studio
+              </a>
+              , this is my own business where i make websites for local businesses.
             </p>
             <p className={styles.p}>
-              i&apos;m still early. i don&apos;t have years of experience or an impressive list of internships. what i do have is a habit of polishing day by day my projects: web apps, servers, random tools i needed and just built. i learn better by doing than by watching someone else do it.
+              i&apos;m still early. i don&apos;t have years of experience or an impressive list of internships. what i do have is a habit of polishing day by day my projects. i learn better by doing than by watching someone else do it.
             </p>
             <p className={styles.p}>
-              someday i want to work on software that matters in a real way, the kind that ends up on something that flies. i&apos;m not there yet, but every project gets me a little closer.
+              someday i want to work on software that matters in a real way, the kind that ends up on something that flies haha. i&apos;m not there yet, but let&apos;s keep pushing &gt;:3.
             </p>
           </div>
         </section>
@@ -460,7 +486,21 @@ export default function Portfolio({ active }: { active: boolean }) {
                 <div className={styles.projTop}>
                   <span className={styles.projIdx}>{p.id}</span>
                   <span className={styles.projTitle}>{p.title}</span>
-                  <a href="#" className={styles.projLink}>↗</a>
+                  {p.href ? (
+                    <a
+                      href={p.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={styles.projLink}
+                      aria-label={`Open ${p.title}`}
+                    >
+                      ↗
+                    </a>
+                  ) : (
+                    <span className={styles.projLink} aria-hidden>
+                      ↗
+                    </span>
+                  )}
                 </div>
                 <p className={styles.projDesc}>{p.desc}</p>
                 <div className={styles.tags}>
