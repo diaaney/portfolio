@@ -87,7 +87,7 @@ const PROJECTS: {
   href?: string
 }[] = [
   { id: '01', title: 'lumiose', desc: 'web design agency for local businesses', tags: ['TypeScript','React','PostgreSQL'], href: 'https://lumiose.studio' },
-  { id: '02', title: 'soju network', desc: 'minecraft server where i learn gcp, multi-region infra, and java the hard way', tags: ['Java','Google Cloud','Networking'] },
+  { id: '02', title: 'rapier', desc: 'paper 1.21.11 fork that restores authentic 1.8.9 pvp combat on modern minecraft servers', tags: ['Java','Paper','Minecraft'], href: 'https://github.com/diaaney/rapier' },
 ]
 
 const SECTIONS = ['about','work','gallery','blog']
