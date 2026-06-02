@@ -473,10 +473,10 @@ export default function Portfolio({ active }: { active: boolean }) {
               , this is my own business where i make websites for local businesses.
             </p>
             <p className={styles.p}>
-              i&apos;m still early. i don&apos;t have years of experience or an impressive list of internships. what i do have is a habit of polishing day by day my projects. i learn better by doing than by watching someone else do it.
+              i also enjoy porting and doing plugins/mods for Minecraft servers, though i have a problem: i leave projects unfinished. i gotta work on fixing that haha
             </p>
             <p className={styles.p}>
-              someday i want to work on software that matters in a real way, the kind that ends up on something that flies haha. i&apos;m not there yet, but let&apos;s keep pushing &gt;:3.
+              someday i want to work on software that matters in a real way, and actually knowing what the fuck i&apos;m doing. i&apos;m not there yet, but let&apos;s keep pushing &gt;:3.
             </p>
           </div>
         </section>
