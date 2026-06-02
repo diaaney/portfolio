@@ -88,6 +88,8 @@ const PROJECTS: {
 }[] = [
   { id: '01', title: 'lumiose', desc: 'web design agency for local businesses', tags: ['TypeScript','React','PostgreSQL'], href: 'https://lumiose.studio' },
   { id: '02', title: 'rapier', desc: 'paper 1.21.11 fork that restores authentic 1.8.9 pvp combat on modern minecraft servers', tags: ['Java','Paper','Minecraft'], href: 'https://github.com/diaaney/rapier' },
+  { id: '03', title: 'mira', desc: 'discord bot with a counting game, dynamic voice channels, and welcome automation', tags: ['Node.js','Discord.js','JavaScript'], href: 'https://github.com/diaaney/mira' },
+  { id: '04', title: "farmer's delight", desc: "paper port of the farmer's delight mod", tags: ['Java','Paper','Minecraft'] },
 ]
 
 const SECTIONS = ['about','work','gallery','blog']
