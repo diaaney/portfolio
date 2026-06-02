@@ -607,15 +607,88 @@ export default function Portfolio({ active }: { active: boolean }) {
               </div>
             </article>
             <article className={styles.post}>
-              <p className={styles.postCaption} data-small-dots>bro</p>
               <div className={styles.postImage}>
-                <img src="/gallery/5.png" alt="photo" />
+                <img src="/gallery/g07.jpg" alt="photo" />
               </div>
             </article>
             <article className={styles.post}>
-              <p className={styles.postCaption} data-small-dots>take care of them...</p>
               <div className={styles.postImage}>
-                <img src="/gallery/6.png" alt="photo" />
+                <img src="/gallery/g08.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g09.png" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g10.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g11.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g12.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g13.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g14.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g15.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g16.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g17.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g18.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g19.png" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g20.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g21.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g22.jpg" alt="photo" />
+              </div>
+            </article>
+            <article className={styles.post}>
+              <div className={styles.postImage}>
+                <img src="/gallery/g23.jpg" alt="photo" />
               </div>
             </article>
           </div>
