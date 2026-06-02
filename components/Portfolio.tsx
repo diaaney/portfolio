@@ -5,8 +5,8 @@ import { createPortal } from 'react-dom'
 import styles from './Portfolio.module.css'
 import GitHubGraph from './GitHubGraph'
 
-function DraggableSticker({ src, alt, initialY, fromRight, width, rotate = 0, containerRef }: {
-  src: string; alt: string; initialY: number; fromRight?: number; width: number; rotate?: number
+function DraggableSticker({ src, alt, initialY, fromRight, width, rotate = 0, clamp = true, gap = 20, containerRef }: {
+  src: string; alt: string; initialY: number; fromRight?: number; width: number; rotate?: number; clamp?: boolean; gap?: number
   containerRef: React.RefObject<HTMLDivElement | null>
 }) {
   const isRight = fromRight != null
@@ -17,8 +17,10 @@ function DraggableSticker({ src, alt, initialY, fromRight, width, rotate = 0, co
     const layoutW = Math.min(780, vw - 64)
     const layoutLeft = (vw - layoutW) / 2
     const available = Math.max(0, layoutLeft - 40)
-    const w = Math.max(120, Math.min(width, available))
-    const x = isRight ? layoutLeft + layoutW + 20 : layoutLeft - w - 20
+    // when clamp is off, use the full width and just keep it on-screen (can overlap content)
+    const w = clamp ? Math.max(120, Math.min(width, available)) : width
+    let x = isRight ? layoutLeft + layoutW + gap : layoutLeft - w - gap
+    if (!clamp) x = isRight ? Math.min(x, vw - w - 12) : Math.max(12, x)
     return { x, y: initialY, w }
   }
 
@@ -345,7 +347,13 @@ export default function Portfolio({ active }: { active: boolean }) {
 
       {active && !galleryMode && !blogMode && <>
         <DraggableSticker src="/media/onigiri.png" alt="onigiri" initialY={900}  width={300} rotate={-12} containerRef={wrapRef} />
-        <DraggableSticker src="/media/2.png"        alt="sticker" fromRight={0}   initialY={1300} width={320} containerRef={wrapRef} />
+        <DraggableSticker src="/media/2.png"        alt="sticker" fromRight={0}   initialY={1300} width={262} containerRef={wrapRef} />
+      </>}
+
+      {active && blogMode && <>
+        <DraggableSticker src="/media/stickers/c3.png" alt="sticker"               initialY={120} width={150} rotate={-3} gap={70} containerRef={wrapRef} />
+        <DraggableSticker src="/media/stickers/c2.png" alt="sticker" fromRight={0} initialY={250} width={185} rotate={4}  gap={70} containerRef={wrapRef} />
+        <DraggableSticker src="/media/stickers/c1.png" alt="sticker"               initialY={660} width={400} rotate={-4} clamp={false} containerRef={wrapRef} />
       </>}
 
       {/* Transition overlay */}
@@ -513,7 +521,12 @@ export default function Portfolio({ active }: { active: boolean }) {
           </div>
         </section>
 
-        <footer className={styles.footer} data-no-dots>diane. © 2026</footer>
+        <footer className={styles.footer} data-no-dots>
+          diane. © 2026
+          <span className={styles.footerNote}>
+            some of the &quot;sketches&quot; have been edited with ai and aren&apos;t mine. the original authors are @failuregirlp and @1ullab1, and the one on the hero i don&apos;t remember, i&apos;m sorryyy!!! u.u
+          </span>
+        </footer>
       </div>
 
       </div>
