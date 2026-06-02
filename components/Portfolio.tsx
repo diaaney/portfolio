@@ -345,7 +345,7 @@ export default function Portfolio({ active }: { active: boolean }) {
 
       {active && !galleryMode && !blogMode && <>
         <DraggableSticker src="/media/onigiri.png" alt="onigiri" initialY={900}  width={300} rotate={-12} containerRef={wrapRef} />
-        <DraggableSticker src="/media/su57.png"    alt="su-57"   fromRight={0}   initialY={1300} width={320} containerRef={wrapRef} />
+        <DraggableSticker src="/media/2.png"        alt="sticker" fromRight={0}   initialY={1300} width={320} containerRef={wrapRef} />
       </>}
 
       {/* Transition overlay */}
