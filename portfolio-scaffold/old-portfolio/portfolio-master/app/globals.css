@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #0d0d0d;
+  --white: #f5f5f3;
+  --gray: #999;
+  --light: #e5e5e3;
+  --mid: #555;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+@layer base {
+  *::selection        { background-color: #f9c8d4; color: #0d0d0d; }
+  *::-moz-selection   { background-color: #f9c8d4; color: #0d0d0d; }
+}
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
+  height: 100vh;
+}
