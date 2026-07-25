@@ -11,7 +11,7 @@ import xml.etree.ElementTree as ET
 from PIL import Image, PngImagePlugin
 
 
-NAME = "Diane Charcoal Fixed Grain"
+NAME = "Diane Charcoal Grain Taper"
 PRESSURE_FLAGS = (
     "PressureOpacity",
     "PressureFlow",
@@ -19,6 +19,14 @@ PRESSURE_FLAGS = (
     "MaskingBrush/Preset/PressureOpacity",
     "MaskingBrush/Preset/PressureFlow",
 )
+
+SIZE_CURVE = "0,0;0.4,1;1,1;"
+
+
+def replace_once(preset: str, old: str, new: str, setting: str) -> str:
+    if preset.count(old) != 1:
+        raise ValueError(f"Expected one setting for {setting}")
+    return preset.replace(old, new, 1)
 
 
 def main(source: Path, destination: Path) -> None:
@@ -32,15 +40,36 @@ def main(source: Path, destination: Path) -> None:
             raise ValueError("Source is not the expected charcoal pencil preset")
 
         old_name = f'name="{original_name}"'
-        if preset.count(old_name) != 1:
-            raise ValueError("Could not uniquely identify the preset name")
-        preset = preset.replace(old_name, f'name="{NAME}"', 1)
+        preset = replace_once(preset, old_name, f'name="{NAME}"', "preset name")
 
         for flag in PRESSURE_FLAGS:
             old = f'name="{flag}">true</param>'
-            if preset.count(old) != 1:
-                raise ValueError(f"Expected one enabled setting: {flag}")
-            preset = preset.replace(old, f'name="{flag}">false</param>', 1)
+            preset = replace_once(preset, old, f'name="{flag}">false</param>', flag)
+
+        preset = replace_once(
+            preset,
+            'name="Texture/Pattern/Scale">0.35</param>',
+            'name="Texture/Pattern/Scale">1</param>',
+            "texture scale",
+        )
+        preset = replace_once(
+            preset,
+            'name="Texture/Strength/Value">0.48</param>',
+            'name="Texture/Strength/Value">0.85</param>',
+            "texture strength",
+        )
+        preset = replace_once(
+            preset,
+            '<curve>0,0.497817;1,1;</curve> </params> ]]></param> <param type="internal" name="SizeUseCurve"',
+            f'<curve>{SIZE_CURVE}</curve> </params> ]]></param> <param type="internal" name="SizeUseCurve"',
+            "size sensor curve",
+        )
+        preset = replace_once(
+            preset,
+            'name="SizecommonCurve"><![CDATA[0,0.497817;1,1;]]></param>',
+            f'name="SizecommonCurve"><![CDATA[{SIZE_CURVE}]]></param>',
+            "size curve",
+        )
 
         parameters = {item.get("name"): item.text for item in ET.fromstring(preset).iter("param")}
         if any(parameters[flag] != "false" for flag in PRESSURE_FLAGS):
@@ -49,6 +78,10 @@ def main(source: Path, destination: Path) -> None:
             raise ValueError("The grain pattern is not enabled")
         if parameters["MaskingBrush/Enabled"] != "true":
             raise ValueError("The textured masking brush is not enabled")
+        if parameters["Texture/Pattern/Scale"] != "1" or parameters["Texture/Strength/Value"] != "0.85":
+            raise ValueError("The grain settings did not update")
+        if SIZE_CURVE not in parameters["SizeSensor"] or parameters["SizecommonCurve"] != SIZE_CURVE:
+            raise ValueError("The taper curve did not update")
 
         metadata = PngImagePlugin.PngInfo()
         metadata.add_text("preset", preset, zip=True)
