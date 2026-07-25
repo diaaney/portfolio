@@ -11,7 +11,9 @@ import xml.etree.ElementTree as ET
 from PIL import Image, PngImagePlugin
 
 
-NAME = "Diane Charcoal Grain Taper"
+NAME = "Diane Charcoal Soft Grain Taper"
+TEXTURE_SCALE = "0.45"
+TEXTURE_STRENGTH = "0.60"
 PRESSURE_FLAGS = (
     "PressureOpacity",
     "PressureFlow",
@@ -49,13 +51,13 @@ def main(source: Path, destination: Path) -> None:
         preset = replace_once(
             preset,
             'name="Texture/Pattern/Scale">0.35</param>',
-            'name="Texture/Pattern/Scale">1</param>',
+            f'name="Texture/Pattern/Scale">{TEXTURE_SCALE}</param>',
             "texture scale",
         )
         preset = replace_once(
             preset,
             'name="Texture/Strength/Value">0.48</param>',
-            'name="Texture/Strength/Value">0.85</param>',
+            f'name="Texture/Strength/Value">{TEXTURE_STRENGTH}</param>',
             "texture strength",
         )
         preset = replace_once(
@@ -78,7 +80,7 @@ def main(source: Path, destination: Path) -> None:
             raise ValueError("The grain pattern is not enabled")
         if parameters["MaskingBrush/Enabled"] != "true":
             raise ValueError("The textured masking brush is not enabled")
-        if parameters["Texture/Pattern/Scale"] != "1" or parameters["Texture/Strength/Value"] != "0.85":
+        if parameters["Texture/Pattern/Scale"] != TEXTURE_SCALE or parameters["Texture/Strength/Value"] != TEXTURE_STRENGTH:
             raise ValueError("The grain settings did not update")
         if SIZE_CURVE not in parameters["SizeSensor"] or parameters["SizecommonCurve"] != SIZE_CURVE:
             raise ValueError("The taper curve did not update")
