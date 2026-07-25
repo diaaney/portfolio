@@ -37,6 +37,31 @@ body {
   text-transform: uppercase;
 }
 
+.frame-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font: 12px Arial, Helvetica, sans-serif;
+}
+
+.frame-nav button {
+  min-width: 28px;
+  padding: 6px 8px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  background: transparent;
+  color: #aaa;
+  cursor: pointer;
+  text-align: center;
+}
+
+.frame-nav button:hover,
+.frame-nav button[aria-pressed="true"] {
+  border-color: #fff;
+  color: #fff;
+}
+
 .comparison-section {
   border-top: 1px solid #262626;
   padding-top: 12px;
@@ -80,51 +105,6 @@ body {
   width: 100%;
   height: 100%;
 }
-
-.hand-word {
-  fill: #fff;
-  font-family: "Arial Black", Arial, Helvetica, sans-serif;
-  font-size: 138px;
-  font-style: italic;
-  font-weight: 900;
-  letter-spacing: -0.065em;
-}
-
-.hand-word--chalk {
-  stroke: #fff;
-  stroke-width: 2px;
-  paint-order: stroke fill;
-}
-
-.hand-word--outline {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 5px;
-  font-style: normal;
-  letter-spacing: -0.03em;
-}
-
-.hand-word--thin {
-  font-family: "Segoe Print", "Comic Sans MS", cursive;
-  font-size: 123px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-.hand-word--scribble {
-  stroke: #fff;
-  stroke-width: 5px;
-  paint-order: stroke fill;
-}
-
-.hand-word--smear {
-  stroke: #fff;
-  stroke-width: 2px;
-  paint-order: stroke fill;
-}
-
-.hand-marks { opacity: 0.85; }
 
 @keyframes title-play {
   to { transform: translateY(-100%); }
