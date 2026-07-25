@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  background: #000;
+  color: #fff;
+}
+
+.demo-stage {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.demo-title {
+  display: block;
+  width: min(94vw, 900px);
+  height: auto;
+  overflow: visible;
+}
+
+.demo-clean,
+.demo-chalk,
+.demo-scribble {
+  transform-origin: 50% 50%;
+  animation-duration: 2.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(1, end);
+}
+
+.demo-clean { animation-name: demo-clean-phase; }
+.demo-chalk { opacity: 0; animation-name: demo-chalk-phase; }
+.demo-scribble { opacity: 0; animation-name: demo-scribble-phase; }
+
+.demo-clean-text,
+.demo-chalk-text,
+.demo-scribble-text {
+  fill: #fff;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 172px;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.075em;
+}
+
+.demo-chalk-text {
+  filter: url(#chalk);
+  stroke: #fff;
+  stroke-width: 2px;
+  paint-order: stroke fill;
+}
+
+.demo-scribble-text {
+  filter: url(#scribble);
+  stroke: #fff;
+  stroke-width: 4px;
+  paint-order: stroke fill;
+}
+
+@keyframes demo-clean-phase {
+  0%, 15%, 88%, 100% { opacity: 1; }
+  16%, 87% { opacity: 0; }
+}
+
+@keyframes demo-chalk-phase {
+  0%, 15%, 50%, 67%, 88%, 100% { opacity: 0; }
+  16%, 49%, 68%, 87% { opacity: 1; }
+}
+
+@keyframes demo-scribble-phase {
+  0%, 49%, 68%, 100% { opacity: 0; }
+  50%, 67% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-clean,
+  .demo-chalk,
+  .demo-scribble { animation: none; }
+
+  .demo-clean { opacity: 1; }
+  .demo-chalk,
+  .demo-scribble { opacity: 0; }
 }
