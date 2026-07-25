@@ -24,7 +24,7 @@ export default function Home() {
       <h1 className="sr-only">Comparación de títulos animados</h1>
       <div className="comparison-heading" aria-hidden="true">
         <span>Referencia</span>
-        <span>DIANE recompuesto</span>
+        <span>Títulos del portafolio</span>
       </div>
       <nav className="frame-nav" aria-label="Ver fotograma">
         <button type="button" onClick={() => setFrame(null)} aria-pressed={frame === null}>Animar</button>
