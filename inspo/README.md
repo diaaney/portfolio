@@ -6,6 +6,8 @@ This directory keeps source material for Diane's new portfolio. It is separate f
 
 `point-n-talk/index.html` is the original HTML response from <https://diana.lu/point-n-talk>. `point-n-talk/offline.html` points directly linked images, scripts, and videos to files under `point-n-talk/assets/`. `point-n-talk/manifest.json` records each asset's original URL and checksum. The archived page is a reference snapshot of a Framer site, not its editable Framer project.
 
+`point-n-talk/index-before-merge.html` preserves the separate page copy that was already in `inspo/` before the folders were combined.
+
 Run `python mirror_site.py` from this directory to refresh the snapshot. Open `point-n-talk/offline.html` through a local HTTP server if you want to review it in a browser.
 
 ## Previous portfolio

@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/portfolio-scaffold/.next/
+/inspo/.next/
 /.pnp
 .pnp.*
 .yarn/*

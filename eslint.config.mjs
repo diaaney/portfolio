@@ -9,7 +9,6 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
-    "portfolio-scaffold/**",
     "inspo/**",
     "out/**",
     "build/**",
