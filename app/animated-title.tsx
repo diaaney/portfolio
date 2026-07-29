@@ -6,11 +6,27 @@ type Piece = Crop | { synthetic: "K"; width: number };
 
 // Letterforms are sampled from the original eight-frame films, preserving
 // their actual outline, chalk grain, and changes between frames.
+// Each interval ends before the next letter begins. The original films move
+// individual strokes between frames, so some letters need frame-specific cuts.
 const glyphs: Record<Variant, Partial<Record<Letter, [number, number]>>> = {
-  demos: { O: [565, 703] },
-  intro: { O: [588, 705], T: [405, 502] },
-  details: { E: [282, 382], A: [460, 564] },
-  "wrap-up": { W: [194, 320], R: [316, 403], A: [399, 489], P: [487, 580], U: [598, 696] },
+  demos: { O: [570, 698] },
+  intro: { O: [590, 699], T: [405, 493] },
+  details: { E: [282, 375], A: [460, 564] },
+  "wrap-up": { W: [200, 317], R: [321, 398], A: [403, 489], P: [496, 579], U: [604, 688] },
+};
+
+const frameBounds: Partial<Record<Variant, Partial<Record<Letter, [number, number][]>>>> = {
+  intro: {
+    T: [[407, 493], [407, 493], [405, 494], [402, 494], [408, 495], [410, 495], [402, 494], [407, 493]],
+    O: [[590, 694], [589, 697], [594, 700], [592, 700], [589, 700], [595, 698], [588, 695], [590, 694]],
+  },
+  "wrap-up": {
+    W: [[200, 317], [198, 317], [200, 317], [200, 318], [200, 318], [200, 317], [200, 317], [202, 318]],
+    R: [[321, 398], [321, 398], [321, 398], [321, 398], [321, 398], [321, 398], [321, 398], [322, 399]],
+    A: [[403, 489], [402, 489], [402, 489], [403, 489], [403, 489], [403, 489], [403, 489], [404, 490]],
+    P: [[496, 579], [495, 580], [495, 579], [496, 578], [495, 579], [496, 580], [496, 581], [497, 578]],
+    U: [[604, 688], [604, 688], [604, 688], [606, 689], [604, 688], [605, 689], [605, 690], [605, 690]],
+  },
 };
 
 const words: Record<Variant, string> = {
@@ -42,7 +58,7 @@ const sourceHeight: Record<Variant, number> = {
 };
 
 const detailBounds: Partial<Record<Letter, [number, number][]>> = {
-  E: [[282, 382], [280, 390], [300, 405], [292, 390], [282, 382], [242, 350], [275, 382], [280, 380]],
+  E: [[282, 377], [290, 391], [312, 443], [291, 385], [291, 374], [249, 350], [279, 375], [284, 377]],
   A: [[460, 564], [460, 572], [473, 590], [470, 570], [470, 570], [450, 595], [450, 560], [465, 563]],
 };
 
@@ -52,11 +68,13 @@ function pieceFor(variant: Variant, letter: Letter, frame: number): Piece {
   }
 
   const source = sources[variant][letter]!;
-  const sourceFrame = borrowedFrames[variant][source]?.[frame] ?? frame;
+  const sourceFrame = variant === "wrap-up" && frame === 6 && source === "wrap-up"
+    ? 7
+    : borrowedFrames[variant][source]?.[frame] ?? frame;
   const sourceLetter = letter === "G" ? "O" : letter === "B" ? "P" : letter;
   const [left, right] = source === "details"
     ? detailBounds[sourceLetter]?.[sourceFrame] ?? glyphs[source][sourceLetter]!
-    : glyphs[source][sourceLetter]!;
+    : frameBounds[source]?.[sourceLetter]?.[sourceFrame] ?? glyphs[source][sourceLetter]!;
   return {
     source,
     left,
@@ -141,9 +159,9 @@ function GearG({ crop, x, frame }: { crop: Crop; x: number; frame: number }) {
   return (
     <g>
       <Glyph crop={crop} x={x} />
-      <path d={`M${x + width * 0.77} 147 H${x + width + 3} V182 H${x + width * 0.78} Z`} fill="black" />
+      <path d={`M${x + width * 0.78} 145 H${x + width + 1} V181 H${x + width * 0.78} Z`} fill="black" />
       <path
-        d={`M${x + width * 0.55} 178 H${x + width * 0.93} V197 H${x + width * 0.81} V189 H${x + width * 0.55} Z`}
+        d={`M${x + width * 0.56} 174 H${x + width * 0.83} V188 H${x + width * 0.73} V181 H${x + width * 0.56} Z`}
         fill={outlined ? "none" : "white"}
         stroke={outlined ? "white" : "none"}
         strokeWidth={outlined ? 4 : 0}
@@ -195,6 +213,7 @@ export function AnimatedTitle({ variant, frame }: { variant: Variant; frame: num
           const spacing = 3;
           const width = pieces.reduce((sum, piece) => sum + pieceWidth(piece), 0) + spacing * (pieces.length - 1);
           const start = (976 - width) / 2;
+          const visibleLetters = variant === "wrap-up" ? Math.min(frame + 1, letters.length) : letters.length;
           let x = start;
 
           return (
@@ -242,7 +261,7 @@ export function AnimatedTitle({ variant, frame }: { variant: Variant; frame: num
               {variant === "wrap-up" && frame === 6 && (
                 <defs>
                   <pattern id="wrap-lines" patternUnits="userSpaceOnUse" width="8" height="8">
-                    <rect width="8" height="2.8" fill="white" />
+                    <rect width="8" height="4.2" fill="white" />
                   </pattern>
                   <mask id="wrap-lines-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="976" height="320">
                     <rect width="976" height="320" fill="url(#wrap-lines)" />
@@ -253,6 +272,7 @@ export function AnimatedTitle({ variant, frame }: { variant: Variant; frame: num
                 {pieces.map((piece, index) => {
                   const position = x;
                   x += pieceWidth(piece) + spacing;
+                  if (index >= visibleLetters) return null;
                   const synthetic = "synthetic" in piece;
                   const outlined = !synthetic && frame === 4 && (variant === "intro" || variant === "wrap-up") && piece.source !== variant && letters[index] !== "G" && letters[index] !== "B";
                   const zigzag = variant === "demos" && frame === 4 && (synthetic || piece.source !== variant);
