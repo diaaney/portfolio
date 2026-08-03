@@ -57,6 +57,16 @@ const sourceHeight: Record<Variant, number> = {
   demos: 95, intro: 81, details: 84, "wrap-up": 76,
 };
 
+// WRAP UP has drips attached to the tops of individual letters. Keep those
+// out of the transplanted letter bodies; the word-level overlay draws them.
+const wrapBodyTop: Partial<Record<Letter, number[]>> = {
+  W: [130, 118, 128, 120, 129, 131, 129, 130],
+  R: [130, 124, 128, 128, 129, 131, 130, 129],
+  A: [131, 132, 132, 130, 129, 132, 132, 133],
+  P: [131, 131, 130, 131, 129, 131, 130, 133],
+  U: [131, 131, 130, 133, 131, 131, 130, 131],
+};
+
 const detailBounds: Partial<Record<Letter, [number, number][]>> = {
   E: [[282, 377], [290, 391], [312, 443], [291, 385], [291, 374], [249, 350], [279, 375], [284, 377]],
   A: [[460, 564], [460, 572], [473, 590], [470, 570], [470, 570], [450, 595], [450, 560], [465, 563]],
@@ -68,19 +78,25 @@ function pieceFor(variant: Variant, letter: Letter, frame: number): Piece {
   }
 
   const source = sources[variant][letter]!;
-  const sourceFrame = variant === "wrap-up" && frame === 6 && source === "wrap-up"
+  const sourceFrame = variant === "intro" && letter === "B" && frame === 5
     ? 7
-    : borrowedFrames[variant][source]?.[frame] ?? frame;
+    : variant === "wrap-up" && frame === 6 && source === "wrap-up"
+      ? 7
+      : borrowedFrames[variant][source]?.[frame] ?? frame;
   const sourceLetter = letter === "G" ? "O" : letter === "B" ? "P" : letter;
   const [left, right] = source === "details"
     ? detailBounds[sourceLetter]?.[sourceFrame] ?? glyphs[source][sourceLetter]!
     : frameBounds[source]?.[sourceLetter]?.[sourceFrame] ?? glyphs[source][sourceLetter]!;
+  const top = source === "wrap-up" ? wrapBodyTop[sourceLetter]?.[sourceFrame] ?? 130
+    : source === "intro" ? 120 : 65;
   return {
     source,
     left,
     right,
     frame: sourceFrame,
     scale: sourceHeight[variant] / sourceHeight[source],
+    top,
+    height: 255 - top,
   };
 }
 
@@ -92,14 +108,15 @@ function Glyph({ crop, x }: { crop: Crop; x: number }) {
   const width = (crop.right - crop.left) * crop.scale;
   const sourceHeight = crop.height ?? 190;
   const height = sourceHeight * crop.scale;
+  const top = crop.top ?? 65;
 
   return (
     <svg
       x={x}
-      y={160 - height / 2}
+      y={160 - 95 * crop.scale + (top - 65) * crop.scale}
       width={width}
       height={height}
-      viewBox={`${crop.left} ${crop.frame * 320 + (crop.top ?? 65)} ${crop.right - crop.left} ${sourceHeight}`}
+      viewBox={`${crop.left} ${crop.frame * 320 + top} ${crop.right - crop.left} ${sourceHeight}`}
       preserveAspectRatio="none"
       overflow="hidden"
     >
@@ -173,20 +190,35 @@ function GearG({ crop, x, frame }: { crop: Crop; x: number; frame: number }) {
 
 function Accent({ variant, frame, x, width }: { variant: Variant; frame: number; x: number; width: number }) {
   if (variant === "demos" && frame >= 2 && frame <= 6) {
+    const left = frame === 4 ? 5 : 70;
     return (
       <>
-        <Glyph crop={{ source: "demos", left: frame === 4 ? 5 : 70, right: 178, frame, scale: 1 }} x={x - 110} />
-        <Glyph crop={{ source: "demos", left: 820, right: frame === 4 ? 970 : 940, frame, scale: 1 }} x={x + width + 2} />
+        <Glyph crop={{ source: "demos", left, right: 178, frame, scale: 1 }} x={x - (192 - left)} />
+        <Glyph crop={{ source: "demos", left: 820, right: frame === 4 ? 970 : 940, frame, scale: 1 }} x={x + width + 17} />
       </>
     );
   }
 
-  if (variant === "intro" && frame >= 4 && frame <= 6) {
+  if (variant === "intro" && frame >= 2 && frame <= 6) {
     return (
       <>
-        <Glyph crop={{ source: "intro", left: 135, right: 245, frame, scale: 1, top: 40, height: 240 }} x={x - 110} />
-        <Glyph crop={{ source: "intro", left: 700, right: 815, frame, scale: 1, top: 40, height: 240 }} x={x + width + 5} />
+        {frame >= 4 && (
+          <>
+            <Glyph crop={{ source: "intro", left: 130, right: 253, frame, scale: 1, top: 180, height: 140 }} x={x - 130} />
+            <Glyph crop={{ source: "intro", left: 253, right: 300, frame, scale: 1, top: 230, height: 90 }} x={x - 7} />
+          </>
+        )}
+        <Glyph crop={{ source: "intro", left: 625, right: 700, frame, scale: 1, top: 0, height: 118 }} x={x + width - 65} />
+        <Glyph crop={{ source: "intro", left: 700, right: 810, frame, scale: 1, top: 0, height: 240 }} x={x + width + 10} />
       </>
+    );
+  }
+
+  if (variant === "wrap-up" && frame > 0) {
+    return (
+      <svg x={x} y="0" width={width} height="118" viewBox={`190 ${frame * 320} 590 118`} preserveAspectRatio="none" overflow="hidden">
+        <image href="/wrap-up-sprite.png" width="976" height="2560" />
+      </svg>
     );
   }
 
@@ -274,7 +306,11 @@ export function AnimatedTitle({ variant, frame }: { variant: Variant; frame: num
                   x += pieceWidth(piece) + spacing;
                   if (index >= visibleLetters) return null;
                   const synthetic = "synthetic" in piece;
-                  const outlined = !synthetic && frame === 4 && (variant === "intro" || variant === "wrap-up") && piece.source !== variant && letters[index] !== "G" && letters[index] !== "B";
+                  const sourceAlreadyOutlined = !synthetic && piece.frame === 4 &&
+                    (piece.source === "intro" || piece.source === "wrap-up");
+                  const outlined = !synthetic && frame === 4 &&
+                    (variant === "intro" || variant === "wrap-up") &&
+                    !sourceAlreadyOutlined && letters[index] !== "G" && letters[index] !== "B";
                   const zigzag = variant === "demos" && frame === 4 && (synthetic || piece.source !== variant);
                   return (
                     <g
@@ -291,11 +327,6 @@ export function AnimatedTitle({ variant, frame }: { variant: Variant; frame: num
                       ) : (
                         <Glyph crop={piece} x={position} />
                       )}
-                      {!synthetic && piece.source === "wrap-up" && frame > 0 && frame < 7 &&
-                        ((variant === "demos" && (letters[index] === "W" || letters[index] === "R")) ||
-                          (variant === "intro" && letters[index] === "A")) && (
-                          <rect x={position} y="0" width={pieceWidth(piece)} height="87" fill="black" />
-                        )}
                     </g>
                   );
                 })}
