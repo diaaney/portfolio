@@ -1,79 +1,91 @@
+import { HandLettering } from "./hand-lettering";
+
 type Variant = "demos" | "intro" | "details" | "wrap-up";
+type Props = { variant: Variant; frame: number | null };
 
-type Props = {
-  variant: Variant;
-  frame: number | null;
-};
-
-const title = {
-  demos: { word: "WORK", width: 500, size: 151, baseline: 231 },
-  intro: { word: "ABOUT", width: 500, size: 146, baseline: 231 },
-  details: { word: "DETAILS", width: 600, size: 135, baseline: 226 },
-  "wrap-up": { word: "GEAR", width: 410, size: 146, baseline: 227 },
+const titles = {
+  demos: { word: "WORK", x: 238, y: 122, width: 500, height: 130, cleanSize: 170, baseline: 246 },
+  intro: { word: "ABOUT", x: 238, y: 125, width: 500, height: 106, cleanSize: 144, baseline: 227 },
+  details: { word: "DETAILS", x: 180, y: 122, width: 616, height: 123, cleanSize: 150, baseline: 231 },
+  "wrap-up": { word: "GEAR", x: 283, y: 130, width: 410, height: 105, cleanSize: 126, baseline: 220 },
 } as const;
 
-function Decorations({
-  variant,
-  frame,
-  start,
-  end,
-}: {
-  variant: Variant;
-  frame: number;
-  start: number;
-  end: number;
+function WordMarks({ variant, frame, start, end }: {
+  variant: Variant; frame: number; start: number; end: number;
 }) {
   if (variant === "demos") {
     if (frame < 2 || frame === 7) return null;
-    if (frame === 4) {
-      return (
-        <g fill="none" stroke="#fff" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round">
-          <path d={"M" + (start - 69) + " 129 l-14 -20 13 -15 -9 -17 17 -7"} />
-          <path d={"M" + (end + 29) + " 133 l14 -14 -8 -16 12 -9 -8 -19"} />
-          <path d={"M" + (start - 63) + " 191 l-13 20 14 17 -8 19"} />
-          <path d={"M" + (end + 24) + " 199 l15 10 -12 17 13 19"} />
-        </g>
-      );
-    }
+    if (frame === 2) return (
+      <g fill="none" stroke="white" strokeWidth="10" strokeLinecap="round">
+        <path d={"M" + (start - 43) + " 163 C" + (start - 55) + " 174 " + (start - 55) + " 194 " + (start - 43) + " 207"} />
+        <path d={"M" + (end + 43) + " 163 C" + (end + 55) + " 174 " + (end + 55) + " 194 " + (end + 43) + " 207"} />
+        <path d={"M" + (start - 65) + " 190 l-4 2 M" + (end + 65) + " 191 l4 1"} strokeWidth="5" />
+      </g>
+    );
+    if (frame === 4) return (
+      <g fill="none" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round">
+        <path d={"M" + (start - 74) + " 73 l-24 13 15 15 -18 17 16 18 -17 15 15 20 -15 14 17 21 -13 17 13 20 -12 23"} />
+        <path d={"M" + (start - 154) + " 108 l-21 16 14 18 -19 18 18 20 -19 20 18 20 -17 18 14 20 -14 18"} />
+        <path d={"M" + (start - 200) + " 178 l-13 15 17 15 -15 18 18 21 -12 18"} />
+        <path d={"M" + (end + 70) + " 79 l15 16 -12 17 17 17 -13 17 18 19 -14 17 16 19 -13 16 16 23 -15 25"} />
+        <path d={"M" + (end + 150) + " 104 l16 16 -15 17 19 19 -13 18 14 20 -12 17 16 21 -12 21"} />
+        <path d={"M" + (end + 190) + " 169 l13 14 -15 17 17 19 -14 17 12 20"} />
+      </g>
+    );
     return (
-      <g fill="none" stroke="#fff" strokeWidth={frame === 3 ? 7 : 5} strokeLinecap="round">
-        <path d={"M" + (start - 34) + " 150 q-15 31 0 66"} />
-        {frame > 2 && <path d={"M" + (start - 60) + " 163 q-11 29 -2 51"} />}
-        <path d={"M" + (end + 30) + " 150 q19 32 3 69"} />
-        {frame > 2 && <path d={"M" + (end + 59) + " 162 q15 26 5 52"} />}
+      <g fill="none" stroke="white" strokeWidth={frame === 3 ? 7 : 5} strokeLinecap="round">
+        <path d={"M" + (start - 38) + " 145 Q" + (start - 59) + " 184 " + (start - 38) + " 225"} />
+        <path d={"M" + (end + 37) + " 145 Q" + (end + 58) + " 185 " + (end + 37) + " 225"} />
+        {(frame === 3 || frame === 5) && <>
+          <path d={"M" + (start - 70) + " 148 Q" + (start - 91) + " 184 " + (start - 69) + " 222"} />
+          <path d={"M" + (end + 69) + " 147 Q" + (end + 91) + " 184 " + (end + 70) + " 223"} />
+        </>}
       </g>
     );
   }
 
   if (variant === "intro") {
     if (frame < 2 || frame === 7) return null;
-    const outline = frame === 4;
-    const left = start - (frame >= 4 ? 34 : 15);
-    const right = end - 22;
+    if (frame === 2) return (
+      <g fill="none" stroke="white" strokeWidth="6" strokeLinecap="round">
+        <path d={"M" + (end - 49) + " 94 l17 5"} />
+        <path d={"M" + (end + 4) + " 105 l14 9"} />
+        <path d={"M" + (end + 31) + " 135 l3 13"} />
+      </g>
+    );
+    if (frame === 3) return (
+      <g fill="none" stroke="white" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
+        <path d={"M" + (end - 51) + " 61 l17 7"} />
+        <path d={"M" + (end + 4) + " 80 l17 11 -9 13"} />
+        <path d={"M" + (end + 60) + " 134 l20 -5 -1 17"} />
+      </g>
+    );
+    if (frame === 4) return (
+      <g fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+        <path d={"M" + (end - 56) + " 58 l10 -18 20 9 -11 25 Z"} />
+        <path d={"M" + (end + 5) + " 51 l16 -24 17 21 -17 30 Z"} />
+        <path d={"M" + (end + 70) + " 107 l26 -12 2 25 -27 4 Z"} />
+        <path d={"M" + (start - 29) + " 198 C" + (start - 57) + " 241 " + (start - 28) + " 283 " + (start + 1) + " 304"} />
+        <path strokeWidth="3" d={"M" + (start - 41) + " 237 Q" + (start - 44) + " 276 " + (start - 5) + " 309"} />
+      </g>
+    );
+    if (frame === 5) return (
+      <g fill="none" stroke="white" strokeWidth="7" strokeLinecap="round">
+        <path d={"M" + (end - 48) + " 48 l-2 -30"} />
+        <path d={"M" + (end + 9) + " 79 l22 -27"} />
+        <path d={"M" + (end + 74) + " 138 l16 -3"} />
+        <path d={"M" + (start - 48) + " 192 C" + (start - 90) + " 238 " + (start - 62) + " 281 " + (start - 20) + " 302"} />
+        <path strokeWidth="5" d={"M" + (start - 67) + " 206 C" + (start - 107) + " 244 " + (start - 78) + " 283 " + (start - 35) + " 303"} />
+        <path strokeWidth="4" d={"M" + (start - 95) + " 240 Q" + (start - 98) + " 272 " + (start - 70) + " 287"} />
+      </g>
+    );
     return (
-      <g
-        fill={outline ? "none" : "#fff"}
-        stroke="#fff"
-        strokeWidth={outline ? 5 : 2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        {frame >= 4 && (
-          <>
-            <path d={"M" + left + " 198 Q" + (left - 19) + " 236 " + (left + 7) + " 260"} fill="none" />
-            <path d={"M" + (left - 9) + " 240 q14 25 43 32"} fill="none" strokeWidth="3" />
-          </>
-        )}
-        {frame >= 5 && (
-          <path d={"M" + (left - 19) + " 224 q-1 42 28 61"} fill="none" strokeWidth="3" />
-        )}
-        <path d={"M" + (right - 7) + " 99 l13 4 -2 7 -17 -3 Z"} />
-        <path d={"M" + (right + 33) + " 81 l16 7 -5 10 -17 -7 Z"} />
-        {frame === 3 || frame === 4 ? (
-          <path d={"M" + (right + 73) + " 105 l18 -7 3 16 -21 1 Z"} />
-        ) : (
-          <path d={"M" + (right + 71) + " 107 l12 -4 -4 8 Z"} />
-        )}
+      <g fill="none" stroke="white" strokeWidth="6" strokeLinecap="round">
+        <path d={"M" + (end - 32) + " 50 l1 -26"} />
+        <path d={"M" + (end + 25) + " 68 l17 -28"} />
+        <path strokeWidth="3" d={"M" + (end + 88) + " 132 l4 -2"} />
+        <path d={"M" + (start - 45) + " 204 C" + (start - 70) + " 245 " + (start - 45) + " 275 " + (start - 10) + " 291"} />
+        <path strokeWidth="4" d={"M" + (start - 60) + " 234 C" + (start - 76) + " 260 " + (start - 55) + " 281 " + (start - 33) + " 291"} />
       </g>
     );
   }
@@ -81,104 +93,161 @@ function Decorations({
   if (variant === "details") {
     if (frame !== 5) return null;
     return (
-      <g fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round">
-        <path d={"M" + (start - 31) + " 177 q-11 37 24 72"} />
-        <path d={"M" + (start - 51) + " 187 q-2 28 25 52"} />
-        <path d={"M" + (start - 70) + " 199 q4 19 19 33"} />
+      <g fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round">
+        <path d={"M" + (start - 40) + " 162 C" + (start - 66) + " 181 " + (start - 47) + " 220 " + (start - 20) + " 239"} />
+        <path d={"M" + (start - 67) + " 170 C" + (start - 88) + " 191 " + (start - 69) + " 218 " + (start - 43) + " 232"} />
       </g>
     );
   }
 
   if (frame === 0) return null;
-  const marks = [
-    { x: start + 19, y: 100, length: 18 },
-    { x: start + 64, y: 89, length: 11 },
-    { x: start + 110, y: 106, length: 7 },
-    { x: end - 103, y: 98, length: 9 },
-    { x: end - 46, y: 89, length: 14 },
-  ];
-  const visible = frame === 1 ? 2 : frame === 2 ? 3 : frame === 3 ? 4 : 5;
+  const progress = [0, 0.10, 0.31, 0.49, 0.67, 0.84, 0.96, 1][frame];
+  const center = start + (end - start) * progress;
   return (
-    <g stroke="#fff" strokeWidth="5" strokeLinecap="round">
-      {marks.slice(0, visible).map((mark, index) => (
-        <path
-          key={index}
-          d={"M" + mark.x + " " + mark.y + " l" + (index % 2 ? 3 : -2) + " -" + mark.length}
-        />
-      ))}
+    <g fill="none" stroke="white" strokeLinecap="round">
+      <path d={"M" + (center - 19) + " 93 l4 -17"} strokeWidth="5" />
+      <path d={"M" + (center + 4) + " 105 l18 -2"} strokeWidth="3.5" />
+      {frame >= 2 && <path d={"M" + (center + 27) + " 69 l4 -16"} strokeWidth="5" />}
+      {frame >= 3 && <path d={"M" + (center - 39) + " 116 l15 -3"} strokeWidth="3" />}
+      {frame >= 4 && <path d={"M" + (center - 28) + " 74 l3 -11"} strokeWidth="4" />}
+      {frame >= 5 && <path d={"M" + (center + 10) + " 51 l3 -10"} strokeWidth="4" />}
+    </g>
+  );
+}
+
+function noise(seed: number) {
+  let value = Math.imul(seed + 0x9e3779b9, 1664525) + 1013904223;
+  value ^= value >>> 16;
+  value = Math.imul(value, 2246822519);
+  value ^= value >>> 13;
+  return (value >>> 0) / 4294967296;
+}
+
+function ChalkWear({ frame, start, y, width, height }: {
+  frame: number; start: number; y: number; width: number; height: number;
+}) {
+  return (
+    <g strokeLinecap="round">
+      {Array.from({ length: 550 }, (_, index) => {
+        const key = frame * 10000 + index * 13;
+        const px = start + noise(key + 1) * width;
+        const py = y + noise(key + 2) * height;
+        const length = 1 + noise(key + 3) * (index % 19 === 0 ? 14 : 6);
+        const shade = index % 11 === 0 ? "#000" : index % 3 === 0 ? "#555" : "#888";
+        return (
+          <path
+            key={index}
+            d={"M" + px + " " + py + " l" + length + " " + (noise(key + 4) - .5) * 2}
+            stroke={shade}
+            strokeWidth={0.6 + noise(key + 5) * 1.5}
+          />
+        );
+      })}
     </g>
   );
 }
 
 function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
-  const config = title[variant];
-  const start = (976 - config.width) / 2;
-  const end = start + config.width;
-  const roughId = variant + "-rough-" + frame;
-  const revealId = variant + "-reveal-" + frame;
-  const stripeId = variant + "-stripe-" + frame;
-  const clean =
-    (variant === "demos" && (frame === 0 || frame === 7)) ||
-    (variant === "intro" && (frame === 0 || frame === 7)) ||
-    (variant === "details" && frame === 0) ||
-    (variant === "wrap-up" && frame === 0);
-  const outline =
-    (variant === "intro" && frame === 4) ||
-    (variant === "wrap-up" && frame === 4);
-  const revealWidth = [112, 208, 315, 420, 420, 420, 420, 420][frame];
-  const sketch = variant === "details" && (frame === 2 || frame === 6);
-  const striped = variant === "wrap-up" && frame === 6;
-  const noisy = !clean;
+  const title = titles[variant];
+  const id = variant + "-" + frame;
+  const roughId = "letter-rough-" + id;
+  const wearId = "letter-wear-" + id;
+  const revealId = "letter-reveal-" + id;
+  const stripeId = "letter-stripe-" + id;
+  const stripeMaskId = "letter-stripe-mask-" + id;
+  const lowerFillId = "letter-lower-fill-" + id;
+  const clean = frame === 0 || (frame === 7 && (variant === "demos" || variant === "intro"));
+  const revealWidth = [115, 209, 310, 420, 420, 420, 420, 420][frame];
+  const isGear = variant === "wrap-up";
+  const isStriped = isGear && frame === 6;
+  const grainProfile =
+    variant === "intro" && frame !== 4
+      ? "0.03 0.12 0.30 0.55 0.76 0.87 1 1 1 1 1 1"
+      : variant === "details" && frame === 1
+        ? "0.04 0.26 0.55 0.80 0.95 0.97 1 1 1 1 1 1"
+      : (variant === "details" && (frame === 3 || frame === 4)) ||
+          (isGear && frame >= 3 && frame !== 6)
+        ? "0.03 0.17 0.40 0.66 0.83 0.91 0.96 1 1 1 1 1"
+        : "0.04 0.26 0.55 0.80 0.90 0.97 1 1 1 1 1 1";
 
   return (
-    <svg className="hand-slide" viewBox="0 0 976 320" role="img" aria-label={config.word}>
+    <svg className="hand-slide" viewBox="0 0 976 320" role="img" aria-label={title.word}>
       <defs>
-        <filter id={roughId} x="-12%" y="-28%" width="124%" height="156%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.065 0.11" numOctaves="2" seed={frame + 8} result="edge" />
-          <feDisplacementMap in="SourceGraphic" in2="edge" scale={sketch ? 7 : 6} xChannelSelector="R" yChannelSelector="G" result="rough" />
-          <feTurbulence type="fractalNoise" baseFrequency="0.31" numOctaves="3" seed={frame + 17} result="grain" />
-          <feColorMatrix
-            in="grain"
-            type="matrix"
-            values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.333 0.333 0.334 0 0"
-            result="luma"
-          />
-          <feComponentTransfer in="luma" result="holes">
-            <feFuncA type="discrete" tableValues="0.10 0.28 0.60 0.92 1 1 1 1" />
+        <filter id={roughId} x="-12%" y="-22%" width="124%" height="144%" colorInterpolationFilters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.11 0.17" numOctaves="2" seed={frame + 13} result="edge" />
+          <feDisplacementMap in="SourceGraphic" in2="edge" scale={variant === "details" && frame === 6 ? 5 : 5.5} xChannelSelector="R" yChannelSelector="G" result="rough" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.67" numOctaves="2" seed={frame + 25} result="grain" />
+          <feColorMatrix in="grain" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  .333 .333 .334 0 0" result="luma" />
+          <feComponentTransfer in="luma" result="scratch">
+            <feFuncA type="discrete" tableValues={grainProfile} />
           </feComponentTransfer>
-          <feComposite in="rough" in2="holes" operator="in" />
+          <feComposite in="rough" in2="scratch" operator="in" />
         </filter>
+        <mask id={wearId} maskUnits="userSpaceOnUse" x="0" y="0" width="976" height="320">
+          <HandLettering word={title.word} variant={variant} frame={frame} x={title.x} y={title.y} width={title.width} height={title.height} idPrefix={"wear-" + id} />
+        </mask>
         <clipPath id={revealId}>
-          <rect x={start - 12} y="0" width={variant === "wrap-up" ? revealWidth : config.width + 24} height="320" />
+          <rect x={title.x - 8} y="0" width={isGear ? revealWidth : title.width + 16} height="320" />
         </clipPath>
-        <pattern id={stripeId} patternUnits="userSpaceOnUse" width="9" height="9">
-          <rect x="0" y="0" width="9" height="5" fill="#fff" />
+        <clipPath id={lowerFillId}>
+          <rect x={title.x - 8} y="185" width={title.width + 16} height="51" />
+        </clipPath>
+        <pattern id={stripeId} patternUnits="userSpaceOnUse" width="976" height="320">
+          {Array.from({ length: 40 }, (_, line) => (
+            <g key={line}>
+              <rect x="0" y={line * 8} width="976" height={3.8 + noise(line + 201) * 1.6} fill="white" />
+              {Array.from({ length: 6 }, (_, gap) => (
+                <rect
+                  key={gap}
+                  x={noise(line * 29 + gap + 301) * 976}
+                  y={line * 8}
+                  width={2 + noise(line * 37 + gap + 401) * 12}
+                  height="6"
+                  fill="black"
+                />
+              ))}
+            </g>
+          ))}
         </pattern>
-        <mask id={stripeId + "-mask"}>
-          <rect x="0" y="0" width="976" height="320" fill={striped ? "url(#" + stripeId + ")" : "#fff"} />
+        <mask id={stripeMaskId} maskUnits="userSpaceOnUse" x="0" y="0" width="976" height="320">
+          <rect x="0" y="0" width="976" height="320" fill={isStriped ? "url(#" + stripeId + ")" : "white"} />
         </mask>
       </defs>
-      <g clipPath={"url(#" + revealId + ")"} mask={"url(#" + stripeId + "-mask)"}>
-        <text
-          x="488"
-          y={config.baseline}
-          textAnchor="middle"
-          textLength={config.width}
-          lengthAdjust="spacingAndGlyphs"
-          fontFamily={sketch ? "Segoe Print, Comic Sans MS, cursive" : "Arial, Helvetica, sans-serif"}
-          fontWeight={sketch ? "400" : "900"}
-          fontStyle={sketch ? "normal" : "italic"}
-          fontSize={config.size}
-          fill={outline ? "none" : "#fff"}
-          stroke={outline ? "#fff" : "none"}
-          strokeWidth={outline ? (sketch ? 4 : 3) : undefined}
-          strokeLinejoin="round"
-          filter={noisy ? "url(#" + roughId + ")" : undefined}
-        >
-          {config.word}
-        </text>
+      <g clipPath={"url(#" + revealId + ")"} mask={"url(#" + stripeMaskId + ")"}>
+        {clean ? (
+          <text
+            x={title.x + title.width / 2}
+            y={title.baseline}
+            textAnchor="middle"
+            textLength={title.width}
+            lengthAdjust="spacingAndGlyphs"
+            fontFamily={isGear ? "Segoe UI Black, Arial, sans-serif" : "Arial, Helvetica, sans-serif"}
+            fontWeight="900"
+            fontStyle="italic"
+            fontSize={title.cleanSize}
+            fill="white"
+          >
+            {title.word}
+          </text>
+        ) : (
+          <g filter={"url(#" + roughId + ")"}>
+            {isGear && frame === 4 && (
+              <g clipPath={"url(#" + lowerFillId + ")"} opacity="0.8">
+                <HandLettering word={title.word} variant={variant} frame={5} x={title.x} y={title.y} width={title.width} height={title.height} idPrefix={"lower-" + id} />
+              </g>
+            )}
+            <HandLettering word={title.word} variant={variant} frame={frame} x={title.x} y={title.y} width={title.width} height={title.height} idPrefix={"display-" + id} />
+          </g>
+        )}
+        {!clean && (
+          <g mask={"url(#" + wearId + ")"}>
+            <ChalkWear frame={frame} start={title.x} y={title.y} width={title.width} height={title.height} />
+          </g>
+        )}
       </g>
-      <Decorations variant={variant} frame={frame} start={start} end={end} />
+      <g filter={clean ? undefined : "url(#" + roughId + ")"}>
+        <WordMarks variant={variant} frame={frame} start={title.x} end={title.x + title.width} />
+      </g>
     </svg>
   );
 }
