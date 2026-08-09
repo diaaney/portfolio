@@ -17,8 +17,8 @@ function WordMarks({ variant, frame, start, end }: {
     if (frame < 2 || frame === 7) return null;
     if (frame === 2) return (
       <g fill="none" stroke="white" strokeWidth="12.5" strokeLinecap="round">
-        <path d={"M" + (start - 25) + " 163 C" + (start - 49) + " 174 " + (start - 49) + " 194 " + (start - 25) + " 207"} />
-        <path d={"M" + (end + 25) + " 163 C" + (end + 49) + " 174 " + (end + 49) + " 194 " + (end + 25) + " 207"} />
+        <path d={"M" + (start - 25) + " 163 C" + (start - 37) + " 174 " + (start - 37) + " 194 " + (start - 25) + " 207"} />
+        <path d={"M" + (end + 25) + " 163 C" + (end + 37) + " 174 " + (end + 37) + " 194 " + (end + 25) + " 207"} />
         <path d={"M" + (start - 70) + " 190 l-4 2 M" + (end + 70) + " 191 l4 1"} strokeWidth="5" />
       </g>
     );
