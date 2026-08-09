@@ -16,10 +16,10 @@ function WordMarks({ variant, frame, start, end }: {
   if (variant === "demos") {
     if (frame < 2 || frame === 7) return null;
     if (frame === 2) return (
-      <g fill="none" stroke="white" strokeWidth="10" strokeLinecap="round">
-        <path d={"M" + (start - 43) + " 163 C" + (start - 55) + " 174 " + (start - 55) + " 194 " + (start - 43) + " 207"} />
-        <path d={"M" + (end + 43) + " 163 C" + (end + 55) + " 174 " + (end + 55) + " 194 " + (end + 43) + " 207"} />
-        <path d={"M" + (start - 65) + " 190 l-4 2 M" + (end + 65) + " 191 l4 1"} strokeWidth="5" />
+      <g fill="none" stroke="white" strokeWidth="12.5" strokeLinecap="round">
+        <path d={"M" + (start - 25) + " 163 C" + (start - 49) + " 174 " + (start - 49) + " 194 " + (start - 25) + " 207"} />
+        <path d={"M" + (end + 25) + " 163 C" + (end + 49) + " 174 " + (end + 49) + " 194 " + (end + 25) + " 207"} />
+        <path d={"M" + (start - 70) + " 190 l-4 2 M" + (end + 70) + " 191 l4 1"} strokeWidth="5" />
       </g>
     );
     if (frame === 4) return (
