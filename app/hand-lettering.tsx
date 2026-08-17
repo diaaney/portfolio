@@ -443,6 +443,20 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
                 paths={strokes}
                 letterIndex={index}
               />
+            ) : introOutline ? (
+              <>
+                <defs>
+                  <mask id={maskId} maskUnits="userSpaceOnUse" x="-12" y="-12" width={glyph.advance + 24} height="116">
+                    {strokes.map((d, strokeIndex) => (
+                      <path key={strokeIndex} d={d} stroke="white" strokeWidth={strokeWeight} />
+                    ))}
+                    {strokes.map((d, strokeIndex) => (
+                      <path key={strokeIndex} d={d} stroke="black" strokeWidth="7.5" />
+                    ))}
+                  </mask>
+                </defs>
+                <rect x="-12" y="-12" width={glyph.advance + 24} height="116" fill="white" mask={"url(#" + maskId + ")"} />
+              </>
             ) : outline ? (
               <>
                 <defs>
@@ -451,48 +465,23 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
                       <path key={strokeIndex} d={d} stroke="white" strokeWidth={strokeWeight} />
                     ))}
                     {strokes.map((d, strokeIndex) => (
-                      <path key={strokeIndex} d={d} stroke="black" strokeWidth={introOutline ? 6 : 10.5} />
+                      <path key={strokeIndex} d={d} stroke="black" strokeWidth="10.5" />
                     ))}
                   </mask>
-                  {(introOutline || (variant === "wrap-up" && frame === 4)) && (
+                  {variant === "wrap-up" && frame === 4 && (
                     <>
                       <mask id={innerMaskId} maskUnits="userSpaceOnUse" x="-12" y="-12" width={glyph.advance + 24} height="116">
                         {strokes.map((d, strokeIndex) => (
-                          <path key={strokeIndex} d={d} stroke="white" strokeWidth={introOutline ? 6 : 9.5} />
+                          <path key={strokeIndex} d={d} stroke="white" strokeWidth="9.5" />
                         ))}
                       </mask>
-                      {variant === "wrap-up" && (
-                        <pattern id={hatchId} patternUnits="userSpaceOnUse" width="9" height="8">
-                          <path d="M0 7 L9 4" stroke="white" strokeWidth="1.6" />
-                        </pattern>
-                      )}
+                      <pattern id={hatchId} patternUnits="userSpaceOnUse" width="9" height="8">
+                        <path d="M0 7 L9 4" stroke="white" strokeWidth="1.6" />
+                      </pattern>
                     </>
                   )}
                 </defs>
                 <rect x="-12" y="-12" width={glyph.advance + 24} height="116" fill="white" mask={"url(#" + maskId + ")"} />
-                {introOutline && (
-                  <g mask={"url(#" + innerMaskId + ")"} stroke="white" strokeLinecap="round">
-                    {strokes.map((d, strokeIndex) => (
-                      <g key={strokeIndex}>
-                        <path d={d} strokeWidth="6" opacity="0.23" />
-                        <path
-                          d={d}
-                          strokeWidth="5.8"
-                          opacity="0.85"
-                          strokeDasharray="7 2.5 13 2 5 3.2 10 2.1 17 3"
-                          strokeDashoffset={index * 13 + strokeIndex * 7}
-                        />
-                        <path
-                          d={d}
-                          strokeWidth="2.2"
-                          opacity="0.8"
-                          strokeDasharray="23 3 9 2.5 16 1.5"
-                          strokeDashoffset={index * 9 + strokeIndex * 17}
-                        />
-                      </g>
-                    ))}
-                  </g>
-                )}
                 {variant === "wrap-up" && frame === 4 && (
                   <rect
                     x="-12"

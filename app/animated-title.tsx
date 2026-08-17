@@ -165,8 +165,8 @@ function WordMarks({ variant, frame, start, end }: {
           <path d={`M${end + 46} 132 L${end + 100} 116 Q${end + 106} 113 ${end + 106} 121 L${end + 103} 154 L${end + 48} 157 Z M${end + 54} 137 L${end + 98} 124 L${end + 98} 148 L${end + 55} 150 Z`} />
         </g>
         <g fill="none" stroke="white" strokeLinecap="round">
-          <path strokeWidth="5" d={`M${start - 17} 200 C${start - 43} 228 ${start - 37} 266 ${start + 22} 296`} />
-          <path strokeWidth="3.3" d={`M${start - 48} 276 C${start - 44} 288 ${start - 28} 302 ${start - 11} 309`} />
+          <path strokeWidth="6" d={`M${start - 37} 192 C${start - 52} 219 ${start - 48} 244 ${start - 27} 263 C${start - 14} 277 ${start + 2} 284 ${start + 14} 288`} />
+          <path strokeWidth="3.7" d={`M${start - 43} 267 C${start - 39} 281 ${start - 26} 290 ${start - 7} 299`} />
         </g>
       </g>
     );
