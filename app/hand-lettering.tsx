@@ -111,6 +111,26 @@ const glyphs: Record<string, Glyph> = {
   },
 };
 
+// The fourth WORK frame bends each pen stroke, not only the whole letters.
+const bentWork: Partial<Record<string, readonly string[]>> = {
+  W: [
+    "M8 8 C6 24 12 45 10 58 Q9 69 15 83 C24 70 32 45 40 28 C39 42 39 61 47 83 C55 76 59 56 67 39 Q73 22 78 8",
+  ],
+  O: [
+    "M38 8 C22 4 9 19 9 36 C4 54 11 76 29 83 C42 89 57 73 64 56 C73 37 63 13 46 8 Q42 7 38 8 Z",
+  ],
+  R: [
+    "M13 83 C10 65 17 46 15 29 Q15 17 19 8",
+    "M19 8 C41 4 58 17 57 29 C60 43 43 51 14 47",
+    "M34 48 C43 59 49 68 62 82",
+  ],
+  K: [
+    "M17 8 Q14 25 15 40 C12 57 9 70 8 83",
+    "M62 7 C50 21 39 36 29 43 Q21 49 13 50",
+    "M30 43 Q40 51 45 63 C51 71 56 76 62 84",
+  ],
+};
+
 // The last DETAILS drawing briefly turns into softer, wandering outlines.
 const looseDetails: Partial<Record<string, readonly string[]>> = {
   A: [
@@ -290,7 +310,7 @@ function shearForFrame(variant: Variant, frame: number) {
 }
 
 function widthForFrame(variant: Variant, frame: number) {
-  if (variant === "demos") return [14, 19, 21, 19, 9.2, 21, 18, 14][frame];
+  if (variant === "demos") return [14, 19, 21, 14.25, 9.2, 21, 18, 14][frame];
   if (variant === "intro") return [14, 18, 20, 21, 17, 22, 20, 14][frame];
   if (variant === "details") return [14, 14, 5.4, 17, 19, 16, 6.3, 17][frame];
   return [14, 17, 19, 20, 17, 20, 19, 18][frame];
@@ -325,6 +345,8 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
         advance += glyph.advance + spacing;
         const strokes = scribble
           ? scribbleWork[letter] || glyph.strokes
+          : variant === "demos" && frame === 3
+            ? bentWork[letter] || glyph.strokes
           : loose
             ? looseDetails[letter] || glyph.strokes
             : variant === "details" && frame === 2
