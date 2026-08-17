@@ -130,10 +130,13 @@ function WordMarks({ variant, frame, start, end }: {
         <path d={`M${end + 105} 177 Q${end + 117} 200 ${end + 109} 223`} strokeWidth="8.4" />
       </g>
     );
+    // The third frame's marks turn upside down and exchange sides here.
     return (
-      <g fill="none" stroke="white" strokeWidth="5" strokeLinecap="round">
-        <path d={"M" + (start - 38) + " 145 Q" + (start - 59) + " 184 " + (start - 38) + " 225"} />
-        <path d={"M" + (end + 37) + " 145 Q" + (end + 58) + " 185 " + (end + 37) + " 225"} />
+      <g fill="none" stroke="white" strokeLinecap="round">
+        <path d={`M${start - 53} 163 C${start - 63} 180 ${start - 63} 204 ${start - 55} 225`} strokeWidth="8.5" />
+        <path d={`M${start - 101} 180 Q${start - 96} 182 ${start - 100} 185`} strokeWidth="7.5" />
+        <path d={`M${end + 49} 146 Q${end + 67} 170 ${end + 50} 195`} strokeWidth="14" />
+        <path d={`M${end + 103} 157 Q${end + 111} 165 ${end + 107} 173`} strokeWidth="6.5" />
       </g>
     );
   }
