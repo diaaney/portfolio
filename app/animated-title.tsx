@@ -22,6 +22,14 @@ function WordMarks({ variant, frame, start, end }: {
         <path d={"M" + (start - 70) + " 190 l-4 2 M" + (end + 70) + " 191 l4 1"} strokeWidth="5" />
       </g>
     );
+    if (frame === 3) return (
+      <g fill="none" stroke="white" strokeWidth="19" strokeLinecap="round">
+        <path d={"M" + (start - 38) + " 139 Q" + (start - 59) + " 184 " + (start - 38) + " 231"} />
+        <path d={"M" + (end + 37) + " 139 Q" + (end + 58) + " 185 " + (end + 37) + " 231"} />
+        <path d={"M" + (start - 70) + " 156 Q" + (start - 91) + " 184 " + (start - 69) + " 214"} />
+        <path d={"M" + (end + 69) + " 155 Q" + (end + 91) + " 184 " + (end + 70) + " 215"} />
+      </g>
+    );
     if (frame === 4) return (
       <g fill="none" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round">
         <path d={"M" + (start - 74) + " 73 l-24 13 15 15 -18 17 16 18 -17 15 15 20 -15 14 17 21 -13 17 13 20 -12 23"} />
@@ -33,10 +41,10 @@ function WordMarks({ variant, frame, start, end }: {
       </g>
     );
     return (
-      <g fill="none" stroke="white" strokeWidth={frame === 3 ? 7 : 5} strokeLinecap="round">
+      <g fill="none" stroke="white" strokeWidth="5" strokeLinecap="round">
         <path d={"M" + (start - 38) + " 145 Q" + (start - 59) + " 184 " + (start - 38) + " 225"} />
         <path d={"M" + (end + 37) + " 145 Q" + (end + 58) + " 185 " + (end + 37) + " 225"} />
-        {(frame === 3 || frame === 5) && <>
+        {frame === 5 && <>
           <path d={"M" + (start - 70) + " 148 Q" + (start - 91) + " 184 " + (start - 69) + " 222"} />
           <path d={"M" + (end + 69) + " 147 Q" + (end + 91) + " 184 " + (end + 70) + " 223"} />
         </>}

@@ -246,8 +246,7 @@ const scribbleWork: Partial<Record<string, readonly string[]>> = {
 };
 
 function isOutline(variant: Variant, frame: number) {
-  return ((variant === "intro" || variant === "wrap-up") && frame === 4) ||
-    (variant === "demos" && frame === 3);
+  return (variant === "intro" || variant === "wrap-up") && frame === 4;
 }
 
 // The photographed DETAILS animation redraws its letters at every stage.
@@ -274,7 +273,7 @@ const detailsVerticals: Record<number, readonly number[]> = {
 };
 
 const workAngles: Record<number, readonly number[]> = {
-  1: [-3, 2, -2, 3], 2: [-2, 3, -3, 2], 3: [2, -2, 3, -3],
+  1: [-3, 2, -2, 3], 2: [-2, 3, -3, 2], 3: [5, -4, 5, -5],
   4: [-2, 3, -2, 2], 5: [3, -2, 2, -3], 6: [-2, 2, -3, 2],
 };
 const aboutAngles: Record<number, readonly number[]> = {
@@ -291,7 +290,7 @@ function shearForFrame(variant: Variant, frame: number) {
 }
 
 function widthForFrame(variant: Variant, frame: number) {
-  if (variant === "demos") return [14, 19, 21, 17, 9.2, 21, 18, 14][frame];
+  if (variant === "demos") return [14, 19, 21, 19, 9.2, 21, 18, 14][frame];
   if (variant === "intro") return [14, 18, 20, 21, 17, 22, 20, 14][frame];
   if (variant === "details") return [14, 14, 5.4, 17, 19, 16, 6.3, 17][frame];
   return [14, 17, 19, 20, 17, 20, 19, 18][frame];
@@ -316,8 +315,8 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
     <g
       transform={"translate(" + (x + shearOffset) + " " + y + ") scale(" + scaleX + " " + scaleY + ") skewX(" + shear + ")"}
       fill="none"
-      strokeLinecap={scribble || loose || (variant === "demos" && (frame === 1 || frame === 2)) ? "round" : "square"}
-      strokeLinejoin={scribble || loose || (variant === "demos" && (frame === 1 || frame === 2)) ? "round" : "bevel"}
+      strokeLinecap={scribble || loose || (variant === "demos" && (frame === 1 || frame === 2 || frame === 3)) ? "round" : "square"}
+      strokeLinejoin={scribble || loose || (variant === "demos" && (frame === 1 || frame === 2 || frame === 3)) ? "round" : "bevel"}
       aria-label={word}
     >
       {letters.map((letter, index) => {
@@ -351,14 +350,19 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
             : variant === "intro"
               ? aboutAngles[frame]?.[index] || 0
               : index % 2 === 0 ? -2 : 2;
-        const vertical = variant === "details"
+        const vertical = variant === "demos" && frame === 3
+          ? [-3, 2, -2, 4][index]
+          : variant === "details"
           ? detailsVerticals[frame]?.[index] || 0
           : frame === 0 ? 0 : [-1, 2, -2, 1, 0][index % 5];
+        const wobble = variant === "demos" && frame === 3
+          ? " skewY(" + [3, -2, 4, -3][index] + ")"
+          : "";
         const strokeWeight = strokeWidth * (letter === "I" ? 0.88 : index % 3 === 1 ? 0.94 : 1);
         return (
           <g
             key={index}
-            transform={"translate(" + letterX + " " + vertical + ") rotate(" + angle + " " + (glyph.advance / 2) + " 45)"}
+            transform={"translate(" + letterX + " " + vertical + ") rotate(" + angle + " " + (glyph.advance / 2) + " 45)" + wobble}
           >
             {outline ? (
               <>
