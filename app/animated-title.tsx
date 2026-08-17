@@ -248,12 +248,14 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
   const title = titles[variant];
   const id = variant + "-" + frame;
   const roughId = "letter-rough-" + id;
+  const softId = "letter-soft-" + id;
   const wearId = "letter-wear-" + id;
   const revealId = "letter-reveal-" + id;
   const stripeId = "letter-stripe-" + id;
   const stripeMaskId = "letter-stripe-mask-" + id;
   const lowerFillId = "letter-lower-fill-" + id;
   const clean = frame === 0 || (frame === 7 && (variant === "demos" || variant === "intro"));
+  const softenWork = variant === "demos" && (frame === 0 || frame === 7);
   const isWorkSpaghetti = variant === "demos" && frame === 4;
   const revealWidth = [115, 209, 310, 420, 420, 420, 420, 420][frame];
   const isGear = variant === "wrap-up";
@@ -273,6 +275,11 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
   return (
     <svg className="hand-slide" viewBox="0 0 976 320" role="img" aria-label={title.word}>
       <defs>
+        {softenWork && (
+          <filter id={softId} x="-3%" y="-6%" width="106%" height="112%">
+            <feGaussianBlur stdDeviation="1.1" />
+          </filter>
+        )}
         <filter id={roughId} x="-12%" y="-22%" width="124%" height="144%" colorInterpolationFilters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.11 0.17" numOctaves="2" seed={frame + 13} result="edge" />
           <feDisplacementMap in="SourceGraphic" in2="edge" scale={isWorkSpaghetti ? 4 : variant === "details" && frame === 6 ? 5 : 5.5} xChannelSelector="R" yChannelSelector="G" result="rough" />
@@ -326,6 +333,7 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
             fontStyle="italic"
             fontSize={title.cleanSize}
             fill="white"
+            filter={softenWork ? `url(#${softId})` : undefined}
           >
             {title.word}
           </text>
