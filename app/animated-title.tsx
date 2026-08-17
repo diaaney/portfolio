@@ -18,30 +18,35 @@ function SpaghettiColumn({ points, spread, zigzag, seed }: {
 }) {
   const top = points[0][1];
   const bottom = points[points.length - 1][1];
-  const rows = Math.floor((bottom - top) / 4.4);
-  const strokes: string[] = [];
+  const rows = Math.max(2, Math.round((bottom - top) / 11));
+  let stroke = "";
+  let previousX = 0;
+  let previousY = 0;
 
   for (let row = 0; row <= rows; row++) {
-    const y = top + row * (bottom - top) / rows;
+    const y = top + row * (bottom - top) / rows +
+      (row === 0 || row === rows ? 0 : (noise(seed + row * 37) - 0.5) * 3);
     let next = 1;
     while (next < points.length - 1 && y > points[next][1]) next++;
     const [x0, y0] = points[next - 1];
     const [x1, y1] = points[next];
     const center = x0 + (x1 - x0) * (y - y0) / (y1 - y0) +
-      Math.sin(row * 2.3) * zigzag;
+      Math.sin(row * 0.72) * zigzag;
+    const radius = spread * (0.36 + noise(seed + row * 37 + 1) * 0.22);
+    const x = center + (row % 2 === 0 ? -radius : radius);
 
-    for (let pass = 0; pass < 3; pass++) {
-      const key = seed + row * 37 + pass * 101;
-      if (noise(key + 1) < 0.07) continue;
-      const x = center - spread / 2 + pass * spread / 3 + (noise(key + 2) - 0.5) * 7;
-      const length = 7 + noise(key + 3) * (spread / 2);
-      const bend = (noise(key + 4) - 0.5) * 5;
-      const tilt = (noise(key + 5) - 0.5) * 2;
-      strokes.push(`M${x.toFixed(1)} ${(y + tilt).toFixed(1)} l${(length * 0.52).toFixed(1)} ${bend.toFixed(1)} l${(length * 0.48).toFixed(1)} ${(-bend + tilt).toFixed(1)}`);
+    if (row === 0) {
+      stroke = `M${x.toFixed(1)} ${y.toFixed(1)}`;
+    } else {
+      const difference = x - previousX;
+      stroke += ` C${(previousX + difference * 0.28).toFixed(1)} ${(previousY - 1.5).toFixed(1)} ` +
+        `${(previousX + difference * 0.72).toFixed(1)} ${(y + 1.5).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`;
     }
+    previousX = x;
+    previousY = y;
   }
 
-  return <path d={strokes.join(" ")} fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />;
+  return <path d={stroke} fill="none" stroke="white" strokeWidth="7.6" strokeLinecap="round" strokeLinejoin="round" />;
 }
 
 function WordMarks({ variant, frame, start, end }: {
@@ -199,25 +204,28 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
   const stripeMaskId = "letter-stripe-mask-" + id;
   const lowerFillId = "letter-lower-fill-" + id;
   const clean = frame === 0 || (frame === 7 && (variant === "demos" || variant === "intro"));
+  const isWorkSpaghetti = variant === "demos" && frame === 4;
   const revealWidth = [115, 209, 310, 420, 420, 420, 420, 420][frame];
   const isGear = variant === "wrap-up";
   const isStriped = isGear && frame === 6;
   const grainProfile =
-    variant === "intro" && frame !== 4
-      ? "0.03 0.12 0.30 0.55 0.76 0.87 1 1 1 1 1 1"
-      : variant === "details" && frame === 1
-        ? "0.04 0.26 0.55 0.80 0.95 0.97 1 1 1 1 1 1"
-      : (variant === "details" && (frame === 3 || frame === 4)) ||
-          (isGear && frame >= 3 && frame !== 6)
-        ? "0.03 0.17 0.40 0.66 0.83 0.91 0.96 1 1 1 1 1"
-        : "0.04 0.26 0.55 0.80 0.90 0.97 1 1 1 1 1 1";
+    isWorkSpaghetti
+      ? "0.32 0.45 0.58 0.68 0.78 0.86 0.92 0.96 1 1 1 1"
+      : variant === "intro" && frame !== 4
+        ? "0.03 0.12 0.30 0.55 0.76 0.87 1 1 1 1 1 1"
+        : variant === "details" && frame === 1
+          ? "0.04 0.26 0.55 0.80 0.95 0.97 1 1 1 1 1 1"
+          : (variant === "details" && (frame === 3 || frame === 4)) ||
+              (isGear && frame >= 3 && frame !== 6)
+            ? "0.03 0.17 0.40 0.66 0.83 0.91 0.96 1 1 1 1 1"
+            : "0.04 0.26 0.55 0.80 0.90 0.97 1 1 1 1 1 1";
 
   return (
     <svg className="hand-slide" viewBox="0 0 976 320" role="img" aria-label={title.word}>
       <defs>
         <filter id={roughId} x="-12%" y="-22%" width="124%" height="144%" colorInterpolationFilters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.11 0.17" numOctaves="2" seed={frame + 13} result="edge" />
-          <feDisplacementMap in="SourceGraphic" in2="edge" scale={variant === "details" && frame === 6 ? 5 : 5.5} xChannelSelector="R" yChannelSelector="G" result="rough" />
+          <feDisplacementMap in="SourceGraphic" in2="edge" scale={isWorkSpaghetti ? 4 : variant === "details" && frame === 6 ? 5 : 5.5} xChannelSelector="R" yChannelSelector="G" result="rough" />
           <feTurbulence type="fractalNoise" baseFrequency="0.67" numOctaves="2" seed={frame + 25} result="grain" />
           <feColorMatrix in="grain" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  .333 .333 .334 0 0" result="luma" />
           <feComponentTransfer in="luma" result="scratch">
@@ -281,7 +289,7 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
             <HandLettering word={title.word} variant={variant} frame={frame} x={title.x} y={title.y} width={title.width} height={title.height} idPrefix={"display-" + id} />
           </g>
         )}
-        {!clean && (
+        {!clean && !isWorkSpaghetti && (
           <g mask={"url(#" + wearId + ")"}>
             <ChalkWear frame={frame} start={title.x} y={title.y} width={title.width} height={title.height} />
           </g>

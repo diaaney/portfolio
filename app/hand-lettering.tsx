@@ -241,8 +241,8 @@ const gearStriped: Partial<Record<string, readonly string[]>> = {
   R: ["M10 82 L17 9", "M17 9 C47 5 60 17 56 32 C53 47 36 50 12 48", "M35 49 L61 82"],
 };
 
-// The fifth WORK drawing is made of short, restless zigzags rather than
-// thick copies of the preceding letters. The strokes still spell the word.
+// The fifth WORK drawing winds visible horizontal chalk lines around the
+// hand-drawn letter paths, with the gaps between passes left intact.
 const scribbleWork: Partial<Record<string, readonly string[]>> = {
   W: [
     "M7 8 L13 12 L6 16 L14 20 L7 24 L14 28 L8 33 L15 37 L9 42 L16 47 L11 52 L19 57 L14 62 L22 68 L18 73 L25 82",
@@ -278,27 +278,24 @@ function spaghettiStrokes(paths: readonly string[], letterIndex: number) {
     for (let index = 0; index < coordinates.length; index += 2) {
       points.push([coordinates[index], coordinates[index + 1]]);
     }
-    if (/z\s*$/i.test(path)) points.push(points[0]);
 
     let strokes = "";
-    for (let segment = 1; segment < points.length; segment++) {
-      const [x0, y0] = points[segment - 1];
-      const [x1, y1] = points[segment];
-      const length = Math.hypot(x1 - x0, y1 - y0);
-      const steps = Math.max(1, Math.ceil(length / 3.6));
-      for (let step = 0; step < steps; step++) {
-        const progress = step / steps;
-        const seed = letterIndex * 100003 + pathIndex * 7001 + segment * 223 + step * 31;
-        if (scratchHash(seed + 1) % 23 === 0) continue;
-        const span = 9 + scratchHash(seed + 2) % 9;
-        const x = x0 + (x1 - x0) * progress + (scratchHash(seed + 3) % 7 - 3) * 0.7;
-        const y = y0 + (y1 - y0) * progress + (scratchHash(seed + 4) % 7 - 3) * 0.4;
-        const bend = (scratchHash(seed + 5) % 9 - 4) * 0.65;
-        const offset = (scratchHash(seed + 6) % 7 - 3) * 0.3;
-        strokes += `M${(x - span / 2).toFixed(1)} ${y.toFixed(1)} ` +
-          `l${(span * 0.35).toFixed(1)} ${bend.toFixed(1)} ` +
-          `l${(span * 0.35).toFixed(1)} ${(-bend + offset).toFixed(1)} ` +
-          `l${(span * 0.3).toFixed(1)} ${(-offset).toFixed(1)} `;
+    for (let row = 0; row < points.length; row++) {
+      const [baseX, baseY] = points[row];
+      const seed = letterIndex * 100003 + pathIndex * 7001 + row * 223;
+      const span = 18 + scratchHash(seed + 1) % 9;
+      const x = baseX + (scratchHash(seed + 2) % 7 - 3) * 0.65;
+      const y = baseY + (scratchHash(seed + 3) % 5 - 2) * 0.55;
+      const bend = (scratchHash(seed + 4) % 9 - 4) * 0.7;
+      const tilt = (scratchHash(seed + 5) % 7 - 3) * 0.4;
+      strokes += `M${(x - span / 2).toFixed(1)} ${y.toFixed(1)} ` +
+        `l${(span * 0.52).toFixed(1)} ${bend.toFixed(1)} ` +
+        `l${(span * 0.48).toFixed(1)} ${(tilt - bend).toFixed(1)} `;
+
+      if (scratchHash(seed + 6) % 4 === 0) {
+        const echo = span * 0.57;
+        strokes += `M${(x - echo / 2 + 1).toFixed(1)} ${(y + 2.3).toFixed(1)} ` +
+          `l${echo.toFixed(1)} ${(tilt * 0.55).toFixed(1)} `;
       }
     }
     return strokes;
@@ -315,7 +312,7 @@ function SpaghettiLetter({ paths, letterIndex }: {
         <path
           key={index}
           d={d}
-          strokeWidth={2.3 + (scratchHash(index * 37 + letterIndex * 71) % 7) * 0.12}
+          strokeWidth={3.5 + (scratchHash(index * 37 + letterIndex * 71) % 7) * 0.19}
         />
       ))}
     </g>
