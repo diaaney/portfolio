@@ -151,19 +151,19 @@ function WordMarks({ variant, frame, start, end }: {
       </g>
     );
     if (frame === 3) return (
-      <g fill="none" stroke="white" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
-        <path d={"M" + (end - 51) + " 61 l17 7"} />
-        <path d={"M" + (end + 4) + " 80 l17 11 -9 13"} />
-        <path d={"M" + (end + 60) + " 134 l20 -5 -1 17"} />
+      <g fill="white" strokeLinejoin="round">
+        <path d={`M${end - 51} 95 L${end - 45} 75 L${end - 39} 63 L${end - 28} 60 L${end - 16} 65 L${end - 24} 91 L${end - 29} 99 L${end - 43} 98 Z`} />
+        <path d={`M${end + 3} 105 L${end + 13} 77 L${end + 21} 75 L${end + 42} 88 L${end + 44} 96 L${end + 35} 110 L${end + 17} 117 Z`} />
+        <path d={`M${end + 31} 140 L${end + 61} 126 L${end + 71} 129 L${end + 74} 145 L${end + 43} 158 L${end + 33} 157 Z`} />
       </g>
     );
     if (frame === 4) return (
-      <g fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-        <path d={"M" + (end - 56) + " 58 l10 -18 20 9 -11 25 Z"} />
-        <path d={"M" + (end + 5) + " 51 l16 -24 17 21 -17 30 Z"} />
-        <path d={"M" + (end + 70) + " 107 l26 -12 2 25 -27 4 Z"} />
-        <path d={"M" + (start - 29) + " 198 C" + (start - 57) + " 241 " + (start - 28) + " 283 " + (start + 1) + " 304"} />
-        <path strokeWidth="3" d={"M" + (start - 41) + " 237 Q" + (start - 44) + " 276 " + (start - 5) + " 309"} />
+      <g fill="none" stroke="white" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d={`M${end - 49} 55 L${end - 27} 50 L${end - 5} 59 L${end - 18} 87 L${end - 50} 80 Z`} />
+        <path d={`M${end + 11} 97 L${end + 39} 28 L${end + 66} 47 L${end + 45} 105 L${end + 24} 100 Z`} />
+        <path d={`M${end + 49} 132 L${end + 97} 116 L${end + 104} 150 L${end + 55} 155 Z`} />
+        <path strokeWidth="5" d={`M${start - 17} 200 C${start - 43} 228 ${start - 37} 266 ${start + 22} 296`} />
+        <path strokeWidth="3.3" d={`M${start - 41} 276 C${start - 37} 288 ${start - 21} 302 ${start - 4} 309`} />
       </g>
     );
     if (frame === 5) return (

@@ -376,12 +376,13 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
   const totalWidth = letters.reduce((sum, letter) => sum + glyphs[letter].advance, 0) +
     Math.max(0, letters.length - 1) * spacing;
   const scaleX = width / totalWidth;
-  const scaleY = height / 100;
+  const introOutline = variant === "intro" && frame === 4;
+  const scaleY = (height / 100) * (introOutline ? 1.13 : 1);
   const outline = isOutline(variant, frame);
   const loose = variant === "details" && frame === 6;
   const scribble = variant === "demos" && frame === 4;
-  const strokeWidth = widthForFrame(variant, frame);
-  const shear = shearForFrame(variant, frame);
+  const strokeWidth = introOutline ? 23 : widthForFrame(variant, frame);
+  const shear = introOutline ? -2 : shearForFrame(variant, frame);
   const shearOffset = -Math.tan((shear * Math.PI) / 180) * 45 * scaleX;
 
   let advance = 0;
@@ -450,7 +451,7 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
                       <path key={strokeIndex} d={d} stroke="white" strokeWidth={strokeWeight} />
                     ))}
                     {strokes.map((d, strokeIndex) => (
-                      <path key={strokeIndex} d={d} stroke="black" strokeWidth="10.5" />
+                      <path key={strokeIndex} d={d} stroke="black" strokeWidth={introOutline ? 9 : 10.5} />
                     ))}
                   </mask>
                   {variant === "wrap-up" && frame === 4 && (
