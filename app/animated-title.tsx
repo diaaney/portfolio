@@ -10,43 +10,86 @@ const titles = {
   "wrap-up": { word: "GEAR", x: 283, y: 130, width: 410, height: 105, cleanSize: 126, baseline: 220 },
 } as const;
 
-function SpaghettiColumn({ points, spread, zigzag, seed }: {
+type PressureStop = readonly [y: number, sweep: number, thickness: number];
+
+function profileAt(profile: readonly PressureStop[], y: number) {
+  let next = 1;
+  while (next < profile.length - 1 && y > profile[next][0]) next++;
+  const [y0, sweep0, thickness0] = profile[next - 1];
+  const [y1, sweep1, thickness1] = profile[next];
+  const t = Math.max(0, Math.min(1, (y - y0) / (y1 - y0)));
+  return {
+    sweep: sweep0 + (sweep1 - sweep0) * t,
+    thickness: thickness0 + (thickness1 - thickness0) * t,
+  };
+}
+
+function SpaghettiColumn({ points, profile, zigzag, pitch, seed }: {
   points: readonly (readonly [number, number])[];
-  spread: number;
+  profile: readonly PressureStop[];
   zigzag: number;
+  pitch: number;
   seed: number;
 }) {
   const top = points[0][1];
   const bottom = points[points.length - 1][1];
-  const rows = Math.max(2, Math.round((bottom - top) / 11));
-  let stroke = "";
-  let previousX = 0;
-  let previousY = 0;
+  const rows = Math.max(2, Math.round((bottom - top) / pitch));
+  const turns: [number, number][] = [];
 
   for (let row = 0; row <= rows; row++) {
     const y = top + row * (bottom - top) / rows +
-      (row === 0 || row === rows ? 0 : (noise(seed + row * 37) - 0.5) * 3);
+      (row === 0 || row === rows ? 0 : (noise(seed + row * 37) - 0.5) * 6);
     let next = 1;
     while (next < points.length - 1 && y > points[next][1]) next++;
     const [x0, y0] = points[next - 1];
     const [x1, y1] = points[next];
     const center = x0 + (x1 - x0) * (y - y0) / (y1 - y0) +
       Math.sin(row * 0.72) * zigzag;
-    const radius = spread * (0.36 + noise(seed + row * 37 + 1) * 0.22);
-    const x = center + (row % 2 === 0 ? -radius : radius);
-
-    if (row === 0) {
-      stroke = `M${x.toFixed(1)} ${y.toFixed(1)}`;
-    } else {
-      const difference = x - previousX;
-      stroke += ` C${(previousX + difference * 0.28).toFixed(1)} ${(previousY - 1.5).toFixed(1)} ` +
-        `${(previousX + difference * 0.72).toFixed(1)} ${(y + 1.5).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`;
-    }
-    previousX = x;
-    previousY = y;
+    const { sweep } = profileAt(profile, y);
+    const radius = sweep * (0.43 + noise(seed + row * 37 + 1) * 0.14);
+    turns.push([center + (row % 2 === 0 ? -radius : radius), y]);
   }
 
-  return <path d={stroke} fill="none" stroke="white" strokeWidth="7.6" strokeLinecap="round" strokeLinejoin="round" />;
+  const samples: [number, number][] = [];
+  for (let turn = 0; turn < turns.length - 1; turn++) {
+    const p0 = turns[Math.max(0, turn - 1)];
+    const p1 = turns[turn];
+    const p2 = turns[turn + 1];
+    const p3 = turns[Math.min(turns.length - 1, turn + 2)];
+    for (let step = 0; step < 8; step++) {
+      const t = step / 8;
+      const t2 = t * t;
+      const t3 = t2 * t;
+      const interpolate = (axis: 0 | 1) => 0.5 * (
+        2 * p1[axis] + (-p0[axis] + p2[axis]) * t +
+        (2 * p0[axis] - 5 * p1[axis] + 4 * p2[axis] - p3[axis]) * t2 +
+        (-p0[axis] + 3 * p1[axis] - 3 * p2[axis] + p3[axis]) * t3
+      );
+      samples.push([interpolate(0), interpolate(1)]);
+    }
+  }
+  samples.push(turns[turns.length - 1]);
+
+  // Fill a ribbon around the centerline so each turn can gain or lose pressure.
+  const left: string[] = [];
+  const right: string[] = [];
+  for (let index = 0; index < samples.length; index++) {
+    const [x, y] = samples[index];
+    const before = samples[Math.max(0, index - 1)];
+    const after = samples[Math.min(samples.length - 1, index + 1)];
+    const dx = after[0] - before[0];
+    const dy = after[1] - before[1];
+    const distance = Math.hypot(dx, dy) || 1;
+    const taper = 0.72 + 0.28 * Math.min(1, index / 4, (samples.length - 1 - index) / 4);
+    const pressure = profileAt(profile, y).thickness * 1.4 *
+      (1 + 0.18 * Math.sin(index * 0.43 + seed)) * taper / 2;
+    const offsetX = -dy / distance * pressure;
+    const offsetY = dx / distance * pressure;
+    left.push(`${(x + offsetX).toFixed(1)} ${(y + offsetY).toFixed(1)}`);
+    right.push(`${(x - offsetX).toFixed(1)} ${(y - offsetY).toFixed(1)}`);
+  }
+  const outline = `M${left.join(" L")} L${right.reverse().join(" L")} Z`;
+  return <path d={outline} fill="white" />;
 }
 
 function WordMarks({ variant, frame, start, end }: {
@@ -71,12 +114,12 @@ function WordMarks({ variant, frame, start, end }: {
     );
     if (frame === 4) return (
       <g>
-        <SpaghettiColumn points={[[start - 102, 72], [start - 128, 91], [start - 119, 111], [start - 159, 148]]} spread={34} zigzag={7} seed={1100} />
-        <SpaghettiColumn points={[[start - 177, 179], [start - 183, 217], [start - 169, 246], [start - 157, 269]]} spread={34} zigzag={7} seed={1300} />
-        <SpaghettiColumn points={[[start - 76, 145], [start - 95, 177], [start - 82, 201], [start - 101, 234], [start - 79, 267], [start - 61, 297]]} spread={36} zigzag={8} seed={1500} />
-        <SpaghettiColumn points={[[end + 47, 107], [end + 54, 163], [end + 52, 216]]} spread={33} zigzag={5} seed={1700} />
-        <SpaghettiColumn points={[[end + 59, 233], [end + 73, 271], [end + 70, 307]]} spread={33} zigzag={5} seed={1900} />
-        <SpaghettiColumn points={[[end + 148, 137], [end + 155, 194], [end + 151, 263]]} spread={30} zigzag={4} seed={2100} />
+        <SpaghettiColumn points={[[start - 102, 72], [start - 128, 91], [start - 119, 111], [start - 159, 148]]} profile={[[72, 11, 4], [95, 20, 6], [122, 29, 10], [148, 27, 8]]} zigzag={7} pitch={12} seed={1100} />
+        <SpaghettiColumn points={[[start - 177, 179], [start - 183, 217], [start - 169, 246], [start - 157, 269]]} profile={[[179, 11, 4], [210, 27, 8], [240, 39, 11], [269, 22, 6]]} zigzag={7} pitch={11.5} seed={1300} />
+        <SpaghettiColumn points={[[start - 76, 145], [start - 95, 177], [start - 82, 201], [start - 101, 234], [start - 79, 267], [start - 61, 297]]} profile={[[145, 31, 10], [178, 33, 9], [215, 16, 4], [238, 15, 4], [273, 29, 9], [297, 25, 6]]} zigzag={8} pitch={12} seed={1500} />
+        <SpaghettiColumn points={[[end + 47, 107], [end + 54, 163], [end + 52, 216]]} profile={[[107, 17, 5], [170, 28, 8], [193, 38, 11], [216, 18, 5]]} zigzag={5} pitch={14.5} seed={1700} />
+        <SpaghettiColumn points={[[end + 59, 233], [end + 73, 271], [end + 70, 307]]} profile={[[233, 18, 6], [255, 32, 10], [281, 18, 6], [307, 7, 3]]} zigzag={5} pitch={13.5} seed={1900} />
+        <SpaghettiColumn points={[[end + 148, 137], [end + 155, 194], [end + 151, 263]]} profile={[[137, 23, 8], [191, 12, 4], [224, 10, 4], [263, 31, 10]]} zigzag={4} pitch={15.5} seed={2100} />
       </g>
     );
     return (
