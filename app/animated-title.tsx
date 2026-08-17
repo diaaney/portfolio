@@ -122,14 +122,18 @@ function WordMarks({ variant, frame, start, end }: {
         <SpaghettiColumn points={[[end + 148, 137], [end + 155, 194], [end + 151, 263]]} profile={[[137, 23, 8], [191, 12, 4], [224, 10, 4], [263, 31, 10]]} zigzag={4} pitch={15.5} seed={2100} />
       </g>
     );
+    if (frame === 5) return (
+      <g fill="none" stroke="white" strokeLinecap="round">
+        <path d={`M${start - 53} 138 Q${start - 69} 182 ${start - 54} 226`} strokeWidth="14.5" />
+        <path d={`M${start - 132} 165 Q${start - 124} 181 ${start - 126} 192`} strokeWidth="7.5" />
+        <path d={`M${end + 65} 143 Q${end + 72} 178 ${end + 61} 224`} strokeWidth="11.5" />
+        <path d={`M${end + 105} 177 Q${end + 117} 200 ${end + 109} 223`} strokeWidth="8.4" />
+      </g>
+    );
     return (
       <g fill="none" stroke="white" strokeWidth="5" strokeLinecap="round">
         <path d={"M" + (start - 38) + " 145 Q" + (start - 59) + " 184 " + (start - 38) + " 225"} />
         <path d={"M" + (end + 37) + " 145 Q" + (end + 58) + " 185 " + (end + 37) + " 225"} />
-        {frame === 5 && <>
-          <path d={"M" + (start - 70) + " 148 Q" + (start - 91) + " 184 " + (start - 69) + " 222"} />
-          <path d={"M" + (end + 69) + " 147 Q" + (end + 91) + " 184 " + (end + 70) + " 223"} />
-        </>}
       </g>
     );
   }
