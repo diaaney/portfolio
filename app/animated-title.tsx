@@ -171,13 +171,13 @@ function WordMarks({ variant, frame, start, end }: {
       </g>
     );
     if (frame === 5) return (
-      <g fill="none" stroke="white" strokeWidth="7" strokeLinecap="round">
-        <path d={"M" + (end - 48) + " 48 l-2 -30"} />
-        <path d={"M" + (end + 9) + " 79 l22 -27"} />
-        <path d={"M" + (end + 74) + " 138 l16 -3"} />
-        <path d={"M" + (start - 48) + " 192 C" + (start - 90) + " 238 " + (start - 62) + " 281 " + (start - 20) + " 302"} />
-        <path strokeWidth="5" d={"M" + (start - 67) + " 206 C" + (start - 107) + " 244 " + (start - 78) + " 283 " + (start - 35) + " 303"} />
-        <path strokeWidth="4" d={"M" + (start - 95) + " 240 Q" + (start - 98) + " 272 " + (start - 70) + " 287"} />
+      <g fill="none" stroke="white" strokeLinecap="round">
+        <path strokeWidth="14" d={`M${end - 30} 78 C${end - 34} 64 ${end - 32} 50 ${end - 33} 37`} />
+        <path strokeWidth="14" d={`M${end + 27} 85 L${end + 51} 43`} />
+        <path strokeWidth="14" d={`M${end + 57} 141 L${end + 91} 133`} />
+        <path strokeWidth="6" d={`M${start - 37} 178 C${start - 52} 211 ${start - 48} 244 ${start - 27} 266 C${start - 14} 281 ${start + 2} 289 ${start + 14} 295`} />
+        <path strokeWidth="5.5" d={`M${start - 64} 192 C${start - 79} 219 ${start - 75} 244 ${start - 54} 263 C${start - 41} 277 ${start - 25} 284 ${start - 13} 288`} />
+        <path strokeWidth="4" d={`M${start - 101} 232 C${start - 108} 242 ${start - 106} 259 ${start - 100} 270`} />
       </g>
     );
     return (
