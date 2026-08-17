@@ -451,7 +451,7 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
                       <path key={strokeIndex} d={d} stroke="white" strokeWidth={strokeWeight} />
                     ))}
                     {strokes.map((d, strokeIndex) => (
-                      <path key={strokeIndex} d={d} stroke="black" strokeWidth="7.5" />
+                      <path key={strokeIndex} d={d} stroke="black" strokeWidth="10.5" />
                     ))}
                   </mask>
                 </defs>
