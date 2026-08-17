@@ -23,11 +23,11 @@ function WordMarks({ variant, frame, start, end }: {
       </g>
     );
     if (frame === 3) return (
-      <g fill="none" stroke="white" strokeWidth="19" strokeLinecap="round">
-        <path d={"M" + (start - 38) + " 139 Q" + (start - 59) + " 184 " + (start - 38) + " 231"} />
-        <path d={"M" + (end + 37) + " 139 Q" + (end + 58) + " 185 " + (end + 37) + " 231"} />
-        <path d={"M" + (start - 83) + " 156 Q" + (start - 95) + " 184 " + (start - 82) + " 214"} strokeWidth="14.25" />
-        <path d={"M" + (end + 82) + " 155 Q" + (end + 95) + " 184 " + (end + 83) + " 215"} strokeWidth="14.25" />
+      <g fill="none" stroke="white" strokeWidth="20.5" strokeLinecap="round">
+        <path d={"M" + (start - 38) + " 128 Q" + (start - 59) + " 184 " + (start - 38) + " 242"} />
+        <path d={"M" + (end + 37) + " 128 Q" + (end + 58) + " 185 " + (end + 37) + " 242"} />
+        <path d={"M" + (start - 83) + " 164 Q" + (start - 95) + " 184 " + (start - 82) + " 208"} strokeWidth="15.5" />
+        <path d={"M" + (end + 82) + " 163 Q" + (end + 95) + " 184 " + (end + 83) + " 209"} strokeWidth="15.5" />
       </g>
     );
     if (frame === 4) return (

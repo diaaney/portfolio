@@ -114,20 +114,20 @@ const glyphs: Record<string, Glyph> = {
 // The fourth WORK frame bends each pen stroke, not only the whole letters.
 const bentWork: Partial<Record<string, readonly string[]>> = {
   W: [
-    "M8 8 C6 24 12 45 10 58 Q9 69 15 83 C24 70 32 45 40 28 C39 42 39 61 47 83 C55 76 59 56 67 39 Q73 22 78 8",
+    "M8 8 C5 23 12 33 9 48 C8 62 12 76 15 83 C24 71 31 46 40 27 C38 41 41 58 46 72 Q47 79 49 82 C57 74 60 57 68 35 C72 23 74 18 78 8",
   ],
   O: [
-    "M38 8 C22 4 9 19 9 36 C4 54 11 76 29 83 C42 89 57 73 64 56 C73 37 63 13 46 8 Q42 7 38 8 Z",
+    "M38 9 C24 3 11 18 10 32 Q7 39 8 47 C5 60 15 78 29 82 Q41 89 53 74 C64 68 67 48 66 39 C65 24 59 13 46 9 Q42 7 38 9 Z",
   ],
   R: [
-    "M13 83 C10 65 17 46 15 29 Q15 17 19 8",
-    "M19 8 C41 4 58 17 57 29 C60 43 43 51 14 47",
-    "M34 48 C43 59 49 68 62 82",
+    "M16 9 C14 23 17 35 14 46 Q14 63 11 83",
+    "M17 9 C33 3 53 10 57 24 Q62 38 50 43 C40 50 26 48 14 46",
+    "M34 48 Q41 54 46 63 C52 73 59 77 62 82",
   ],
   K: [
-    "M17 8 Q14 25 15 40 C12 57 9 70 8 83",
-    "M62 7 C50 21 39 36 29 43 Q21 49 13 50",
-    "M30 43 Q40 51 45 63 C51 71 56 76 62 84",
+    "M18 8 C15 19 18 31 14 43 C13 57 8 68 10 83",
+    "M62 8 Q54 16 48 25 C36 38 26 45 14 51",
+    "M32 42 Q38 49 43 59 C48 68 56 76 62 83",
   ],
 };
 
@@ -293,7 +293,7 @@ const detailsVerticals: Record<number, readonly number[]> = {
 };
 
 const workAngles: Record<number, readonly number[]> = {
-  1: [-3, 2, -2, 3], 2: [-2, 3, -3, 2], 3: [5, -4, 5, -5],
+  1: [-3, 2, -2, 3], 2: [-2, 3, -3, 2],
   4: [-2, 3, -2, 2], 5: [3, -2, 2, -3], 6: [-2, 2, -3, 2],
 };
 const aboutAngles: Record<number, readonly number[]> = {
@@ -303,7 +303,7 @@ const aboutAngles: Record<number, readonly number[]> = {
 };
 
 function shearForFrame(variant: Variant, frame: number) {
-  if (variant === "demos") return [0, -10, -8, -6, -4, -8, -6, 0][frame];
+  if (variant === "demos") return [0, -10, -8, 0, -4, -8, -6, 0][frame];
   if (variant === "intro") return [0, -11, -9, -8, -5, -9, -8, 0][frame];
   if (variant === "details") return [0, -13, -9, -7, -8, -10, 0, -7][frame];
   return [0, -8, -7, -8, -5, -8, -6, -8][frame];
@@ -373,18 +373,15 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
               ? aboutAngles[frame]?.[index] || 0
               : index % 2 === 0 ? -2 : 2;
         const vertical = variant === "demos" && frame === 3
-          ? [-3, 2, -2, 4][index]
+          ? 0
           : variant === "details"
           ? detailsVerticals[frame]?.[index] || 0
           : frame === 0 ? 0 : [-1, 2, -2, 1, 0][index % 5];
-        const wobble = variant === "demos" && frame === 3
-          ? " skewY(" + [3, -2, 4, -3][index] + ")"
-          : "";
         const strokeWeight = strokeWidth * (letter === "I" ? 0.88 : index % 3 === 1 ? 0.94 : 1);
         return (
           <g
             key={index}
-            transform={"translate(" + letterX + " " + vertical + ") rotate(" + angle + " " + (glyph.advance / 2) + " 45)" + wobble}
+            transform={"translate(" + letterX + " " + vertical + ") rotate(" + angle + " " + (glyph.advance / 2) + " 45)"}
           >
             {outline ? (
               <>
