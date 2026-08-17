@@ -10,6 +10,40 @@ const titles = {
   "wrap-up": { word: "GEAR", x: 283, y: 130, width: 410, height: 105, cleanSize: 126, baseline: 220 },
 } as const;
 
+function SpaghettiColumn({ points, spread, zigzag, seed }: {
+  points: readonly (readonly [number, number])[];
+  spread: number;
+  zigzag: number;
+  seed: number;
+}) {
+  const top = points[0][1];
+  const bottom = points[points.length - 1][1];
+  const rows = Math.floor((bottom - top) / 4.4);
+  const strokes: string[] = [];
+
+  for (let row = 0; row <= rows; row++) {
+    const y = top + row * (bottom - top) / rows;
+    let next = 1;
+    while (next < points.length - 1 && y > points[next][1]) next++;
+    const [x0, y0] = points[next - 1];
+    const [x1, y1] = points[next];
+    const center = x0 + (x1 - x0) * (y - y0) / (y1 - y0) +
+      Math.sin(row * 2.3) * zigzag;
+
+    for (let pass = 0; pass < 3; pass++) {
+      const key = seed + row * 37 + pass * 101;
+      if (noise(key + 1) < 0.07) continue;
+      const x = center - spread / 2 + pass * spread / 3 + (noise(key + 2) - 0.5) * 7;
+      const length = 7 + noise(key + 3) * (spread / 2);
+      const bend = (noise(key + 4) - 0.5) * 5;
+      const tilt = (noise(key + 5) - 0.5) * 2;
+      strokes.push(`M${x.toFixed(1)} ${(y + tilt).toFixed(1)} l${(length * 0.52).toFixed(1)} ${bend.toFixed(1)} l${(length * 0.48).toFixed(1)} ${(-bend + tilt).toFixed(1)}`);
+    }
+  }
+
+  return <path d={strokes.join(" ")} fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />;
+}
+
 function WordMarks({ variant, frame, start, end }: {
   variant: Variant; frame: number; start: number; end: number;
 }) {
@@ -31,13 +65,13 @@ function WordMarks({ variant, frame, start, end }: {
       </g>
     );
     if (frame === 4) return (
-      <g fill="none" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round">
-        <path d={"M" + (start - 74) + " 73 l-24 13 15 15 -18 17 16 18 -17 15 15 20 -15 14 17 21 -13 17 13 20 -12 23"} />
-        <path d={"M" + (start - 154) + " 108 l-21 16 14 18 -19 18 18 20 -19 20 18 20 -17 18 14 20 -14 18"} />
-        <path d={"M" + (start - 200) + " 178 l-13 15 17 15 -15 18 18 21 -12 18"} />
-        <path d={"M" + (end + 70) + " 79 l15 16 -12 17 17 17 -13 17 18 19 -14 17 16 19 -13 16 16 23 -15 25"} />
-        <path d={"M" + (end + 150) + " 104 l16 16 -15 17 19 19 -13 18 14 20 -12 17 16 21 -12 21"} />
-        <path d={"M" + (end + 190) + " 169 l13 14 -15 17 17 19 -14 17 12 20"} />
+      <g>
+        <SpaghettiColumn points={[[start - 102, 72], [start - 128, 91], [start - 119, 111], [start - 159, 148]]} spread={34} zigzag={7} seed={1100} />
+        <SpaghettiColumn points={[[start - 177, 179], [start - 183, 217], [start - 169, 246], [start - 157, 269]]} spread={34} zigzag={7} seed={1300} />
+        <SpaghettiColumn points={[[start - 76, 145], [start - 95, 177], [start - 82, 201], [start - 101, 234], [start - 79, 267], [start - 61, 297]]} spread={36} zigzag={8} seed={1500} />
+        <SpaghettiColumn points={[[end + 47, 107], [end + 54, 163], [end + 52, 216]]} spread={33} zigzag={5} seed={1700} />
+        <SpaghettiColumn points={[[end + 59, 233], [end + 73, 271], [end + 70, 307]]} spread={33} zigzag={5} seed={1900} />
+        <SpaghettiColumn points={[[end + 148, 137], [end + 155, 194], [end + 151, 263]]} spread={30} zigzag={4} seed={2100} />
       </g>
     );
     return (

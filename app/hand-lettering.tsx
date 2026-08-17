@@ -241,7 +241,7 @@ const gearStriped: Partial<Record<string, readonly string[]>> = {
   R: ["M10 82 L17 9", "M17 9 C47 5 60 17 56 32 C53 47 36 50 12 48", "M35 49 L61 82"],
 };
 
-// The fourth WORK drawing is made of short, restless zigzags rather than
+// The fifth WORK drawing is made of short, restless zigzags rather than
 // thick copies of the preceding letters. The strokes still spell the word.
 const scribbleWork: Partial<Record<string, readonly string[]>> = {
   W: [
@@ -264,6 +264,63 @@ const scribbleWork: Partial<Record<string, readonly string[]>> = {
     "M33 46 L41 51 L38 56 L47 62 L45 67 L53 72 L51 77 L62 83",
   ],
 };
+
+function scratchHash(seed: number) {
+  let value = Math.imul(seed + 0x9e3779b9, 1664525);
+  value ^= value >>> 16;
+  return value >>> 0;
+}
+
+function spaghettiStrokes(paths: readonly string[], letterIndex: number) {
+  return paths.map((path, pathIndex) => {
+    const coordinates = (path.match(/-?\d+(?:\.\d+)?/g) || []).map(Number);
+    const points: [number, number][] = [];
+    for (let index = 0; index < coordinates.length; index += 2) {
+      points.push([coordinates[index], coordinates[index + 1]]);
+    }
+    if (/z\s*$/i.test(path)) points.push(points[0]);
+
+    let strokes = "";
+    for (let segment = 1; segment < points.length; segment++) {
+      const [x0, y0] = points[segment - 1];
+      const [x1, y1] = points[segment];
+      const length = Math.hypot(x1 - x0, y1 - y0);
+      const steps = Math.max(1, Math.ceil(length / 3.6));
+      for (let step = 0; step < steps; step++) {
+        const progress = step / steps;
+        const seed = letterIndex * 100003 + pathIndex * 7001 + segment * 223 + step * 31;
+        if (scratchHash(seed + 1) % 23 === 0) continue;
+        const span = 9 + scratchHash(seed + 2) % 9;
+        const x = x0 + (x1 - x0) * progress + (scratchHash(seed + 3) % 7 - 3) * 0.7;
+        const y = y0 + (y1 - y0) * progress + (scratchHash(seed + 4) % 7 - 3) * 0.4;
+        const bend = (scratchHash(seed + 5) % 9 - 4) * 0.65;
+        const offset = (scratchHash(seed + 6) % 7 - 3) * 0.3;
+        strokes += `M${(x - span / 2).toFixed(1)} ${y.toFixed(1)} ` +
+          `l${(span * 0.35).toFixed(1)} ${bend.toFixed(1)} ` +
+          `l${(span * 0.35).toFixed(1)} ${(-bend + offset).toFixed(1)} ` +
+          `l${(span * 0.3).toFixed(1)} ${(-offset).toFixed(1)} `;
+      }
+    }
+    return strokes;
+  });
+}
+
+function SpaghettiLetter({ paths, letterIndex }: {
+  paths: readonly string[];
+  letterIndex: number;
+}) {
+  return (
+    <g stroke="white" strokeLinecap="round" strokeLinejoin="round">
+      {spaghettiStrokes(paths, letterIndex).map((d, index) => (
+        <path
+          key={index}
+          d={d}
+          strokeWidth={2.3 + (scratchHash(index * 37 + letterIndex * 71) % 7) * 0.12}
+        />
+      ))}
+    </g>
+  );
+}
 
 function isOutline(variant: Variant, frame: number) {
   return (variant === "intro" || variant === "wrap-up") && frame === 4;
@@ -383,7 +440,12 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
             key={index}
             transform={"translate(" + letterX + " " + vertical + ") rotate(" + angle + " " + (glyph.advance / 2) + " 45)"}
           >
-            {outline ? (
+            {scribble ? (
+              <SpaghettiLetter
+                paths={strokes}
+                letterIndex={index}
+              />
+            ) : outline ? (
               <>
                 <defs>
                   <mask id={maskId} maskUnits="userSpaceOnUse" x="-12" y="-12" width={glyph.advance + 24} height="116">
@@ -427,12 +489,6 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
                     stroke="white"
                     strokeWidth={strokeWeight * (strokeIndex > 0 ? 0.92 : 1)}
                   />
-                  {scribble && (
-                    <>
-                      <path d={d} stroke="white" strokeWidth="4.5" opacity="0.85" transform="translate(3 -2)" />
-                      <path d={d} stroke="white" strokeWidth="3.2" opacity="0.75" transform="translate(-2 2)" />
-                    </>
-                  )}
                 </g>
               ))
             )}
