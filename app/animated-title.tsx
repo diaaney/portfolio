@@ -158,12 +158,16 @@ function WordMarks({ variant, frame, start, end }: {
       </g>
     );
     if (frame === 4) return (
-      <g fill="none" stroke="white" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d={`M${end - 49} 55 L${end - 27} 50 L${end - 5} 59 L${end - 18} 87 L${end - 50} 80 Z`} />
-        <path d={`M${end + 11} 97 L${end + 39} 28 L${end + 66} 47 L${end + 45} 105 L${end + 24} 100 Z`} />
-        <path d={`M${end + 49} 132 L${end + 97} 116 L${end + 104} 150 L${end + 55} 155 Z`} />
-        <path strokeWidth="5" d={`M${start - 17} 200 C${start - 43} 228 ${start - 37} 266 ${start + 22} 296`} />
-        <path strokeWidth="3.3" d={`M${start - 41} 276 C${start - 37} 288 ${start - 21} 302 ${start - 4} 309`} />
+      <g>
+        <g fill="white" fillRule="evenodd">
+          <path d={`M${end - 48} 60 Q${end - 44} 50 ${end - 28} 50 L${end - 11} 56 Q${end - 5} 59 ${end - 8} 67 L${end - 22} 88 Q${end - 28} 94 ${end - 35} 86 L${end - 52} 81 Q${end - 46} 72 ${end - 48} 60 Z M${end - 37} 65 L${end - 24} 61 L${end - 19} 65 L${end - 30} 78 L${end - 39} 75 Z`} />
+          <path d={`M${end + 9} 97 L${end + 37} 29 Q${end + 40} 24 ${end + 46} 29 L${end + 65} 47 Q${end + 69} 51 ${end + 66} 56 L${end + 47} 102 Q${end + 43} 108 ${end + 36} 105 L${end + 15} 100 Z M${end + 30} 88 L${end + 42} 41 L${end + 58} 52 L${end + 44} 91 Z`} />
+          <path d={`M${end + 46} 132 L${end + 100} 116 Q${end + 106} 113 ${end + 106} 121 L${end + 103} 154 L${end + 48} 157 Z M${end + 54} 137 L${end + 98} 124 L${end + 98} 148 L${end + 55} 150 Z`} />
+        </g>
+        <g fill="none" stroke="white" strokeLinecap="round">
+          <path strokeWidth="5" d={`M${start - 17} 200 C${start - 43} 228 ${start - 37} 266 ${start + 22} 296`} />
+          <path strokeWidth="3.3" d={`M${start - 48} 276 C${start - 44} 288 ${start - 28} 302 ${start - 11} 309`} />
+        </g>
       </g>
     );
     if (frame === 5) return (
