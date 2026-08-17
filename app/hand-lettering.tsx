@@ -372,7 +372,7 @@ function widthForFrame(variant: Variant, frame: number) {
 
 export function HandLettering({ word, variant, frame, x, y, width, height, idPrefix = "letter" }: Props) {
   const letters = Array.from(word.toUpperCase()).filter((letter) => glyphs[letter]);
-  const spacing = variant === "intro" && frame === 4 ? 8 : 3;
+  const spacing = variant === "intro" && frame === 4 ? 12 : 3;
   const totalWidth = letters.reduce((sum, letter) => sum + glyphs[letter].advance, 0) +
     Math.max(0, letters.length - 1) * spacing;
   const scaleX = width / totalWidth;
@@ -381,7 +381,7 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
   const outline = isOutline(variant, frame);
   const loose = variant === "details" && frame === 6;
   const scribble = variant === "demos" && frame === 4;
-  const strokeWidth = introOutline ? 18 : widthForFrame(variant, frame);
+  const strokeWidth = introOutline ? 25 : widthForFrame(variant, frame);
   const shear = introOutline ? -2 : shearForFrame(variant, frame);
   const shearOffset = -Math.tan((shear * Math.PI) / 180) * 45 * scaleX;
 
@@ -451,7 +451,7 @@ export function HandLettering({ word, variant, frame, x, y, width, height, idPre
                       <path key={strokeIndex} d={d} stroke="white" strokeWidth={strokeWeight} />
                     ))}
                     {strokes.map((d, strokeIndex) => (
-                      <path key={strokeIndex} d={d} stroke="black" strokeWidth="10.5" />
+                      <path key={strokeIndex} d={d} stroke="black" strokeWidth="14" />
                     ))}
                   </mask>
                 </defs>
