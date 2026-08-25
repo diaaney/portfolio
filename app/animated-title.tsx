@@ -185,8 +185,8 @@ function WordMarks({ variant, frame, start, end }: {
         <path d={"M" + (end - 32) + " 50 l1 -26"} />
         <path d={"M" + (end + 25) + " 68 l17 -28"} />
         <path strokeWidth="3" d={"M" + (end + 88) + " 132 l4 -2"} />
-        <path d={"M" + (start - 45) + " 204 C" + (start - 70) + " 245 " + (start - 45) + " 275 " + (start - 10) + " 291"} />
-        <path strokeWidth="4" d={"M" + (start - 60) + " 234 C" + (start - 76) + " 260 " + (start - 55) + " 281 " + (start - 33) + " 291"} />
+        <path d={`M${start - 37} 203 C${start - 43} 217 ${start - 41} 231 ${start - 32} 242 C${start - 26} 248 ${start - 20} 251 ${start - 16} 252`} />
+        <path strokeWidth="3.7" d={`M${start - 57} 232 C${start - 55} 240 ${start - 51} 245 ${start - 45} 248`} />
       </g>
     );
   }
