@@ -259,7 +259,8 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
   const stripeMaskId = "letter-stripe-mask-" + id;
   const lowerFillId = "letter-lower-fill-" + id;
   const clean = frame === 0 || (frame === 7 && (variant === "demos" || variant === "intro"));
-  const softenWork = variant === "demos" && (frame === 0 || frame === 7);
+  const softenCleanTitle =
+    (variant === "demos" || variant === "intro") && (frame === 0 || frame === 7);
   const isWorkSpaghetti = variant === "demos" && frame === 4;
   const revealWidth = [115, 209, 310, 420, 420, 420, 420, 420][frame];
   const isGear = variant === "wrap-up";
@@ -279,7 +280,7 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
   return (
     <svg className="hand-slide" viewBox="0 0 976 320" role="img" aria-label={title.word}>
       <defs>
-        {softenWork && (
+        {softenCleanTitle && (
           <filter id={softId} x="-3%" y="-6%" width="106%" height="112%">
             <feGaussianBlur stdDeviation="1.1" />
           </filter>
@@ -337,7 +338,7 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
             fontStyle="italic"
             fontSize={title.cleanSize}
             fill="white"
-            filter={softenWork ? `url(#${softId})` : undefined}
+            filter={softenCleanTitle ? `url(#${softId})` : undefined}
           >
             {title.word}
           </text>
