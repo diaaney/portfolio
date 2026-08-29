@@ -177,7 +177,7 @@ function WordMarks({ variant, frame, start, end }: {
         <path strokeWidth="14" d={`M${end + 57} 141 L${end + 91} 133`} />
         <path strokeWidth="6" d={`M${start - 37} 178 C${start - 52} 211 ${start - 48} 244 ${start - 27} 266 C${start - 14} 281 ${start + 2} 289 ${start + 14} 295`} />
         <path strokeWidth="4.5" d={`M${start - 59} 192 C${start - 68} 219 ${start - 65} 244 ${start - 50} 263 C${start - 42} 275 ${start - 31} 282 ${start - 25} 286`} />
-        <path strokeWidth="4" d={`M${start - 101} 232 C${start - 108} 242 ${start - 106} 259 ${start - 100} 270`} />
+        <path strokeWidth="4" d={`M${start - 92} 232 C${start - 99} 242 ${start - 97} 259 ${start - 91} 270`} />
       </g>
     );
     return (
