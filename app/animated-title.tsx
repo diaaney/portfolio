@@ -260,7 +260,8 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
   const lowerFillId = "letter-lower-fill-" + id;
   const clean = frame === 0 || (frame === 7 && (variant === "demos" || variant === "intro"));
   const softenCleanTitle =
-    (variant === "demos" || variant === "intro") && (frame === 0 || frame === 7);
+    ((variant === "demos" || variant === "intro") && (frame === 0 || frame === 7)) ||
+    (variant === "details" && frame === 0);
   const isWorkSpaghetti = variant === "demos" && frame === 4;
   const revealWidth = [115, 209, 310, 420, 420, 420, 420, 420][frame];
   const isGear = variant === "wrap-up";
