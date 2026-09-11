@@ -195,7 +195,7 @@ function WordMarks({ variant, frame, start, end }: {
     if (frame === 2) return (
       <g fill="none" stroke="white" strokeLinecap="round" opacity="0.78">
         <path d={`M${end + 35} 149 C${end + 37} 153 ${end + 37} 158 ${end + 36} 164`} strokeWidth="4" />
-        <path d={`M${end + 54} 180 C${end + 64} 195 ${end + 65} 215 ${end + 53} 237`} strokeWidth="4.5" />
+        <path d={`M${end + 34} 180 C${end + 44} 195 ${end + 45} 215 ${end + 33} 237`} strokeWidth="4.5" />
       </g>
     );
     if (frame !== 5) return null;
