@@ -208,19 +208,19 @@ a:focus-visible {
 .activity-card-github {
   --activity-accent: #e7cbd6;
   --activity-logo: url("/activity/github.svg");
-  --activity-1: #795e69;
-  --activity-2: #a88291;
-  --activity-3: #c9a7b5;
-  --activity-4: #ecd5df;
+  --activity-1: rgb(228 112 157 / 35%);
+  --activity-2: rgb(228 112 157 / 50%);
+  --activity-3: rgb(228 112 157 / 68%);
+  --activity-4: rgb(228 112 157 / 85%);
 }
 
 .activity-card-leetcode {
   --activity-accent: #d7cce4;
   --activity-logo: url("/activity/leetcode.svg");
-  --activity-1: #6e6379;
-  --activity-2: #9989a8;
-  --activity-3: #beadce;
-  --activity-4: #e1d6e9;
+  --activity-1: rgb(168 123 219 / 35%);
+  --activity-2: rgb(168 123 219 / 50%);
+  --activity-3: rgb(168 123 219 / 68%);
+  --activity-4: rgb(168 123 219 / 85%);
 }
 
 .activity-heading {
@@ -272,19 +272,19 @@ a:focus-visible {
   position: absolute;
   left: 50%;
   display: block;
-  width: 240px;
+  width: 165px;
   max-width: 65%;
   height: auto;
   transform: translateX(-50%);
 }
 
 .activity-card-github .activity-art img {
-  bottom: -33px;
+  bottom: 0;
 }
 
 .activity-card-leetcode .activity-art img {
-  bottom: -10px;
-  width: 100px;
+  bottom: 0;
+  width: 90px;
 }
 
 .activity-months,
@@ -323,7 +323,7 @@ a:focus-visible {
   display: block;
   aspect-ratio: 1;
   border-radius: 3px;
-  background: #242424;
+  background: rgb(255 255 255 / 11%);
 }
 
 .activity-day {
@@ -334,7 +334,7 @@ a:focus-visible {
 .activity-day:not(.activity-day-outside):hover {
   z-index: 2;
   transform: scale(1.13);
-  box-shadow: 0 0 0 1px #dedede;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 42%);
 }
 
 .activity-day[data-detail]:hover::after {
