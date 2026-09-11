@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ActivityCalendars } from "./activity-calendars";
 import { AnimatedTitle } from "./animated-title";
 
 const navigation = [
@@ -68,6 +69,8 @@ export default function Home() {
               for the work, the thinking behind it, and the details along the way.
             </p>
           </div>
+
+          <ActivityCalendars />
 
           <div className="hero-feature" aria-label="Featured work preview">
             <span className="feature-corner">SELECTED WORK / 001</span>
