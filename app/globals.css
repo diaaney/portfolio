@@ -570,6 +570,7 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
+.word-nav,
 .frame-nav {
   display: flex;
   flex-wrap: wrap;
@@ -578,6 +579,7 @@ a:focus-visible {
   font-size: 12px;
 }
 
+.word-nav button,
 .frame-nav button {
   min-width: 28px;
   padding: 6px 8px;
@@ -589,6 +591,8 @@ a:focus-visible {
   text-align: center;
 }
 
+.word-nav button:hover,
+.word-nav button[aria-pressed="true"],
 .frame-nav button:hover,
 .frame-nav button[aria-pressed="true"] {
   border-color: #fff;
