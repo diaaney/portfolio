@@ -543,87 +543,10 @@ a:focus-visible {
   color: #fff;
 }
 
-/* The title sandbox remains available at /playground for frame-by-frame edits. */
-.comparison-page {
-  display: flex;
-  width: 100%;
-  max-width: 1500px;
-  min-height: 100svh;
-  flex-direction: column;
-  gap: 20px;
-  margin: 0 auto;
-  padding: 32px 24px 48px;
-}
-
-.comparison-heading,
-.comparison-section {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.comparison-heading {
-  color: #aaa;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.word-nav,
-.frame-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  font-size: 12px;
-}
-
-.word-nav button,
-.frame-nav button {
-  min-width: 28px;
-  padding: 6px 8px;
-  border: 1px solid #555;
-  border-radius: 3px;
-  background: transparent;
-  color: #aaa;
-  cursor: pointer;
-  text-align: center;
-}
-
-.word-nav button:hover,
-.word-nav button[aria-pressed="true"],
-.frame-nav button:hover,
-.frame-nav button[aria-pressed="true"] {
-  border-color: #fff;
-  color: #fff;
-}
-
-.comparison-section {
-  border-top: 1px solid #262626;
-  padding-top: 12px;
-}
-
-.comparison-cell,
-.title-window,
 .hand-title {
   width: 100%;
   aspect-ratio: 976 / 320;
-}
-
-.comparison-cell,
-.title-window,
-.hand-title {
   overflow: hidden;
-}
-
-.title-frames {
-  width: 100%;
-  height: 800%;
-  background-position: top center;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  animation: title-play 571.43ms steps(8, end) infinite;
 }
 
 .hand-strip {
@@ -698,15 +621,9 @@ a:focus-visible {
   .closing-note { margin-top: 100px; }
   .site-footer { margin-top: 105px; }
   .site-footer > p { margin-bottom: 70px; }
-  .comparison-page { gap: 12px; padding: 20px 10px 32px; }
-  .comparison-heading,
-  .comparison-section { gap: 8px; }
-  .comparison-heading { font-size: 10px; letter-spacing: 0.05em; }
-  .comparison-section { padding-top: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .title-frames,
   .hand-strip { animation: none; }
 }
