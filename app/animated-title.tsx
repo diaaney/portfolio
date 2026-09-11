@@ -192,6 +192,12 @@ function WordMarks({ variant, frame, start, end }: {
   }
 
   if (variant === "details") {
+    if (frame === 2) return (
+      <g fill="none" stroke="white" strokeLinecap="round" opacity="0.78">
+        <path d={`M${end + 35} 149 C${end + 37} 153 ${end + 37} 158 ${end + 36} 164`} strokeWidth="4" />
+        <path d={`M${end + 54} 180 C${end + 64} 195 ${end + 65} 215 ${end + 53} 237`} strokeWidth="4.5" />
+      </g>
+    );
     if (frame !== 5) return null;
     return (
       <g fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round">
@@ -326,7 +332,7 @@ function WordFrame({ variant, frame }: { variant: Variant; frame: number }) {
           <rect x="0" y="0" width="976" height="320" fill={isStriped ? "url(#" + stripeId + ")" : "white"} />
         </mask>
       </defs>
-      <g clipPath={"url(#" + revealId + ")"} mask={"url(#" + stripeMaskId + ")"}>
+      <g clipPath={"url(#" + revealId + ")"} mask={"url(#" + stripeMaskId + ")"} opacity={variant === "details" && frame === 2 ? 0.84 : undefined}>
         {clean ? (
           <text
             x={title.x + title.width / 2}
