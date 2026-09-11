@@ -44,17 +44,26 @@ function activityLevel(count: number, kind: "github" | "leetcode") {
   return count >= 5 ? 4 : count >= 3 ? 3 : count >= 2 ? 2 : 1;
 }
 
-function ActivityArt({ kind }: { kind: "github" | "leetcode" }) {
+function ActivityArt({ kind, loading = false }: { kind: "github" | "leetcode"; loading?: boolean }) {
   const isGitHub = kind === "github";
+  const name = isGitHub ? "GitHub" : "LeetCode";
+  const href = isGitHub ? "https://github.com/diaaney" : "https://leetcode.com/u/diaaney/";
 
   return (
-    <div className="activity-art" aria-hidden="true">
+    <div className="activity-art">
       <Image
         src={isGitHub ? "/illustrations/diane-nerd-calendar.png" : "/illustrations/cat-flower-pot.png"}
         alt=""
         width={isGitHub ? 1324 : 762}
         height={isGitHub ? 1206 : 641}
       />
+      {loading ? (
+        <span className="activity-title" aria-hidden="true"><span className="activity-logo" /></span>
+      ) : (
+        <a className="activity-title" href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${name} profile`}>
+          <span className="activity-logo" aria-hidden="true" />
+        </a>
+      )}
     </div>
   );
 }
@@ -77,7 +86,6 @@ function ActivityCard({
   const name = kind === "github" ? "GitHub" : "LeetCode";
   const unit = kind === "github" ? "contributions" : "submissions";
   const singularUnit = kind === "github" ? "contribution" : "submission";
-  const href = kind === "github" ? "https://github.com/diaaney" : "https://leetcode.com/u/diaaney/";
   const total = days
     ? Object.entries(days).reduce(
         (sum, [date, count]) => sum + (date >= start && date <= end ? count : 0),
@@ -87,12 +95,6 @@ function ActivityCard({
 
   return (
     <article className={`activity-card activity-card-${kind}`}>
-      <div className="activity-heading">
-        <a className="activity-title" href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${name} profile`}>
-          <span className="activity-logo" aria-hidden="true" />
-        </a>
-        <span className="activity-period">last 3 months</span>
-      </div>
       <ActivityArt kind={kind} />
       <div
         className="activity-heatmap"
@@ -144,11 +146,7 @@ function ActivityCard({
 function ActivitySkeleton({ kind }: { kind: "github" | "leetcode" }) {
   return (
     <article className={`activity-card activity-card-${kind}`} aria-hidden="true">
-      <div className="activity-heading">
-        <span className="activity-title"><span className="activity-logo" /></span>
-        <span className="activity-period">last 3 months</span>
-      </div>
-      <ActivityArt kind={kind} />
+      <ActivityArt kind={kind} loading />
       <div className="activity-heatmap" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
         {Array.from({ length: 14 }, (_, week) => (
           <div className="activity-week" key={week}>

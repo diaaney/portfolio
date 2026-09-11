@@ -157,7 +157,7 @@ a:focus-visible {
   align-items: end;
   gap: 16px;
   max-width: 700px;
-  margin: 30px auto 0;
+  margin: 0 auto;
 }
 
 .hero-illustrations img {
@@ -193,15 +193,13 @@ a:focus-visible {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px;
-  margin: 0 0 72px;
+  margin: 40px 0 72px;
 }
 
 .activity-card {
   min-width: 0;
-  border-top: 1px solid #292929;
   background: transparent;
   color: #b9b9b9;
-  padding: 17px 0 0;
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
@@ -223,14 +221,11 @@ a:focus-visible {
   --activity-4: rgb(168 123 219 / 85%);
 }
 
-.activity-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 27px;
-}
-
 .activity-title {
+  position: absolute;
+  z-index: 1;
+  bottom: 8px;
+  left: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -255,17 +250,9 @@ a:focus-visible {
   mask: var(--activity-logo) center / contain no-repeat;
 }
 
-.activity-period {
-  color: #aaa;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
 .activity-art {
   position: relative;
-  height: 205px;
+  height: 175px;
 }
 
 .activity-art img {
@@ -279,11 +266,11 @@ a:focus-visible {
 }
 
 .activity-card-github .activity-art img {
-  bottom: 0;
+  bottom: -6px;
 }
 
 .activity-card-leetcode .activity-art img {
-  bottom: 0;
+  bottom: -6px;
   width: 90px;
 }
 
