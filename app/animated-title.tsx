@@ -201,8 +201,8 @@ function WordMarks({ variant, frame, start, end }: {
     if (frame !== 5) return null;
     return (
       <g fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round">
-        <path d={"M" + (start - 40) + " 162 C" + (start - 56) + " 183 " + (start - 49) + " 216 " + (start - 28) + " 239"} />
-        <path d={"M" + (start - 67) + " 170 C" + (start - 81) + " 190 " + (start - 72) + " 213 " + (start - 50) + " 232"} />
+        <path d={"M" + (start - 20) + " 162 C" + (start - 27) + " 184 " + (start - 27) + " 215 " + (start - 14) + " 239"} />
+        <path d={"M" + (start - 53) + " 170 C" + (start - 62) + " 190 " + (start - 58) + " 213 " + (start - 44) + " 232"} />
       </g>
     );
   }
