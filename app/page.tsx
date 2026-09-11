@@ -54,13 +54,15 @@ export default function Home() {
             <h1>
               Hi, I&apos;m Diane.
               <br />
-              <em>I make things.</em>
+              ML <em>engineer</em>
             </h1>
             <p className="hero-subtitle">Work, experiments, and a little bit of me.</p>
           </div>
 
-          <div className="hero-doodle" aria-hidden="true">
-            <Image src="/iconnerd.png" alt="" width={1000} height={1000} priority />
+          <div className="hero-illustrations" aria-hidden="true">
+            <Image src="/illustrations/diane-nerd.png" alt="" width={1340} height={1980} priority />
+            <Image src="/illustrations/diane-full-body.png" alt="" width={1237} height={1998} priority />
+            <Image src="/illustrations/diane-with-cat.png" alt="" width={1853} height={1998} priority />
           </div>
 
           <div className="intro-columns">
