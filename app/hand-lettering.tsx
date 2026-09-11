@@ -359,7 +359,7 @@ const aboutAngles: Record<number, readonly number[]> = {
 function shearForFrame(variant: Variant, frame: number) {
   if (variant === "demos") return [0, -10, -8, 0, -4, -8, -6, 0][frame];
   if (variant === "intro") return [0, -11, -9, -8, -5, -9, -8, 0][frame];
-  if (variant === "details") return [0, -13, -18, -7, -8, -10, 0, -7][frame];
+  if (variant === "details") return [0, -13, -18, -12, 0, 18, 0, -7][frame];
   return [0, -8, -7, -8, -5, -8, -6, -8][frame];
 }
 
