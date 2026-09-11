@@ -2,9 +2,9 @@ import Image from "next/image";
 import { AnimatedTitle } from "./animated-title";
 
 const navigation = [
-  { number: "01", label: "WORK", href: "#work" },
-  { number: "02", label: "ABOUT", href: "#about" },
-  { number: "03", label: "DETAILS", href: "#details" },
+  { label: "WORK", href: "#work" },
+  { label: "ABOUT", href: "#about" },
+  { label: "DETAILS", href: "#details" },
 ] as const;
 
 function ChapterTitle({
@@ -32,14 +32,12 @@ export default function Home() {
           d<span>✳</span>
         </a>
         <nav className="rail-links" aria-label="Sections">
-          {navigation.map(({ number, label, href }) => (
+          {navigation.map(({ label, href }) => (
             <a href={href} key={href}>
-              <span>{number}</span>
               {label}
             </a>
           ))}
         </nav>
-        <span className="rail-note">DIANE © 2026</span>
       </aside>
 
       <main className="portfolio-page" id="top">
