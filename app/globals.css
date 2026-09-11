@@ -63,20 +63,15 @@ a:focus-visible {
 
 .rail-icon {
   display: block;
-  overflow: hidden;
   width: 40px;
   height: 40px;
 }
 
 .rail-icon img {
   display: block;
-  position: relative;
-  top: -8px;
-  left: -10px;
-  width: 56px;
-  max-width: none;
-  height: 56px;
-  opacity: 0.55;
+  width: 32px;
+  height: 31px;
+  opacity: 0.4;
 }
 
 .visual-mark span {

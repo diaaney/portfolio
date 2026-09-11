@@ -30,7 +30,7 @@ export default function Home() {
     <>
       <aside className="site-rail" aria-label="Site navigation">
         <a className="rail-icon" href="#top" aria-label="Back to top">
-          <Image src="/iconnerd.png" alt="" width={56} height={56} />
+          <Image src="/sidebar-reference-icon.png" alt="" width={32} height={31} />
         </a>
         <nav className="rail-links" aria-label="Sections">
           {navigation.map(({ label, href }) => (
