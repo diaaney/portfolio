@@ -52,8 +52,8 @@ function ActivityArt({ kind }: { kind: "github" | "leetcode" }) {
       <Image
         src={isGitHub ? "/illustrations/diane-nerd-calendar.png" : "/illustrations/cat-flower-pot.png"}
         alt=""
-        width={isGitHub ? 708 : 762}
-        height={isGitHub ? 599 : 641}
+        width={isGitHub ? 1324 : 762}
+        height={isGitHub ? 1206 : 641}
       />
     </div>
   );
@@ -94,17 +94,6 @@ function ActivityCard({
         <span className="activity-period">last 3 months</span>
       </div>
       <ActivityArt kind={kind} />
-      <div className="activity-months" style={{ gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))` }}>
-        {weeks.map((week, index) => {
-          const firstOfMonth = week.find((day) => day.getUTCDate() === 1 && dateKey(day) <= end);
-          const label = index === 0
-            ? monthFormatter.format(new Date(`${start}T00:00:00Z`))
-            : firstOfMonth
-              ? monthFormatter.format(firstOfMonth)
-              : "";
-          return <span key={dateKey(week[0])}>{label}</span>;
-        })}
-      </div>
       <div
         className="activity-heatmap"
         role="img"
@@ -129,6 +118,17 @@ function ActivityCard({
           </div>
         ))}
       </div>
+      <div className="activity-months" style={{ gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))` }}>
+        {weeks.map((week, index) => {
+          const firstOfMonth = week.find((day) => day.getUTCDate() === 1 && dateKey(day) <= end);
+          const label = index === 0
+            ? monthFormatter.format(new Date(`${start}T00:00:00Z`))
+            : firstOfMonth
+              ? monthFormatter.format(firstOfMonth)
+              : "";
+          return <span key={dateKey(week[0])}>{label}</span>;
+        })}
+      </div>
       <div className="activity-footer">
         <span>{days ? `${total} ${unit} in the last 3 months` : loading ? "Loading activity..." : "Activity unavailable"}</span>
         <span className="activity-legend" aria-hidden="true">
@@ -149,7 +149,6 @@ function ActivitySkeleton({ kind }: { kind: "github" | "leetcode" }) {
         <span className="activity-period">last 3 months</span>
       </div>
       <ActivityArt kind={kind} />
-      <div className="activity-months" />
       <div className="activity-heatmap" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
         {Array.from({ length: 14 }, (_, week) => (
           <div className="activity-week" key={week}>
@@ -157,6 +156,7 @@ function ActivitySkeleton({ kind }: { kind: "github" | "leetcode" }) {
           </div>
         ))}
       </div>
+      <div className="activity-months" />
       <div className="activity-footer">Loading activity...</div>
     </article>
   );

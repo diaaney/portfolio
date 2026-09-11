@@ -264,20 +264,27 @@ a:focus-visible {
 }
 
 .activity-art {
-  display: flex;
-  align-items: end;
-  justify-content: center;
-  height: 150px;
-  padding-top: 13px;
+  position: relative;
+  height: 205px;
 }
 
 .activity-art img {
+  position: absolute;
+  left: 50%;
   display: block;
-  width: auto;
-  max-width: 55%;
+  width: 240px;
+  max-width: 65%;
   height: auto;
-  max-height: 140px;
-  object-fit: contain;
+  transform: translateX(-50%);
+}
+
+.activity-card-github .activity-art img {
+  bottom: -33px;
+}
+
+.activity-card-leetcode .activity-art img {
+  bottom: -10px;
+  width: 100px;
 }
 
 .activity-months,
@@ -287,14 +294,22 @@ a:focus-visible {
 }
 
 .activity-months {
-  align-items: end;
-  height: 30px;
-  padding-bottom: 4px;
+  position: relative;
+  z-index: 1;
+  align-items: start;
+  height: 22px;
+  padding-top: 5px;
   font-size: 10px;
 }
 
 .activity-months span {
   white-space: nowrap;
+}
+
+.activity-heatmap {
+  position: relative;
+  z-index: 2;
+  background: #000;
 }
 
 .activity-week {
