@@ -5,6 +5,7 @@ const navigation = [
   { label: "WORK", href: "#work" },
   { label: "ABOUT", href: "#about" },
   { label: "DETAILS", href: "#details" },
+  { label: "GEAR", href: "#gear" },
 ] as const;
 
 function ChapterTitle({
@@ -28,8 +29,8 @@ export default function Home() {
   return (
     <>
       <aside className="site-rail" aria-label="Site navigation">
-        <a className="rail-monogram" href="#top" aria-label="Back to top">
-          d<span>✳</span>
+        <a className="rail-icon" href="#top" aria-label="Back to top">
+          <Image src="/iconnerd.png" alt="" width={56} height={56} />
         </a>
         <nav className="rail-links" aria-label="Sections">
           {navigation.map(({ label, href }) => (
@@ -42,19 +43,13 @@ export default function Home() {
 
       <main className="portfolio-page" id="top">
         <header className="hero">
-          <div className="hero-topline">
-            <span>DIANE / PORTFOLIO</span>
-            <span>SCROLL TO EXPLORE ↓</span>
-          </div>
-
           <div className="hero-heading">
-            <p className="eyebrow">A place for ideas in progress</p>
             <h1>
-              Hi, I&apos;m Diane.
+              hey, i&apos;m diane
               <br />
-              ML <em>engineer</em>
+              nice to meet you!
             </h1>
-            <p className="hero-subtitle">Work, experiments, and a little bit of me.</p>
+            <p className="hero-subtitle">ml engineer</p>
           </div>
 
           <div className="hero-illustrations" aria-hidden="true">
@@ -206,7 +201,7 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="site-footer">
+        <footer className="site-footer" id="gear">
           <p>Thanks for looking.</p>
           <div>
             <span>DIANE © 2026</span>

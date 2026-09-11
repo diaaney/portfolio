@@ -53,25 +53,32 @@ a:focus-visible {
 .site-rail {
   position: fixed;
   z-index: 20;
-  top: 109px;
-  left: max(32px, calc((100vw - 1720px) / 2));
+  top: 105px;
+  left: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
-  width: 150px;
+  width: 100px;
 }
 
-.rail-monogram {
-  font-size: 24px;
-  font-style: italic;
-  font-weight: 900;
-  letter-spacing: -0.12em;
-  line-height: 1;
-  text-decoration: none;
+.rail-icon {
+  display: block;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
 }
 
-.rail-monogram span,
+.rail-icon img {
+  display: block;
+  position: relative;
+  top: -8px;
+  left: -10px;
+  width: 56px;
+  max-width: none;
+  height: 56px;
+  opacity: 0.55;
+}
+
 .visual-mark span {
   position: relative;
   top: -0.45em;
@@ -84,11 +91,14 @@ a:focus-visible {
 .rail-links {
   display: flex;
   flex-direction: column;
-  gap: 11px;
 }
 
 .rail-links a {
-  color: #888;
+  display: flex;
+  align-items: center;
+  width: 100px;
+  height: 35px;
+  color: rgb(255 255 255 / 40%);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -103,10 +113,9 @@ a:focus-visible {
 }
 
 .hero {
-  padding-top: 65px;
+  padding-top: 138px;
 }
 
-.hero-topline,
 .eyebrow,
 .card-kicker,
 .feature-corner,
@@ -122,14 +131,8 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-.hero-topline {
-  display: flex;
-  justify-content: space-between;
-  color: #777;
-}
-
 .hero-heading {
-  margin: 16px auto 0;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -139,15 +142,11 @@ a:focus-visible {
 }
 
 .hero-heading h1 {
-  margin: 22px 0 14px;
+  margin: 0 0 22px;
   font-size: 32px;
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.3;
-}
-
-.hero-heading h1 em {
-  font-weight: inherit;
 }
 
 .hero-subtitle {
@@ -595,17 +594,16 @@ a:focus-visible {
   }
 
   .rail-links { flex-direction: row; gap: 20px; }
+  .rail-links a { width: auto; }
   .hero { padding-top: 24px; }
 }
 
 @media (max-width: 640px) {
   .portfolio-page,
   .site-rail { width: calc(100% - 32px); }
-  .site-rail { gap: 18px; }
   .rail-links { gap: 13px; }
   .rail-links a { font-size: 11px; }
-  .hero-topline { font-size: 9px; }
-  .hero-heading { margin-top: 95px; }
+  .hero-heading { margin-top: 56px; }
   .hero-heading h1 { font-size: clamp(28px, 7vw, 32px); }
   .hero-illustrations { gap: 8px; margin-top: 24px; }
   .hero-illustrations img { height: 170px; }
