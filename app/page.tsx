@@ -18,16 +18,7 @@ function ChapterTitle({
     <div className="chapter-break">
       <h2 className="sr-only">{label}</h2>
       <div className="chapter-animation">
-        {variant === "details" ? (
-          <div className="title-window" role="img" aria-label="DETAILS">
-            <div
-              className="title-frames"
-              style={{ backgroundImage: "url(/details-sprite.png)" }}
-            />
-          </div>
-        ) : (
-          <AnimatedTitle variant={variant} frame={null} />
-        )}
+        <AnimatedTitle variant={variant} frame={null} />
       </div>
     </div>
   );
