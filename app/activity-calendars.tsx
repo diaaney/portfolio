@@ -70,9 +70,12 @@ function ActivityCard({
 
   return (
     <article className={`activity-card activity-card-${kind}`}>
-      <a className="activity-title" href={href} target="_blank" rel="noopener noreferrer">
-        {name} activity <span aria-hidden="true">↗</span>
-      </a>
+      <div className="activity-heading">
+        <a className="activity-title" href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${name} profile`}>
+          <span className="activity-logo" aria-hidden="true" />
+        </a>
+        <span className="activity-period">last 3 months</span>
+      </div>
       <div className="activity-months" style={{ gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))` }}>
         {weeks.map((week, index) => {
           const firstOfMonth = week.find((day) => day.getUTCDate() === 1 && dateKey(day) <= end);
@@ -123,8 +126,11 @@ function ActivityCard({
 function ActivitySkeleton({ kind }: { kind: "github" | "leetcode" }) {
   return (
     <article className={`activity-card activity-card-${kind}`} aria-hidden="true">
-      <span className="activity-title">{kind} activity</span>
-      <div className="activity-months">last 3 months</div>
+      <div className="activity-heading">
+        <span className="activity-title"><span className="activity-logo" /></span>
+        <span className="activity-period">last 3 months</span>
+      </div>
+      <div className="activity-months" />
       <div className="activity-heatmap" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
         {Array.from({ length: 14 }, (_, week) => (
           <div className="activity-week" key={week}>
