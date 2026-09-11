@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type DailyActivity = Record<string, number>;
@@ -43,6 +44,21 @@ function activityLevel(count: number, kind: "github" | "leetcode") {
   return count >= 5 ? 4 : count >= 3 ? 3 : count >= 2 ? 2 : 1;
 }
 
+function ActivityArt({ kind }: { kind: "github" | "leetcode" }) {
+  const isGitHub = kind === "github";
+
+  return (
+    <div className="activity-art" aria-hidden="true">
+      <Image
+        src={isGitHub ? "/illustrations/diane-nerd-calendar.png" : "/illustrations/cat-flower-pot.png"}
+        alt=""
+        width={isGitHub ? 708 : 762}
+        height={isGitHub ? 599 : 641}
+      />
+    </div>
+  );
+}
+
 function ActivityCard({
   kind,
   days,
@@ -60,6 +76,7 @@ function ActivityCard({
 }) {
   const name = kind === "github" ? "GitHub" : "LeetCode";
   const unit = kind === "github" ? "contributions" : "submissions";
+  const singularUnit = kind === "github" ? "contribution" : "submission";
   const href = kind === "github" ? "https://github.com/diaaney" : "https://leetcode.com/u/diaaney/";
   const total = days
     ? Object.entries(days).reduce(
@@ -76,6 +93,7 @@ function ActivityCard({
         </a>
         <span className="activity-period">last 3 months</span>
       </div>
+      <ActivityArt kind={kind} />
       <div className="activity-months" style={{ gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))` }}>
         {weeks.map((week, index) => {
           const firstOfMonth = week.find((day) => day.getUTCDate() === 1 && dateKey(day) <= end);
@@ -103,7 +121,7 @@ function ActivityCard({
                 <span
                   className={`activity-day activity-level-${activityLevel(count, kind)}${outside ? " activity-day-outside" : ""}`}
                   key={date}
-                  title={outside ? undefined : `${dayFormatter.format(day)}: ${days ? count : "–"} ${unit}`}
+                  data-detail={outside ? undefined : `${dayFormatter.format(day)} · ${days ? count : "–"} ${count === 1 ? singularUnit : unit}`}
                   aria-hidden="true"
                 />
               );
@@ -130,6 +148,7 @@ function ActivitySkeleton({ kind }: { kind: "github" | "leetcode" }) {
         <span className="activity-title"><span className="activity-logo" /></span>
         <span className="activity-period">last 3 months</span>
       </div>
+      <ActivityArt kind={kind} />
       <div className="activity-months" />
       <div className="activity-heatmap" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
         {Array.from({ length: 14 }, (_, week) => (
