@@ -224,7 +224,7 @@ a:focus-visible {
 .activity-title {
   position: absolute;
   z-index: 1;
-  bottom: 8px;
+  bottom: 1px;
   left: 0;
   display: inline-flex;
   align-items: center;
@@ -266,11 +266,11 @@ a:focus-visible {
 }
 
 .activity-card-github .activity-art img {
-  bottom: -6px;
+  bottom: -7px;
 }
 
 .activity-card-leetcode .activity-art img {
-  bottom: -6px;
+  bottom: -7px;
   width: 90px;
 }
 
