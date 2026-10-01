@@ -55,21 +55,25 @@ export default function Home() {
 
           <ActivityCalendars />
 
+          <div className="hero-about" id="about">
+            <ChapterTitle label="ABOUT" variant="intro" />
+
+            <div className="intro-columns">
+              <p>
+                I like following an idea from the first messy sketch to the moment it
+                finally feels right. This is where I collect what I&apos;ve been making.
+              </p>
+              <p>
+                Some things are finished, some are still changing. There&apos;s room here
+                for the work, the thinking behind it, and the details along the way.
+              </p>
+            </div>
+          </div>
+
           <div className="hero-illustrations" aria-hidden="true">
             <Image src="/illustrations/diane-nerd.png" alt="" width={1340} height={1980} priority />
             <Image src="/illustrations/diane-full-body.png" alt="" width={1237} height={1998} priority />
             <Image src="/illustrations/diane-with-cat.png" alt="" width={1853} height={1998} priority />
-          </div>
-
-          <div className="intro-columns">
-            <p>
-              I like following an idea from the first messy sketch to the moment it
-              finally feels right. This is where I collect what I&apos;ve been making.
-            </p>
-            <p>
-              Some things are finished, some are still changing. There&apos;s room here
-              for the work, the thinking behind it, and the details along the way.
-            </p>
           </div>
 
           <div className="hero-feature" aria-label="Featured work preview">
@@ -141,8 +145,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="portfolio-section" id="about" aria-label="About">
-          <ChapterTitle label="ABOUT" variant="intro" />
+        <section className="portfolio-section" aria-label="More about Diane">
+          <h2 className="sr-only">More about Diane</h2>
 
           <div className="about-layout">
             <div className="about-copy">

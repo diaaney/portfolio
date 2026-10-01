@@ -52,10 +52,10 @@ function ActivityArt({ kind, loading = false }: { kind: "github" | "leetcode"; l
   return (
     <div className="activity-art">
       <Image
-        src={isGitHub ? "/illustrations/diane-nerd-calendar.png" : "/illustrations/cat-flower-pot.png"}
+        src={isGitHub ? "/illustrations/cat-flower-pot.png" : "/illustrations/diane-nerd-calendar.png"}
         alt=""
-        width={isGitHub ? 1324 : 762}
-        height={isGitHub ? 1206 : 641}
+        width={isGitHub ? 762 : 1324}
+        height={isGitHub ? 641 : 1206}
       />
       {loading ? (
         <span className="activity-title" aria-hidden="true"><span className="activity-logo" /></span>

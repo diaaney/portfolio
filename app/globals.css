@@ -189,6 +189,19 @@ a:focus-visible {
   color: rgb(255 255 255 / 90%);
 }
 
+.hero .activity-section {
+  margin-bottom: 0;
+}
+
+.hero-about {
+  scroll-margin-top: 25px;
+  padding-top: 72px;
+}
+
+.hero-about .chapter-break {
+  margin: 0 auto 36px;
+}
+
 .activity-section {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -267,11 +280,12 @@ a:focus-visible {
 
 .activity-card-github .activity-art img {
   bottom: -7px;
+  width: 90px;
 }
 
 .activity-card-leetcode .activity-art img {
   bottom: -7px;
-  width: 90px;
+  width: 165px;
 }
 
 .activity-months,
