@@ -200,6 +200,19 @@ a:focus-visible {
 
 .hero-about .chapter-break {
   margin: 0 auto 36px;
+  border-bottom: 0;
+}
+
+.hero-about .intro-columns {
+  margin-bottom: 44px;
+}
+
+.hero-about::after {
+  display: block;
+  width: min(360px, 100%);
+  margin: 0 auto 88px;
+  border-top: 1px solid #242424;
+  content: "";
 }
 
 .activity-section {
@@ -237,7 +250,7 @@ a:focus-visible {
 .activity-title {
   position: absolute;
   z-index: 1;
-  bottom: 1px;
+  bottom: 12px;
   left: 0;
   display: inline-flex;
   align-items: center;
