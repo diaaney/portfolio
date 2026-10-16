@@ -234,6 +234,30 @@ a:focus-visible {
   color: rgb(255 255 255 / 90%);
 }
 
+.intro-first {
+  position: relative;
+}
+
+.about-camera-cat {
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 42px;
+  width: 84px;
+  height: 92px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.about-camera-cat img {
+  position: absolute;
+  top: -201px;
+  left: -5px;
+  width: 280px;
+  height: auto;
+  max-width: none;
+  filter: brightness(0) invert(1);
+}
+
 .hero .activity-section {
   margin-bottom: 0;
 }

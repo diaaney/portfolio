@@ -46,10 +46,15 @@ export default function Home() {
             <ChapterTitle label="ABOUT" variant="intro" />
 
             <div className="intro-columns">
-              <p>
-                I like following an idea from the first messy sketch to the moment it
-                finally feels right. This is where I collect what I&apos;ve been making.
-              </p>
+              <div className="intro-first">
+                <div className="about-camera-cat" aria-hidden="true">
+                  <Image src="/illustrations/diane-with-cat.png" alt="" width={1853} height={1998} />
+                </div>
+                <p>
+                  I like following an idea from the first messy sketch to the moment it
+                  finally feels right. This is where I collect what I&apos;ve been making.
+                </p>
+              </div>
               <p>
                 Some things are finished, some are still changing. There&apos;s room here
                 for the work, the thinking behind it, and the details along the way.
