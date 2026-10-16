@@ -13,7 +13,7 @@ function ChapterTitle({
 }) {
   return (
     <div className="chapter-break">
-      <h2 className="sr-only">{label}</h2>
+      <h2 className="chapter-screen-reader-title">{label}</h2>
       <div className="chapter-animation">
         <AnimatedTitle variant={variant} frame={null} />
       </div>
@@ -55,12 +55,6 @@ export default function Home() {
                 for the work, the thinking behind it, and the details along the way.
               </p>
             </div>
-          </div>
-
-          <div className="hero-illustrations" aria-hidden="true">
-            <Image src="/illustrations/diane-nerd.png" alt="" width={1340} height={1980} priority />
-            <Image src="/illustrations/diane-full-body.png" alt="" width={1237} height={1998} priority />
-            <Image src="/illustrations/diane-with-cat.png" alt="" width={1853} height={1998} priority />
           </div>
 
           <div className="hero-feature" aria-label="Featured work preview">
