@@ -3,7 +3,7 @@ type DailyActivity = Record<string, number>;
 async function githubActivity(): Promise<DailyActivity> {
   const response = await fetch("https://github.com/users/diaaney/contributions", {
     headers: { Accept: "text/html", "User-Agent": "Diane-Portfolio" },
-    next: { revalidate: 3600 },
+    next: { revalidate: 300 },
   });
 
   if (!response.ok) throw new Error("GitHub activity is unavailable");
@@ -67,7 +67,7 @@ export async function GET() {
     },
     {
       headers: {
-        "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+        "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600",
       },
     },
   );
