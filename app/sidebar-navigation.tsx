@@ -13,11 +13,7 @@ const navigation = [
 
 export function SidebarNavigation() {
   const [active, setActive] = useState<string>("#top");
-  const [pointerPosition, setPointerPosition] = useState<{
-    top: number;
-    left: number;
-    transform: string;
-  } | null>(null);
+  const [pointerTransform, setPointerTransform] = useState<string | null>(null);
   const linksRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -61,21 +57,14 @@ export function SidebarNavigation() {
       if (!link) return;
 
       if (window.matchMedia("(max-width: 980px)").matches) {
-        setPointerPosition(
-          active === "#top"
-            ? { top: -25, left: -24, transform: "rotate(55deg)" }
-            : {
-                top: link.offsetTop - 10,
-                left: link.offsetLeft + link.offsetWidth / 2 - 44,
-                transform: "rotate(55deg)",
-              },
-        );
+        const top = active === "#top" ? -30 : link.offsetTop - 10;
+        const left = active === "#top" ? -32 : link.offsetLeft + link.offsetWidth / 2 - 50;
+        setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(55deg)`);
       } else {
-        setPointerPosition({
-          top: active === "#top" ? -72 : link.offsetTop + link.offsetHeight / 2 - 50,
-          left: active === "#top" ? -90 : -116,
-          transform: active === "#top" ? "rotate(35deg)" : "rotate(-18deg)",
-        });
+        const top = active === "#top" ? -105 : link.offsetTop + link.offsetHeight / 2 - 50;
+        const left = active === "#top" ? -84 : -126;
+        const angle = active === "#top" ? 35 : -18;
+        setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(${angle}deg)`);
       }
     };
 
@@ -94,7 +83,7 @@ export function SidebarNavigation() {
           width={518}
           height={454}
           aria-hidden="true"
-          style={pointerPosition ?? undefined}
+          style={pointerTransform ? { transform: pointerTransform } : undefined}
         />
         {navigation.map(({ label, href }) => (
           <a
