@@ -92,7 +92,7 @@ a:focus-visible {
 }
 
 .site-rail-inverse .rail-links a {
-  color: rgb(0 0 0 / 40%);
+  color: #000;
 }
 
 .site-rail-inverse .rail-links a:hover,
@@ -103,6 +103,10 @@ a:focus-visible {
 .site-rail-inverse .rail-pointer,
 .site-rail-inverse .rail-intro img {
   filter: brightness(0);
+}
+
+.site-rail-inverse .rail-intro img {
+  opacity: 1;
 }
 
 .rail-links {

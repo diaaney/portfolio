@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 const navigation = [
   { label: "INTRO", href: "#top" },
@@ -15,6 +15,23 @@ export function SidebarNavigation() {
   const [active, setActive] = useState<string>("#top");
   const [pointerTransform, setPointerTransform] = useState<string | null>(null);
   const linksRef = useRef<HTMLElement>(null);
+  const scrollFrame = useRef(0);
+  const navigationTarget = useRef<string | null>(null);
+
+  useEffect(() => {
+    const cancelScroll = () => {
+      cancelAnimationFrame(scrollFrame.current);
+      navigationTarget.current = null;
+    };
+
+    window.addEventListener("wheel", cancelScroll, { passive: true });
+    window.addEventListener("touchstart", cancelScroll, { passive: true });
+    return () => {
+      cancelScroll();
+      window.removeEventListener("wheel", cancelScroll);
+      window.removeEventListener("touchstart", cancelScroll);
+    };
+  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -22,6 +39,7 @@ export function SidebarNavigation() {
     const update = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
+        if (navigationTarget.current) return;
         const marker = window.innerHeight * 0.35;
         const sections = navigation
           .map(({ href }) => ({ href, element: document.querySelector(href) }))
@@ -79,6 +97,49 @@ export function SidebarNavigation() {
     return () => window.removeEventListener("resize", placePointer);
   }, [active]);
 
+  const navigate = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    const target = document.querySelector(href);
+    if (!target) return;
+    event.preventDefault();
+    cancelAnimationFrame(scrollFrame.current);
+
+    const maximum = document.documentElement.scrollHeight - window.innerHeight;
+    const destination = Math.min(maximum, Math.max(0, window.scrollY + target.getBoundingClientRect().top));
+    let start = window.scrollY;
+
+    if (href === "#gear" && destination - start > window.innerHeight) {
+      start = destination - window.innerHeight;
+      window.scrollTo({ top: start, behavior: "instant" });
+    }
+
+    history.pushState(null, "", href);
+    setActive(href);
+    navigationTarget.current = href;
+
+    const distance = destination - start;
+    const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? 0
+      : Math.min(900, Math.max(500, Math.abs(distance) * 0.35));
+    let started: number | null = null;
+
+    const step = (now: number) => {
+      started ??= now;
+      const progress = duration === 0 ? 1 : Math.min(1, (now - started) / duration);
+      const eased = 1 - (1 - progress) ** 3;
+      window.scrollTo({ top: start + distance * eased, behavior: "instant" });
+
+      if (progress < 1) {
+        scrollFrame.current = requestAnimationFrame(step);
+      } else {
+        navigationTarget.current = null;
+      }
+    };
+
+    scrollFrame.current = requestAnimationFrame(step);
+  };
+
   const renderRail = (inverse: boolean) => (
     <aside
       className={inverse ? "site-rail site-rail-inverse" : "site-rail"}
@@ -100,6 +161,7 @@ export function SidebarNavigation() {
             className={href === "#top" ? "rail-intro" : undefined}
             href={href}
             key={href}
+            onClick={(event) => navigate(event, href)}
             aria-label={href === "#top" ? "Intro" : undefined}
             aria-current={active === href ? "location" : undefined}
             tabIndex={inverse ? -1 : undefined}
