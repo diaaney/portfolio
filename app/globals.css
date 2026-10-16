@@ -502,6 +502,7 @@ a:focus-visible {
 
 #work > .chapter-break {
   margin-top: 0;
+  border-bottom: 0;
 }
 
 .chapter-screen-reader-title {
