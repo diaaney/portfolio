@@ -319,21 +319,21 @@ a:focus-visible {
 }
 
 .activity-card-github {
-  --activity-accent: #e7b9cd;
+  --activity-accent: #ff5faf;
   --activity-logo: url("/activity/github.svg");
-  --activity-1: #49323e;
-  --activity-2: #785064;
-  --activity-3: #aa7891;
-  --activity-4: #e7b9cd;
+  --activity-1: #57213f;
+  --activity-2: #92305f;
+  --activity-3: #cf4086;
+  --activity-4: #ff5faf;
 }
 
 .activity-card-leetcode {
-  --activity-accent: #d2bce3;
+  --activity-accent: #bb7aff;
   --activity-logo: url("/activity/leetcode.svg");
-  --activity-1: #40334f;
-  --activity-2: #68547f;
-  --activity-3: #967db2;
-  --activity-4: #d2bce3;
+  --activity-1: #3b2459;
+  --activity-2: #62369a;
+  --activity-3: #9050d3;
+  --activity-4: #bb7aff;
 }
 
 .activity-title {
