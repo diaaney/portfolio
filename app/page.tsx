@@ -50,7 +50,9 @@ export default function Home() {
               <br />
               nice to meet you!
             </h1>
-            <p className="hero-subtitle">ml engineer</p>
+            <p className="hero-subtitle">
+              ml engineering student @ <a href="https://www.uabc.mx/" target="_blank" rel="noopener noreferrer">UABC</a>
+            </p>
           </div>
 
           <ActivityCalendars />

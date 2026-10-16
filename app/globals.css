@@ -151,6 +151,15 @@ a:focus-visible {
   line-height: 1.5;
 }
 
+.hero-subtitle a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hero-subtitle a:hover {
+  color: #fff;
+}
+
 .hero-illustrations {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
