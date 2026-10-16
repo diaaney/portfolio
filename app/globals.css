@@ -268,7 +268,7 @@ a:focus-visible {
   width: 224px;
   height: auto;
   max-width: none;
-  filter: brightness(0) invert(1) blur(0.15px);
+  filter: brightness(0) invert(1) drop-shadow(0 0 0 #fff) drop-shadow(0 0 0 #fff);
 }
 
 .hero .activity-section {
