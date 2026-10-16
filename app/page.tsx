@@ -136,33 +136,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="portfolio-section" aria-label="More about Diane">
-          <h2 className="sr-only">More about Diane</h2>
-
-          <div className="about-layout">
-            <div className="about-copy">
-              <p className="eyebrow">02 / ABOUT ME</p>
-              <h3>Curious about how things look, move, and feel.</h3>
-              <p>
-                I&apos;m Diane. I like experimenting, making, adjusting, and then
-                adjusting a little more. A good idea usually starts with paying
-                attention to the small things.
-              </p>
-              <p>This section is for the person and the process behind the work.</p>
-            </div>
-            <div className="about-portrait">
-              <Image src="/iconnerd.png" alt="A hand-drawn portrait of Diane" width={1000} height={1000} />
-              <span>HI AGAIN :)</span>
-            </div>
-          </div>
-
-          <div className="about-notes">
-            <div><span>01</span><p>Notice the little things.</p></div>
-            <div><span>02</span><p>Try the weird idea.</p></div>
-            <div><span>03</span><p>Keep making it better.</p></div>
-          </div>
-        </section>
-
         <section className="portfolio-section" id="details" aria-label="Details">
           <ChapterTitle label="DETAILS" variant="details" />
 

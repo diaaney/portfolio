@@ -158,7 +158,6 @@ a:focus-visible {
 
 .eyebrow,
 .card-kicker,
-.about-portrait > span,
 .site-footer > div {
   font-size: 10px;
   font-weight: 700;
@@ -210,8 +209,7 @@ a:focus-visible {
   margin: 36px auto 88px;
 }
 
-.intro-columns p,
-.about-copy > p:not(.eyebrow) {
+.intro-columns p {
   margin: 0;
   font-size: 16px;
   letter-spacing: -0.01em;
@@ -524,8 +522,7 @@ a:focus-visible {
   text-align: center;
 }
 
-.section-lead h3,
-.about-copy h3 {
+.section-lead h3 {
   margin: 18px 0;
   font-size: clamp(26px, 3vw, 38px);
   font-weight: 650;
@@ -756,68 +753,6 @@ a:focus-visible {
   font-style: normal;
 }
 
-.about-layout {
-  display: grid;
-  grid-template-columns: 1.04fr 0.96fr;
-  align-items: center;
-  gap: 42px;
-}
-
-.about-copy h3 {
-  margin-top: 15px;
-  margin-bottom: 26px;
-}
-
-.about-copy > p:not(.eyebrow) + p {
-  margin-top: 18px;
-  color: #a8a7a4;
-}
-
-.about-portrait {
-  position: relative;
-  display: flex;
-  aspect-ratio: 0.95;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px solid #292929;
-  border-radius: 16px;
-  background: #0d0d0d;
-}
-
-.about-portrait img {
-  display: block;
-  width: 95%;
-  height: auto;
-}
-
-.about-portrait > span {
-  position: absolute;
-  right: 19px;
-  bottom: 16px;
-  color: #aaa;
-}
-
-.about-notes {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 86px;
-  border-top: 1px solid #2a2a2a;
-  padding-top: 18px;
-}
-
-.about-notes span {
-  color: #777;
-  font-size: 11px;
-}
-
-.about-notes p {
-  margin: 15px 0 0;
-  font-size: 15px;
-  line-height: 1.4;
-}
-
 .detail-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -994,10 +929,6 @@ a:focus-visible {
   }
   .work-bento-card { scroll-snap-align: start; }
   .work-talk-row { min-height: 80px; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; padding: 14px 18px; }
-  .about-layout { grid-template-columns: 1fr; gap: 35px; }
-  .about-portrait { aspect-ratio: 1.1; }
-  .about-notes { gap: 12px; margin-top: 50px; }
-  .about-notes p { font-size: 13px; }
   .detail-grid { grid-template-columns: 1fr 1fr; gap: 30px 14px; }
   .detail-card:last-child { grid-column: 1 / -1; max-width: calc(50% - 7px); }
   .detail-visual span { font-size: 24vw; }
