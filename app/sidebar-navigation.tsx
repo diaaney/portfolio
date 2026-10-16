@@ -76,18 +76,19 @@ export function SidebarNavigation() {
 
       if (window.matchMedia("(max-width: 980px)").matches) {
         const center = link.offsetLeft + link.offsetWidth / 2;
-        const top = active === "#top" ? -30 : active === "#details"
-          ? link.offsetTop + link.offsetHeight / 2 - 11 : link.offsetTop - 10;
-        const left = active === "#top" ? -32 : center - (active === "#details" ? 40 : 50);
-        const angle = active === "#details" ? -45 : 55;
+        const top = active === "#top" ? -30 : active === "#gear"
+          ? link.offsetTop + link.offsetHeight / 2 + 18 : active === "#details"
+            ? link.offsetTop + link.offsetHeight / 2 - 11 : link.offsetTop - 10;
+        const left = active === "#top" ? -32 : center - (active === "#gear" ? 20 : active === "#details" ? 40 : 50);
+        const angle = active === "#gear" ? -88 : active === "#details" ? -45 : 55;
         setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(${angle}deg)`);
       } else {
         const center = link.offsetTop + link.offsetHeight / 2;
         const top = active === "#top" ? -87 : active === "#details" ? center - 22
-          : active === "#gear" ? center - 50 : center - 45;
-        const left = active === "#top" ? -67 : active === "#gear" ? -126
+          : active === "#gear" ? center - 10 : center - 45;
+        const left = active === "#top" ? -67 : active === "#gear" ? -84
           : active === "#details" ? -112 : -114;
-        const angle = active === "#top" ? 28 : active === "#details" ? -50 : -18;
+        const angle = active === "#top" ? 28 : active === "#gear" ? -88 : active === "#details" ? -50 : -18;
         setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(${angle}deg)`);
       }
     };
@@ -106,7 +107,9 @@ export function SidebarNavigation() {
     cancelAnimationFrame(scrollFrame.current);
 
     const maximum = document.documentElement.scrollHeight - window.innerHeight;
-    const destination = Math.min(maximum, Math.max(0, window.scrollY + target.getBoundingClientRect().top));
+    const destination = Math.min(maximum, Math.max(0,
+      window.scrollY + target.getBoundingClientRect().top + (href === "#gear" ? window.innerHeight : 0),
+    ));
     let start = window.scrollY;
 
     if (href === "#gear" && destination - start > window.innerHeight) {
@@ -121,13 +124,15 @@ export function SidebarNavigation() {
     const distance = destination - start;
     const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       ? 0
-      : Math.min(900, Math.max(500, Math.abs(distance) * 0.35));
+      : href === "#gear" ? 900 : Math.min(900, Math.max(500, Math.abs(distance) * 0.35));
     let started: number | null = null;
 
     const step = (now: number) => {
       started ??= now;
       const progress = duration === 0 ? 1 : Math.min(1, (now - started) / duration);
-      const eased = 1 - (1 - progress) ** 3;
+      const eased = href === "#gear"
+        ? progress * progress * (3 - 2 * progress)
+        : 1 - (1 - progress) ** 3;
       window.scrollTo({ top: start + distance * eased, behavior: "instant" });
 
       if (progress < 1) {

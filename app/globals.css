@@ -53,18 +53,8 @@ a:focus-visible {
 }
 
 .gear-stage {
-  height: 100vh;
-  height: 100dvh;
-}
-
-.gear-panel {
-  position: fixed;
-  z-index: 30;
-  inset: 0;
-  background: #fff;
-  pointer-events: none;
-  transform: translate3d(100%, 0, 0);
-  will-change: transform;
+  height: 200vh;
+  height: 200dvh;
 }
 
 .site-rail {
@@ -82,13 +72,18 @@ a:focus-visible {
   position: fixed;
   z-index: 40;
   inset: 0;
-  clip-path: inset(0 0 0 var(--gear-reveal-left, 100%));
+  overflow: hidden;
+  background: #fff;
   pointer-events: none;
+  transform: translate3d(100vw, 0, 0);
+  will-change: transform;
 }
 
 .site-rail-inverse {
   position: absolute;
   z-index: auto;
+  transform: translate3d(-100vw, 0, 0);
+  will-change: transform;
 }
 
 .site-rail-inverse .rail-links a {
@@ -777,7 +772,7 @@ a:focus-visible {
 }
 
 @media (max-width: 980px) {
-  .gear-nav-reveal { display: none; }
+  .site-rail-inverse { display: none; }
   .site-rail {
     position: relative;
     top: auto;
