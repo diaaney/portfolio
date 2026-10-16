@@ -240,19 +240,19 @@ a:focus-visible {
 
 .about-camera-cat {
   position: absolute;
-  bottom: calc(100% + 3px);
+  bottom: 100%;
   left: 42px;
-  width: 84px;
-  height: 92px;
+  width: 70px;
+  height: 74px;
   overflow: hidden;
   pointer-events: none;
 }
 
 .about-camera-cat img {
   position: absolute;
-  top: -201px;
-  left: -5px;
-  width: 280px;
+  top: -161px;
+  left: -4px;
+  width: 224px;
   height: auto;
   max-width: none;
   filter: brightness(0) invert(1);
