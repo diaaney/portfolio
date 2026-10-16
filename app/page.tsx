@@ -51,19 +51,26 @@ export default function Home() {
                   <Image src="/illustrations/diane-with-cat.png" alt="" width={1853} height={1998} />
                 </div>
                 <p>
-                  I&apos;m 20, based in Baja California, and in my second year of
-                  university. I founded my startup, Lumiose Labs, to learn by building.
-                  We&apos;re working on a web design agency for local businesses and
-                  some tools for Discord.
+                  20, based in baja california, and in my second year of uni. i started
+                  lumiose labs because i wanted to learn by making real things. right now
+                  we are building a web design agency for local businesses and some
+                  discord tools.
                 </p>
               </div>
               <p>
-                I love shipping new apps and features. The part I enjoy most is
-                designing them, from the UI and the stack to the way everything flows.
-                I&apos;ve started practicing on LeetCode too, and I&apos;m always looking
-                for chances to learn by doing.
+                i love shipping apps and new features. the fun part is figuring out
+                how they should look and work, from the ui and the stack to the little
+                details in the flow. i just started leetcode too, still figuring it out.
               </p>
             </div>
+
+            <p className="intro-personal">
+              outside of coding, i love shooters. i played a lot of valorant and even
+              made it to radiant o.o. these days i mostly play cs and league (i suck
+              at both). i also love decorating discord communities and making bots
+              for them. and yes, i LOVE croissants and coffee. i would love to be
+              french, but i am chinese. you met me at a very chinese time in my life.
+            </p>
           </div>
 
           <div className="hero-feature" aria-label="Featured work preview">
