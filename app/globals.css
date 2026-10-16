@@ -268,7 +268,7 @@ a:focus-visible {
   width: 224px;
   height: auto;
   max-width: none;
-  filter: brightness(0) invert(1) drop-shadow(0 0 0 #fff) drop-shadow(0 0 0 #fff);
+  filter: brightness(0) invert(1) drop-shadow(0 0 0 #fff);
 }
 
 .hero .activity-section {
@@ -374,6 +374,7 @@ a:focus-visible {
 .activity-card-leetcode .activity-art img {
   bottom: -7px;
   width: 165px;
+  filter: drop-shadow(0 0 0 #fff);
 }
 
 .activity-months,
