@@ -51,13 +51,16 @@ export default function Home() {
                   <Image src="/illustrations/diane-with-cat.png" alt="" width={1853} height={1998} />
                 </div>
                 <p>
-                  I like following an idea from the first messy sketch to the moment it
-                  finally feels right. This is where I collect what I&apos;ve been making.
+                  I&apos;m 20 and in my second year of university. I&apos;m actively
+                  looking for opportunities to gain hands-on experience, so I founded
+                  Lumiose Labs, a startup where I build and launch new ideas.
                 </p>
               </div>
               <p>
-                Some things are finished, some are still changing. There&apos;s room here
-                for the work, the thinking behind it, and the details along the way.
+                At Lumiose Labs, our projects include a web design agency for local
+                businesses and tools for Discord. We&apos;re also exploring a redesign
+                of our university&apos;s course bidding system and how new technology
+                could improve it.
               </p>
             </div>
           </div>
