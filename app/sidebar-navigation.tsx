@@ -72,9 +72,9 @@ export function SidebarNavigation() {
         );
       } else {
         setPointerPosition({
-          top: active === "#top" ? -53 : link.offsetTop + link.offsetHeight / 2 - 80,
-          left: -120,
-          transform: active === "#top" ? "rotate(4deg)" : "rotate(-8deg)",
+          top: active === "#top" ? -83 : link.offsetTop + link.offsetHeight / 2 - 60,
+          left: active === "#top" ? -94 : -125,
+          transform: active === "#top" ? "rotate(35deg)" : "rotate(-18deg)",
         });
       }
     };
@@ -101,6 +101,7 @@ export function SidebarNavigation() {
             className={href === "#top" ? "rail-intro" : undefined}
             href={href}
             key={href}
+            aria-label={href === "#top" ? "Intro" : undefined}
             aria-current={active === href ? "location" : undefined}
           >
             {href === "#top" && (
@@ -112,7 +113,7 @@ export function SidebarNavigation() {
                 priority
               />
             )}
-            <span>{label}</span>
+            {href !== "#top" && <span>{label}</span>}
           </a>
         ))}
       </nav>
