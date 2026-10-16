@@ -63,17 +63,17 @@ export function SidebarNavigation() {
       if (window.matchMedia("(max-width: 980px)").matches) {
         setPointerPosition(
           active === "#top"
-            ? { top: -25, left: -16, transform: "rotate(55deg)" }
+            ? { top: -25, left: -24, transform: "rotate(55deg)" }
             : {
                 top: link.offsetTop - 10,
-                left: link.offsetLeft + link.offsetWidth / 2 - 40,
+                left: link.offsetLeft + link.offsetWidth / 2 - 44,
                 transform: "rotate(55deg)",
               },
         );
       } else {
         setPointerPosition({
-          top: active === "#top" ? -83 : link.offsetTop + link.offsetHeight / 2 - 60,
-          left: active === "#top" ? -94 : -125,
+          top: active === "#top" ? -72 : link.offsetTop + link.offsetHeight / 2 - 50,
+          left: active === "#top" ? -90 : -116,
           transform: active === "#top" ? "rotate(35deg)" : "rotate(-18deg)",
         });
       }
