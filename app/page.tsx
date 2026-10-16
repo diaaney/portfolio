@@ -138,47 +138,9 @@ export default function Home() {
 
         <section className="portfolio-section" id="details" aria-label="Details">
           <ChapterTitle label="DETAILS" variant="details" />
-
-          <div className="section-lead">
-            <p className="eyebrow">03 / THE DETAILS</p>
-            <h3>The parts that make the whole.</h3>
-            <p>Little decisions, loose sketches, and everything in between.</p>
-          </div>
-
-          <div className="detail-grid">
-            <article className="detail-card">
-              <div className="detail-visual detail-visual-one"><span>✳</span></div>
-              <span className="card-kicker">01 / START</span>
-              <h4>The idea</h4>
-              <p>The first thought, question, or sketch that starts the work.</p>
-            </article>
-            <article className="detail-card">
-              <div className="detail-visual detail-visual-two"><span>↗</span></div>
-              <span className="card-kicker">02 / EXPLORE</span>
-              <h4>The process</h4>
-              <p>Making versions, finding surprises, and following what works.</p>
-            </article>
-            <article className="detail-card">
-              <div className="detail-visual detail-visual-three"><span>◎</span></div>
-              <span className="card-kicker">03 / FINISH</span>
-              <h4>The little things</h4>
-              <p>The final touches that help an idea feel like itself.</p>
-            </article>
-          </div>
-
-          <div className="closing-note">
-            <span className="eyebrow">STILL MAKING THINGS</span>
-            <p>More experiments, stories, and details will live here soon.</p>
-          </div>
         </section>
 
-        <footer className="site-footer" id="gear">
-          <p>Thanks for looking.</p>
-          <div>
-            <span>DIANE © 2026</span>
-            <a href="#top">BACK TO TOP ↑</a>
-          </div>
-        </footer>
+        <div id="gear" aria-label="Gear" />
       </main>
     </>
   );
