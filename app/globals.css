@@ -167,8 +167,6 @@ a:focus-visible {
 
 .eyebrow,
 .card-kicker,
-.feature-corner,
-.feature-bottom,
 .visual-index,
 .visual-foot,
 .about-portrait > span,
@@ -242,7 +240,7 @@ a:focus-visible {
 
 .intro-personal {
   max-width: 680px;
-  margin: 0 auto 44px;
+  margin: 0 auto;
   color: rgb(255 255 255 / 90%);
   font-size: 16px;
   letter-spacing: -0.01em;
@@ -270,8 +268,7 @@ a:focus-visible {
   width: 224px;
   height: auto;
   max-width: none;
-  opacity: 0.9;
-  filter: brightness(0) invert(1) blur(0.3px);
+  filter: brightness(0) invert(1) blur(0.15px);
 }
 
 .hero .activity-section {
@@ -281,6 +278,7 @@ a:focus-visible {
 .hero-about {
   scroll-margin-top: 25px;
   padding-top: 132px;
+  padding-bottom: 132px;
 }
 
 .hero-about .chapter-break {
@@ -290,14 +288,6 @@ a:focus-visible {
 
 .hero-about .intro-columns {
   margin-bottom: var(--intro-gap);
-}
-
-.hero-about::after {
-  display: block;
-  width: min(360px, 100%);
-  margin: 0 auto 88px;
-  border-top: 1px solid #242424;
-  content: "";
 }
 
 .activity-section {
@@ -503,63 +493,6 @@ a:focus-visible {
   border-radius: 2px;
 }
 
-.hero-feature {
-  position: relative;
-  display: flex;
-  aspect-ratio: 1.75;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #e9e7e0;
-  color: #111;
-  padding: 24px 28px;
-}
-
-.feature-corner,
-.feature-bottom {
-  position: relative;
-  z-index: 2;
-}
-
-.feature-art {
-  position: absolute;
-  inset: 0;
-}
-
-.feature-orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 68%;
-  aspect-ratio: 1;
-  border: 2px solid #161616;
-  border-radius: 50%;
-  transform: translate(-50%, -50%) rotate(-18deg) scaleY(0.62);
-}
-
-.feature-orbit-two {
-  width: 47%;
-  border-width: 1px;
-  transform: translate(-50%, -50%) rotate(25deg) scaleY(0.76);
-}
-
-.feature-star {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: clamp(92px, 18vw, 250px);
-  line-height: 1;
-  transform: translate(-50%, -51%) rotate(-12deg);
-}
-
-.hero-after {
-  margin: 18px 0 0;
-  color: #727272;
-  font-size: 11px;
-  text-align: center;
-}
-
 .portfolio-section {
   scroll-margin-top: 25px;
 }
@@ -574,6 +507,10 @@ a:focus-visible {
   border-top: 1px solid #242424;
   border-bottom: 1px solid #242424;
   padding: 54px 0;
+}
+
+#work > .chapter-break {
+  margin-top: 0;
 }
 
 .chapter-screen-reader-title {
@@ -937,10 +874,6 @@ a:focus-visible {
   .intro-columns p { font-size: 15px; }
   .intro-personal { font-size: 15px; }
   .activity-section { grid-template-columns: 1fr; gap: 14px; margin-bottom: 55px; }
-  .hero-feature { aspect-ratio: 1.12; padding: 18px; border-radius: 12px; }
-  .feature-star { font-size: 145px; }
-  .feature-orbit { width: 90%; }
-  .feature-orbit-two { width: 63%; }
   .chapter-break { width: min(330px, 100%); margin: 90px auto 75px; padding: 40px 0; }
   .section-lead { margin-bottom: 45px; }
   .work-stack { gap: 52px; }

@@ -58,9 +58,9 @@ export default function Home() {
                 </p>
               </div>
               <p>
-                i love shipping apps and new features. i can spend forever tweaking
-                the ui, trying different stacks, and getting the pipeline right. i just
-                started leetcode too, still figuring it out.
+                love shipping apps and new features. i can spend forever designing the
+                ui and working out how the app will work in my head. i started leetcode
+                too, still figuring it out.
               </p>
             </div>
 
@@ -72,17 +72,6 @@ export default function Home() {
               french, but i am chinese. you met me at a very chinese time in my life.
             </p>
           </div>
-
-          <div className="hero-feature" aria-label="Featured work preview">
-            <span className="feature-corner">SELECTED WORK / 001</span>
-            <div className="feature-art" aria-hidden="true">
-              <div className="feature-orbit feature-orbit-one" />
-              <div className="feature-orbit feature-orbit-two" />
-              <span className="feature-star">✳</span>
-            </div>
-            <span className="feature-bottom">A PLACE FOR THE NEXT BIG IDEA ↗</span>
-          </div>
-          <p className="hero-after">More below ↓</p>
         </header>
 
         <section className="portfolio-section" id="work" aria-label="Work">
