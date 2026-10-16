@@ -57,13 +57,19 @@ export function SidebarNavigation() {
       if (!link) return;
 
       if (window.matchMedia("(max-width: 980px)").matches) {
-        const top = active === "#top" ? -30 : link.offsetTop - 10;
-        const left = active === "#top" ? -32 : link.offsetLeft + link.offsetWidth / 2 - 50;
-        setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(55deg)`);
+        const center = link.offsetLeft + link.offsetWidth / 2;
+        const top = active === "#top" ? -30 : active === "#details"
+          ? link.offsetTop + link.offsetHeight / 2 - 11 : link.offsetTop - 10;
+        const left = active === "#top" ? -32 : center - (active === "#details" ? 40 : 50);
+        const angle = active === "#details" ? -45 : 55;
+        setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(${angle}deg)`);
       } else {
-        const top = active === "#top" ? -105 : link.offsetTop + link.offsetHeight / 2 - 50;
-        const left = active === "#top" ? -84 : -126;
-        const angle = active === "#top" ? 35 : -18;
+        const center = link.offsetTop + link.offsetHeight / 2;
+        const top = active === "#top" ? -87 : active === "#details" ? center - 22
+          : active === "#gear" ? center - 50 : center - 45;
+        const left = active === "#top" ? -67 : active === "#gear" ? -126
+          : active === "#details" ? -112 : -114;
+        const angle = active === "#top" ? 28 : active === "#details" ? -50 : -18;
         setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(${angle}deg)`);
       }
     };
