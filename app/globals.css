@@ -46,6 +46,7 @@ a:focus-visible {
 }
 
 .portfolio-page {
+  position: relative;
   width: min(760px, calc(100% - 48px));
   margin: 0 auto;
 }
@@ -63,15 +64,16 @@ a:focus-visible {
 
 .rail-icon {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 38px;
 }
 
 .rail-icon img {
   display: block;
-  width: 32px;
-  height: 31px;
-  opacity: 0.4;
+  width: 44px;
+  height: 38px;
+  object-fit: contain;
+  opacity: 0.75;
 }
 
 .visual-mark span {
@@ -89,6 +91,7 @@ a:focus-visible {
 }
 
 .rail-links a {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100px;
@@ -103,8 +106,51 @@ a:focus-visible {
 }
 
 .rail-links a:hover,
-.rail-links a:focus-visible {
+.rail-links a:focus-visible,
+.rail-links a[aria-current="location"] {
   color: #fff;
+}
+
+.rail-pointer {
+  position: absolute;
+  top: 50%;
+  left: -62px;
+  width: 58px;
+  height: 52px;
+  object-fit: contain;
+  transform: translateY(-50%) rotate(-8deg);
+  pointer-events: none;
+}
+
+.flying-cat {
+  position: absolute;
+  z-index: 1;
+  top: 24px;
+  right: -130px;
+  width: 105px;
+  height: 146px;
+  pointer-events: none;
+  animation: flying-cat-float 2.8s ease-in-out infinite alternate;
+}
+
+.flying-cat-sprite {
+  width: 100%;
+  height: 100%;
+  background-image: url("/illustrations/flying-cat-sprite.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 300% 100%;
+  animation: flying-cat-frames 840ms linear infinite;
+}
+
+@keyframes flying-cat-frames {
+  0%, 32.99% { background-position: 0 0; }
+  33%, 65.99% { background-position: 50% 0; }
+  66%, 100% { background-position: 100% 0; }
+}
+
+@keyframes flying-cat-float {
+  to { transform: translateY(-10px); }
 }
 
 .hero {
@@ -828,6 +874,14 @@ a:focus-visible {
 
   .rail-links { flex-direction: row; gap: 20px; }
   .rail-links a { width: auto; }
+  .rail-pointer {
+    top: -24px;
+    left: 50%;
+    width: 32px;
+    height: 30px;
+    transform: translateX(-50%) rotate(65deg);
+  }
+  .flying-cat { top: 75px; right: 0; width: 75px; height: 104px; }
   .hero { padding-top: 24px; }
 }
 
@@ -836,6 +890,7 @@ a:focus-visible {
   .site-rail { width: calc(100% - 32px); }
   .rail-links { gap: 13px; }
   .rail-links a { font-size: 11px; }
+  .flying-cat { top: 77px; width: 58px; height: 82px; }
   .hero-heading { margin-top: 56px; }
   .hero-heading h1 { font-size: clamp(28px, 7vw, 32px); }
   .hero-illustrations { gap: 8px; margin-top: 24px; }
@@ -876,4 +931,6 @@ a:focus-visible {
   html { scroll-behavior: auto; }
   .hand-strip { animation: none; }
   .activity-day { transition: none; }
+  .flying-cat { animation: none; }
+  .flying-cat-sprite { animation: none; }
 }

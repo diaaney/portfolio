@@ -1,13 +1,8 @@
 import Image from "next/image";
 import { ActivityCalendars } from "./activity-calendars";
 import { AnimatedTitle } from "./animated-title";
-
-const navigation = [
-  { label: "WORK", href: "#work" },
-  { label: "ABOUT", href: "#about" },
-  { label: "DETAILS", href: "#details" },
-  { label: "GEAR", href: "#gear" },
-] as const;
+import { FlyingCat } from "./flying-cat";
+import { SidebarNavigation } from "./sidebar-navigation";
 
 function ChapterTitle({
   label,
@@ -29,20 +24,10 @@ function ChapterTitle({
 export default function Home() {
   return (
     <>
-      <aside className="site-rail" aria-label="Site navigation">
-        <a className="rail-icon" href="#top" aria-label="Back to top">
-          <Image src="/sidebar-reference-icon.png" alt="" width={32} height={31} />
-        </a>
-        <nav className="rail-links" aria-label="Sections">
-          {navigation.map(({ label, href }) => (
-            <a href={href} key={href}>
-              {label}
-            </a>
-          ))}
-        </nav>
-      </aside>
+      <SidebarNavigation />
 
       <main className="portfolio-page" id="top">
+        <FlyingCat />
         <header className="hero">
           <div className="hero-heading">
             <h1>
