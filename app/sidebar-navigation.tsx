@@ -85,7 +85,7 @@ export function SidebarNavigation() {
       } else {
         const center = link.offsetTop + link.offsetHeight / 2;
         const top = active === "#top" ? -87 : active === "#details" ? center - 22
-          : active === "#gear" ? center - 10 : center - 45;
+          : active === "#gear" ? center + 24 : center - 45;
         const left = active === "#top" ? -67 : active === "#gear" ? -84
           : active === "#details" ? -112 : -114;
         const angle = active === "#top" ? 28 : active === "#gear" ? -88 : active === "#details" ? -50 : -18;
