@@ -4,6 +4,12 @@ import { AnimatedTitle } from "./animated-title";
 import { FlyingCat } from "./flying-cat";
 import { SidebarNavigation } from "./sidebar-navigation";
 
+const workCards = [
+  { number: "01", title: "placeholder one", line: "M12 73 C 36 48 69 27 108 67" },
+  { number: "02", title: "placeholder two", line: "M23 57 C 27 17 99 20 98 56 C 98 86 32 85 23 57 Z" },
+  { number: "03", title: "placeholder three", line: "M17 29 H103 M17 73 H103 M60 35 V67 M53 42 L60 35 L67 42 M53 60 L60 67 L67 60" },
+] as const;
+
 function ChapterTitle({
   label,
   variant,
@@ -77,57 +83,56 @@ export default function Home() {
         <section className="portfolio-section" id="work" aria-label="Work">
           <ChapterTitle label="WORK" variant="demos" />
 
-          <div className="section-lead">
-            <p className="eyebrow">01 / SELECTED WORK</p>
-            <h3>Made to be seen, used, and felt.</h3>
-            <p>
-              A home for projects and experiments. Each story can grow here as the
-              portfolio grows.
-            </p>
-          </div>
-
-          <div className="work-stack">
-            <article className="work-item">
-              <div className="work-visual work-visual-primary">
-                <span className="visual-index">01 / FEATURED PROJECT</span>
-                <span className="visual-mark">d<span>✳</span></span>
-                <span className="visual-foot">IDEA → EXPERIMENT → SOMETHING REAL</span>
+          <div className="work-examples">
+            <section className="work-example" aria-labelledby="work-example-one">
+              <div className="work-example-heading">
+                <h3 id="work-example-one"><em>“project 01”</em> / visual concepts</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               </div>
-              <div className="work-caption">
-                <div>
-                  <span className="card-kicker">PROJECT 01</span>
-                  <h4>The first story</h4>
-                </div>
-                <p>A space for the project, its process, and the final result.</p>
-              </div>
-            </article>
 
-            <div className="work-pair">
-              <article className="work-item">
-                <div className="work-visual work-visual-second">
-                  <span className="visual-index">02 / EXPERIMENT</span>
-                  <span className="visual-squiggle" aria-hidden="true">~</span>
+              <div className="work-bento-grid">
+                {workCards.map((card) => (
+                  <article className="work-bento-card" key={card.number}>
+                    <div className={`work-bento-visual work-bento-visual-${card.number}`} aria-hidden="true">
+                      <span className="work-bento-index">{card.number} / PLACEHOLDER</span>
+                      <span className="work-bento-shape" />
+                      <span className="work-bento-glass">
+                        <svg viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                          <path d={card.line} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                    </div>
+                    <h4>{card.title}</h4>
+                    <p>Lorem ipsum dolor sit amet.</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="work-example work-example-talk" aria-labelledby="work-example-two">
+              <div className="work-example-heading">
+                <h3 id="work-example-two"><em>“project 02”</em> / another direction</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt sapien vel mauris cursus, a placerat mi tempor.</p>
+              </div>
+
+              <div className="work-talk-art" aria-hidden="true">
+                <span className="work-talk-bubble work-talk-bubble-one">...</span>
+                <span className="work-talk-bubble work-talk-bubble-two">?</span>
+                <span className="work-talk-bubble work-talk-bubble-three">!</span>
+                <span className="work-talk-orbit" />
+              </div>
+
+              <div className="work-talk-list">
+                <div className="work-talk-row">
+                  <span><i aria-hidden="true">◻</i> placeholder one</span>
+                  <span>Lorem ipsum dolor sit amet</span>
                 </div>
-                <div className="work-caption">
-                  <div>
-                    <span className="card-kicker">PROJECT 02</span>
-                    <h4>A different direction</h4>
-                  </div>
+                <div className="work-talk-row">
+                  <span><i aria-hidden="true">◉</i> placeholder two</span>
+                  <span>Consectetur adipiscing elit</span>
                 </div>
-              </article>
-              <article className="work-item">
-                <div className="work-visual work-visual-third">
-                  <span className="visual-index">03 / IN PROGRESS</span>
-                  <Image src="/iconlike.png" alt="" width={1000} height={1000} />
-                </div>
-                <div className="work-caption">
-                  <div>
-                    <span className="card-kicker">PROJECT 03</span>
-                    <h4>Something new</h4>
-                  </div>
-                </div>
-              </article>
-            </div>
+              </div>
+            </section>
           </div>
         </section>
 
