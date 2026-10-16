@@ -234,6 +234,11 @@ a:focus-visible {
   color: rgb(255 255 255 / 90%);
 }
 
+.intro-columns p,
+.intro-personal {
+  text-align: justify;
+}
+
 .intro-personal {
   max-width: 680px;
   margin: 0 auto 44px;
