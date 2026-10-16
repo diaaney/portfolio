@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ActivityCalendars } from "./activity-calendars";
 import { AnimatedTitle } from "./animated-title";
 import { FlyingCat } from "./flying-cat";
+import { GearSlide } from "./gear-slide";
 import { SidebarNavigation } from "./sidebar-navigation";
 
 const workCards = [
@@ -140,8 +141,8 @@ export default function Home() {
           <ChapterTitle label="DETAILS" variant="details" />
         </section>
 
-        <div id="gear" aria-label="Gear" />
       </main>
+      <GearSlide />
     </>
   );
 }

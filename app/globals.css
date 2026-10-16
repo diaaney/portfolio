@@ -29,6 +29,7 @@ body {
   background: #000;
   color: #fff;
   font-family: "Inter", Arial, Helvetica, sans-serif;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -49,6 +50,21 @@ a:focus-visible {
   position: relative;
   width: min(760px, calc(100% - 48px));
   margin: 0 auto;
+}
+
+.gear-stage {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.gear-panel {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  background: #fff;
+  pointer-events: none;
+  transform: translate3d(100%, 0, 0);
+  will-change: transform;
 }
 
 .site-rail {
