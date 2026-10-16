@@ -69,14 +69,39 @@ a:focus-visible {
 
 .site-rail {
   position: fixed;
-  z-index: 40;
+  z-index: 20;
   top: 105px;
   left: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 120px;
-  mix-blend-mode: difference;
+}
+
+.gear-nav-reveal {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  clip-path: inset(0 0 0 var(--gear-reveal-left, 100%));
+  pointer-events: none;
+}
+
+.site-rail-inverse {
+  z-index: auto;
+}
+
+.site-rail-inverse .rail-links a {
+  color: rgb(0 0 0 / 40%);
+}
+
+.site-rail-inverse .rail-links a:hover,
+.site-rail-inverse .rail-links a[aria-current="location"] {
+  color: #000;
+}
+
+.site-rail-inverse .rail-pointer,
+.site-rail-inverse .rail-intro img {
+  filter: brightness(0);
 }
 
 .rail-links {

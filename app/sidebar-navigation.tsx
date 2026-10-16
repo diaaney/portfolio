@@ -79,9 +79,13 @@ export function SidebarNavigation() {
     return () => window.removeEventListener("resize", placePointer);
   }, [active]);
 
-  return (
-    <aside className="site-rail" aria-label="Site navigation">
-      <nav className="rail-links" aria-label="Sections" ref={linksRef}>
+  const renderRail = (inverse: boolean) => (
+    <aside
+      className={inverse ? "site-rail site-rail-inverse" : "site-rail"}
+      aria-label={inverse ? undefined : "Site navigation"}
+      aria-hidden={inverse || undefined}
+    >
+      <nav className="rail-links" aria-label={inverse ? undefined : "Sections"} ref={inverse ? undefined : linksRef}>
         <Image
           className="rail-pointer"
           src="/illustrations/sidebar-pointer.png"
@@ -98,6 +102,7 @@ export function SidebarNavigation() {
             key={href}
             aria-label={href === "#top" ? "Intro" : undefined}
             aria-current={active === href ? "location" : undefined}
+            tabIndex={inverse ? -1 : undefined}
           >
             {href === "#top" && (
               <Image
@@ -105,7 +110,7 @@ export function SidebarNavigation() {
                 alt=""
                 width={562}
                 height={375}
-                priority
+                priority={!inverse}
               />
             )}
             {href !== "#top" && <span>{label}</span>}
@@ -113,5 +118,14 @@ export function SidebarNavigation() {
         ))}
       </nav>
     </aside>
+  );
+
+  return (
+    <>
+      {renderRail(false)}
+      <div className="gear-nav-reveal" aria-hidden="true">
+        {renderRail(true)}
+      </div>
+    </>
   );
 }

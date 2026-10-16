@@ -21,6 +21,7 @@ export function GearSlide() {
         const progress = Math.min(1, Math.max(0, 1 - top / window.innerHeight));
         const visible = reducedMotion.matches ? Number(progress >= 1) : progress;
         panel.style.transform = `translate3d(${(1 - visible) * 100}%, 0, 0)`;
+        document.documentElement.style.setProperty("--gear-reveal-left", `${(1 - visible) * 100}%`);
       });
     };
 
@@ -34,6 +35,7 @@ export function GearSlide() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
       reducedMotion.removeEventListener("change", update);
+      document.documentElement.style.removeProperty("--gear-reveal-left");
     };
   }, []);
 
