@@ -58,9 +58,9 @@ export default function Home() {
               </div>
               <p>
                 At Lumiose Labs, our projects include a web design agency for local
-                businesses and tools for Discord. We&apos;re also exploring a redesign
-                of our university&apos;s course bidding system and how new technology
-                could improve it.
+                businesses and tools for Discord. I&apos;ve also recently started
+                practicing on LeetCode to sharpen my problem-solving skills and keep
+                learning outside the classroom.
               </p>
             </div>
           </div>
