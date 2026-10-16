@@ -305,21 +305,21 @@ a:focus-visible {
 }
 
 .activity-card-github {
-  --activity-accent: #e7cbd6;
+  --activity-accent: #e7b9cd;
   --activity-logo: url("/activity/github.svg");
-  --activity-1: rgb(228 112 157 / 35%);
-  --activity-2: rgb(228 112 157 / 50%);
-  --activity-3: rgb(228 112 157 / 68%);
-  --activity-4: rgb(228 112 157 / 85%);
+  --activity-1: #49323e;
+  --activity-2: #785064;
+  --activity-3: #aa7891;
+  --activity-4: #e7b9cd;
 }
 
 .activity-card-leetcode {
-  --activity-accent: #d7cce4;
+  --activity-accent: #d2bce3;
   --activity-logo: url("/activity/leetcode.svg");
-  --activity-1: rgb(168 123 219 / 35%);
-  --activity-2: rgb(168 123 219 / 50%);
-  --activity-3: rgb(168 123 219 / 68%);
-  --activity-4: rgb(168 123 219 / 85%);
+  --activity-1: #40334f;
+  --activity-2: #68547f;
+  --activity-3: #967db2;
+  --activity-4: #d2bce3;
 }
 
 .activity-title {
@@ -413,7 +413,7 @@ a:focus-visible {
   display: block;
   aspect-ratio: 1;
   border-radius: 3px;
-  background: rgb(255 255 255 / 11%);
+  background: #1c1c20;
 }
 
 .activity-day {
@@ -424,7 +424,7 @@ a:focus-visible {
 .activity-day:not(.activity-day-outside):hover {
   z-index: 2;
   transform: scale(1.13);
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 42%);
+  box-shadow: 0 0 0 1px var(--activity-accent);
 }
 
 .activity-day[data-detail]:hover::after {
@@ -435,8 +435,9 @@ a:focus-visible {
   width: max-content;
   padding: 7px 9px;
   border-radius: 4px;
-  background: #eae7e2;
-  color: #171717;
+  border: 1px solid #3b3541;
+  background: #201e24;
+  color: #f4edf2;
   content: attr(data-detail);
   font-size: 11px;
   font-weight: 500;
