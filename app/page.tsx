@@ -58,10 +58,9 @@ export default function Home() {
                 </p>
               </div>
               <p>
-                i love shipping apps and new features. i can spend forever on the ui.
-                then i get just as into picking the stack and figuring out what actually
-                happens after you click a button, right down to where the data ends up.
-                i just started leetcode too, still figuring it out.
+                i love shipping apps and new features. i can spend forever tweaking
+                the ui, trying different stacks, and getting the pipeline right. i just
+                started leetcode too, still figuring it out.
               </p>
             </div>
 
