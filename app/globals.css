@@ -87,6 +87,7 @@ a:focus-visible {
 }
 
 .site-rail-inverse {
+  position: absolute;
   z-index: auto;
 }
 
@@ -772,6 +773,7 @@ a:focus-visible {
 }
 
 @media (max-width: 980px) {
+  .gear-nav-reveal { display: none; }
   .site-rail {
     position: relative;
     top: auto;
