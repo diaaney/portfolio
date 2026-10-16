@@ -51,16 +51,17 @@ export default function Home() {
                   <Image src="/illustrations/diane-with-cat.png" alt="" width={1853} height={1998} />
                 </div>
                 <p>
-                  I&apos;m 20 and in my second year of university. I&apos;m actively
-                  looking for opportunities to gain hands-on experience, so I founded
-                  Lumiose Labs, a startup where I build and launch new ideas.
+                  I&apos;m 20, based in Baja California, and in my second year of
+                  university. I founded my startup, Lumiose Labs, to learn by building.
+                  We&apos;re working on a web design agency for local businesses and
+                  some tools for Discord.
                 </p>
               </div>
               <p>
-                At Lumiose Labs, our projects include a web design agency for local
-                businesses and tools for Discord. I&apos;ve also recently started
-                practicing on LeetCode to sharpen my problem-solving skills and keep
-                learning outside the classroom.
+                I love shipping new apps and features. The part I enjoy most is
+                designing them, from the UI and the stack to the way everything flows.
+                I&apos;ve started practicing on LeetCode too, and I&apos;m always looking
+                for chances to learn by doing.
               </p>
             </div>
           </div>
