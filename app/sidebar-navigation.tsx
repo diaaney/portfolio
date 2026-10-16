@@ -1,17 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navigation = [
-  { label: "WORK", href: "#work" },
+  { label: "INTRO", href: "#top" },
   { label: "ABOUT", href: "#about" },
+  { label: "WORK", href: "#work" },
   { label: "DETAILS", href: "#details" },
   { label: "GEAR", href: "#gear" },
 ] as const;
 
 export function SidebarNavigation() {
-  const [active, setActive] = useState<string>("#about");
+  const [active, setActive] = useState<string>("#top");
+  const [pointerPosition, setPointerPosition] = useState<{
+    top: number;
+    left: number;
+    transform: string;
+  } | null>(null);
+  const linksRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let frame = 0;
@@ -27,7 +34,7 @@ export function SidebarNavigation() {
             a.element!.getBoundingClientRect().top - b.element!.getBoundingClientRect().top,
           );
 
-        let current = "#about";
+        let current = "#top";
         for (const { href, element } of sections) {
           if (element!.getBoundingClientRect().top <= marker) current = href;
         }
@@ -48,25 +55,64 @@ export function SidebarNavigation() {
     };
   }, []);
 
+  useEffect(() => {
+    const placePointer = () => {
+      const link = linksRef.current?.querySelector<HTMLAnchorElement>(`a[href="${active}"]`);
+      if (!link) return;
+
+      if (window.matchMedia("(max-width: 980px)").matches) {
+        setPointerPosition(
+          active === "#top"
+            ? { top: -25, left: -16, transform: "rotate(55deg)" }
+            : {
+                top: link.offsetTop - 10,
+                left: link.offsetLeft + link.offsetWidth / 2 - 40,
+                transform: "rotate(55deg)",
+              },
+        );
+      } else {
+        setPointerPosition({
+          top: active === "#top" ? -53 : link.offsetTop + link.offsetHeight / 2 - 80,
+          left: -120,
+          transform: active === "#top" ? "rotate(4deg)" : "rotate(-8deg)",
+        });
+      }
+    };
+
+    placePointer();
+    window.addEventListener("resize", placePointer);
+    return () => window.removeEventListener("resize", placePointer);
+  }, [active]);
+
   return (
     <aside className="site-rail" aria-label="Site navigation">
-      <a className="rail-icon" href="#top" aria-label="Back to top">
-        <Image src="/illustrations/laughing-cat.png" alt="" width={562} height={375} priority />
-      </a>
-      <nav className="rail-links" aria-label="Sections">
+      <nav className="rail-links" aria-label="Sections" ref={linksRef}>
+        <Image
+          className="rail-pointer"
+          src="/illustrations/sidebar-pointer.png"
+          alt=""
+          width={518}
+          height={454}
+          aria-hidden="true"
+          style={pointerPosition ?? undefined}
+        />
         {navigation.map(({ label, href }) => (
-          <a href={href} key={href} aria-current={active === href ? "location" : undefined}>
-            {active === href && (
+          <a
+            className={href === "#top" ? "rail-intro" : undefined}
+            href={href}
+            key={href}
+            aria-current={active === href ? "location" : undefined}
+          >
+            {href === "#top" && (
               <Image
-                className="rail-pointer"
-                src="/illustrations/sidebar-pointer.png"
+                src="/illustrations/laughing-cat.png"
                 alt=""
-                width={518}
-                height={454}
-                aria-hidden="true"
+                width={562}
+                height={375}
+                priority
               />
             )}
-            {label}
+            <span>{label}</span>
           </a>
         ))}
       </nav>
