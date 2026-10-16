@@ -110,29 +110,22 @@ export function SidebarNavigation() {
     const destination = Math.min(maximum, Math.max(0,
       window.scrollY + target.getBoundingClientRect().top + (href === "#gear" ? window.innerHeight : 0),
     ));
-    let start = window.scrollY;
-
-    if (href === "#gear" && destination - start > window.innerHeight) {
-      start = destination - window.innerHeight;
-      window.scrollTo({ top: start, behavior: "instant" });
-    }
+    const start = window.scrollY;
 
     history.pushState(null, "", href);
     setActive(href);
     navigationTarget.current = href;
 
     const distance = destination - start;
-    const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches || Math.abs(distance) < 1
       ? 0
-      : href === "#gear" ? 900 : Math.min(900, Math.max(500, Math.abs(distance) * 0.35));
+      : Math.min(2100, Math.max(href === "#gear" ? 900 : 650, Math.abs(distance) * 0.5));
     let started: number | null = null;
 
     const step = (now: number) => {
       started ??= now;
       const progress = duration === 0 ? 1 : Math.min(1, (now - started) / duration);
-      const eased = href === "#gear"
-        ? progress * progress * (3 - 2 * progress)
-        : 1 - (1 - progress) ** 3;
+      const eased = progress * progress * (3 - 2 * progress);
       window.scrollTo({ top: start + distance * eased, behavior: "instant" });
 
       if (progress < 1) {
