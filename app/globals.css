@@ -255,7 +255,7 @@ a:focus-visible {
 
 .about-camera-cat {
   position: absolute;
-  bottom: calc(100% - 4px);
+  bottom: calc(100% - 1px);
   left: 42px;
   width: 70px;
   height: 74px;
@@ -270,7 +270,8 @@ a:focus-visible {
   width: 224px;
   height: auto;
   max-width: none;
-  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  filter: brightness(0) invert(1) blur(0.3px);
 }
 
 .hero .activity-section {
