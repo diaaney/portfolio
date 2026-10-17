@@ -1,3 +1,5 @@
+import { activityDateKey } from "@/app/activity-date";
+
 type DailyActivity = Record<string, number>;
 
 async function githubActivity(): Promise<DailyActivity> {
@@ -29,16 +31,19 @@ async function leetcodeActivity(): Promise<DailyActivity> {
     headers: { "Content-Type": "application/json", Referer: "https://leetcode.com/" },
     body: JSON.stringify({
       query:
-        "query userProfileCalendar($username: String!) { matchedUser(username: $username) { submissionCalendar } }",
+        "query userProfileCalendar($username: String!) { matchedUser(username: $username) { submissionCalendar } recentSubmissionList(username: $username, limit: 100) { timestamp } }",
       variables: { username: "diaaney" },
     }),
-    next: { revalidate: 3600 },
+    cache: "no-store",
   });
 
   if (!response.ok) throw new Error("LeetCode activity is unavailable");
 
   const data = (await response.json()) as {
-    data?: { matchedUser?: { submissionCalendar?: string } };
+    data?: {
+      matchedUser?: { submissionCalendar?: string };
+      recentSubmissionList?: { timestamp: string }[];
+    };
   };
   const calendar = data.data?.matchedUser?.submissionCalendar;
   if (!calendar) throw new Error("LeetCode calendar could not be read");
@@ -49,6 +54,18 @@ async function leetcodeActivity(): Promise<DailyActivity> {
   for (const [timestamp, count] of Object.entries(timestamps)) {
     const date = new Date(Number(timestamp) * 1000).toISOString().slice(0, 10);
     days[date] = count;
+  }
+
+  // LeetCode groups calendar entries by UTC day. Move recent submissions to
+  // the day they happened in Diane's time zone without losing older counts.
+  for (const submission of data.data?.recentSubmissionList ?? []) {
+    const submittedAt = new Date(Number(submission.timestamp) * 1000);
+    if (Number.isNaN(submittedAt.getTime())) continue;
+    const utcDate = submittedAt.toISOString().slice(0, 10);
+    const localDate = activityDateKey(submittedAt);
+    if (utcDate === localDate || !days[utcDate]) continue;
+    days[utcDate] -= 1;
+    days[localDate] = (days[localDate] ?? 0) + 1;
   }
 
   return days;
@@ -67,7 +84,7 @@ export async function GET() {
     },
     {
       headers: {
-        "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600",
+        "Cache-Control": "no-store",
       },
     },
   );

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { activityDateKey } from "./activity-date";
 
 type DailyActivity = Record<string, number>;
 type ActivityData = { github: DailyActivity | null; leetcode: DailyActivity | null };
@@ -24,7 +25,7 @@ function addDays(date: Date, days: number) {
 }
 
 function makeWeeks(today: Date) {
-  const end = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+  const end = new Date(`${activityDateKey(today)}T00:00:00Z`);
   const start = addDays(end, -89);
 
   const first = addDays(start, -start.getUTCDay());
@@ -169,18 +170,28 @@ export function ActivityCalendars() {
     let active = true;
     const frame = requestAnimationFrame(() => { if (active) setToday(new Date()); });
 
-    fetch("/api/activity")
-      .then((response) => {
-        if (!response.ok) throw new Error("Activity request failed");
-        return response.json() as Promise<ActivityData>;
-      })
-      .then((activity) => { if (active) setData(activity); })
-      .catch(() => { if (active) setData({ github: null, leetcode: null }); })
-      .finally(() => { if (active) setLoading(false); });
+    const refresh = () => {
+      if (document.visibilityState !== "visible") return;
+      setToday(new Date());
+      fetch("/api/activity", { cache: "no-store" })
+        .then((response) => {
+          if (!response.ok) throw new Error("Activity request failed");
+          return response.json() as Promise<ActivityData>;
+        })
+        .then((activity) => { if (active) setData(activity); })
+        .catch(() => { if (active) setData((current) => current ?? { github: null, leetcode: null }); })
+        .finally(() => { if (active) setLoading(false); });
+    };
+
+    refresh();
+    const interval = window.setInterval(refresh, 60_000);
+    document.addEventListener("visibilitychange", refresh);
 
     return () => {
       active = false;
       cancelAnimationFrame(frame);
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", refresh);
     };
   }, []);
 
