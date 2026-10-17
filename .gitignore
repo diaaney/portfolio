@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-/inspo/.next/
 /.pnp
 .pnp.*
 .yarn/*
