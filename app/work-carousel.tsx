@@ -45,10 +45,9 @@ export function WorkCarousel() {
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current) return;
-    const width = viewport.current?.clientWidth ?? 700;
     const raw = event.clientX - drag.current.startX;
     const atEdge = (active === 0 && raw > 0) || (active === projectCount - 1 && raw < 0);
-    const offset = Math.max(-width * 0.35, Math.min(width * 0.35, atEdge ? raw * 0.22 : raw));
+    const offset = atEdge ? raw * 0.24 : raw;
     drag.current.offset = offset;
     setDragOffset(offset);
   };
@@ -56,7 +55,7 @@ export function WorkCarousel() {
   const finishDrag = () => {
     if (!drag.current) return;
     const { offset, startTime } = drag.current;
-    const width = viewport.current?.clientWidth ?? 700;
+    const width = slides.current[active]?.clientWidth ?? viewport.current?.clientWidth ?? 700;
     const quickFlick = Math.abs(offset) > 24 && Math.abs(offset) / Math.max(performance.now() - startTime, 1) > 0.45;
     if (Math.abs(offset) > Math.min(90, width * 0.16) || quickFlick) {
       goTo(active + (offset < 0 ? 1 : -1));
@@ -90,7 +89,7 @@ export function WorkCarousel() {
       >
         <div
           className="work-carousel-track"
-          style={{ transform: `translate3d(calc(${-active * 100}% + ${dragOffset}px), 0, 0)`, transition: isDragging ? "none" : undefined }}
+          style={{ transform: `translate3d(calc(${-active * 100}% - ${active ? "var(--work-slide-gap)" : "0px"} + ${dragOffset}px), 0, 0)`, transition: isDragging ? "none" : undefined }}
         >
           <section
             className={`work-example work-carousel-slide${active === 0 ? " is-active" : ""}`}
