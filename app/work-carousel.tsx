@@ -155,15 +155,16 @@ export function WorkCarousel() {
         </div>
       </div>
 
-      <div className="work-carousel-controls" aria-label="Project navigation">
-        <button type="button" onClick={() => goTo(active - 1)} disabled={active === 0} aria-label="Previous project">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5 8 12l7 7" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      <span className="chapter-screen-reader-title" aria-live="polite">Project {active + 1} of {projectCount}</span>
+      {active === 0 ? (
+        <button className="work-carousel-arrow work-carousel-arrow-next" type="button" onClick={() => goTo(1)} aria-label="Next project">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 14 0m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
-        <span className="work-carousel-count" aria-live="polite">0{active + 1} <span>/</span> 0{projectCount}</span>
-        <button type="button" onClick={() => goTo(active + 1)} disabled={active === projectCount - 1} aria-label="Next project">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      ) : (
+        <button className="work-carousel-arrow work-carousel-arrow-previous" type="button" onClick={() => goTo(0)} aria-label="Previous project">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
-      </div>
+      )}
     </div>
   );
 }

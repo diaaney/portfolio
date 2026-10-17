@@ -550,6 +550,7 @@ a:focus-visible {
 
 .work-carousel {
   --work-slide-gap: clamp(80px, 9vw, 130px);
+  position: relative;
 }
 
 .work-carousel-viewport {
@@ -585,70 +586,47 @@ a:focus-visible {
 .work-carousel-slide {
   flex: 0 0 100%;
   min-width: 0;
-  opacity: 0.45;
-  transition: opacity 500ms ease;
+  opacity: 0;
+  transition: opacity 360ms ease;
 }
 
-.work-carousel-slide.is-active {
+.work-carousel-slide.is-active,
+.work-carousel-viewport.is-dragging .work-carousel-slide {
   opacity: 1;
 }
 
-.work-carousel-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 46px;
-}
-
-.work-carousel-controls button {
+.work-carousel-arrow {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
   display: grid;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   border: 0;
   padding: 0;
   background: transparent;
   color: #f8edf4;
   cursor: pointer;
-  transition: color 180ms ease, transform 180ms ease;
+  transition: color 180ms ease, opacity 180ms ease;
+  transform: translateY(-50%);
 }
 
-.work-carousel-controls button:not(:disabled):hover {
+.work-carousel-arrow-next { right: -70px; }
+.work-carousel-arrow-previous { left: -70px; }
+
+.work-carousel-arrow:hover {
   color: #ff5faf;
-  transform: translateX(-4px);
 }
 
-.work-carousel-controls button:last-child:not(:disabled):hover {
-  transform: translateX(4px);
-}
-
-.work-carousel-controls button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.work-carousel-controls button:focus-visible {
+.work-carousel-arrow:focus-visible {
   outline: 1px solid #ff5faf;
   outline-offset: 3px;
 }
 
-.work-carousel-controls svg {
-  width: 27px;
-  height: 27px;
-}
-
-.work-carousel-count {
-  min-width: 54px;
-  color: #f8edf4;
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.08em;
-  text-align: center;
-}
-
-.work-carousel-count span {
-  color: #756b78;
+.work-carousel-arrow svg {
+  width: 32px;
+  height: 32px;
 }
 
 .work-example-heading {
@@ -872,6 +850,8 @@ a:focus-visible {
 
 @media (max-width: 980px) {
   .work-carousel-viewport { width: 100%; mask-image: none; }
+  .work-carousel-arrow-next { right: -44px; }
+  .work-carousel-arrow-previous { left: -44px; }
   .site-rail-inverse { display: none; }
   .site-rail {
     position: relative;
@@ -913,7 +893,8 @@ a:focus-visible {
   .activity-section { grid-template-columns: 1fr; gap: 14px; margin-bottom: 55px; }
   .chapter-break { width: min(330px, 100%); margin: 90px auto 75px; padding: 40px 0; }
   .work-examples { margin-bottom: 95px; }
-  .work-carousel-controls { margin-top: 32px; }
+  .work-carousel-arrow-next { right: 0; }
+  .work-carousel-arrow-previous { left: 0; }
   .work-example-heading { margin-bottom: 42px; }
   .work-example-heading h3 { font-size: 22px; }
   .work-example-heading p { margin-top: 22px; font-size: 14px; }
@@ -943,5 +924,5 @@ a:focus-visible {
   .work-carousel-viewport,
   .work-carousel-track,
   .work-carousel-slide,
-  .work-carousel-controls button { transition: none; }
+  .work-carousel-arrow { transition: none; }
 }
