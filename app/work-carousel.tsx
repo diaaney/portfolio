@@ -156,15 +156,24 @@ export function WorkCarousel() {
       </div>
 
       <span className="chapter-screen-reader-title" aria-live="polite">Project {active + 1} of {projectCount}</span>
-      {active === 0 ? (
-        <button className="work-carousel-arrow work-carousel-arrow-next" type="button" onClick={() => goTo(1)} aria-label="Next project">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m8 5 7 7-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </button>
-      ) : (
-        <button className="work-carousel-arrow work-carousel-arrow-previous" type="button" onClick={() => goTo(0)} aria-label="Previous project">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m16 5-7 7 7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </button>
-      )}
+      <button
+        className={`work-carousel-arrow work-carousel-arrow-next${active === 0 ? " is-visible" : ""}`}
+        type="button"
+        onClick={() => goTo(1)}
+        aria-label="Next project"
+        disabled={active !== 0}
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m8 5 7 7-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </button>
+      <button
+        className={`work-carousel-arrow work-carousel-arrow-previous${active === 1 ? " is-visible" : ""}`}
+        type="button"
+        onClick={() => goTo(0)}
+        aria-label="Previous project"
+        disabled={active !== 1}
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m16 5-7 7 7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </button>
     </div>
   );
 }
