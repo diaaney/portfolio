@@ -17,12 +17,15 @@ const projectCount = 2 + placeholderProjects.length;
 
 export function WorkCarousel() {
   const [active, setActive] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [height, setHeight] = useState<number>();
   const viewport = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
   const slides = useRef<(HTMLElement | null)[]>([]);
   const drag = useRef<{ startX: number; startTime: number; offset: number } | null>(null);
+  const dragFrame = useRef(0);
+
+  useEffect(() => () => cancelAnimationFrame(dragFrame.current), []);
 
   useEffect(() => {
     const slide = slides.current[active];
@@ -35,9 +38,15 @@ export function WorkCarousel() {
     return () => observer.disconnect();
   }, [active]);
 
+  const resetDragOffset = () => {
+    cancelAnimationFrame(dragFrame.current);
+    dragFrame.current = 0;
+    track.current?.style.setProperty("--work-drag-offset", "0px");
+  };
+
   const goTo = (next: number) => {
+    resetDragOffset();
     setActive(Math.max(0, Math.min(projectCount - 1, next)));
-    setDragOffset(0);
   };
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
@@ -54,7 +63,12 @@ export function WorkCarousel() {
     const atEdge = (active === 0 && raw > 0) || (active === projectCount - 1 && raw < 0);
     const offset = atEdge ? raw * 0.24 : raw;
     drag.current.offset = offset;
-    setDragOffset(offset);
+    if (!dragFrame.current) {
+      dragFrame.current = requestAnimationFrame(() => {
+        dragFrame.current = 0;
+        track.current?.style.setProperty("--work-drag-offset", `${drag.current?.offset ?? 0}px`);
+      });
+    }
   };
 
   const finishDrag = () => {
@@ -65,7 +79,7 @@ export function WorkCarousel() {
     if (Math.abs(offset) > Math.min(90, width * 0.16) || quickFlick) {
       goTo(active + (offset < 0 ? 1 : -1));
     } else {
-      setDragOffset(0);
+      resetDragOffset();
     }
     drag.current = null;
     setIsDragging(false);
@@ -92,11 +106,12 @@ export function WorkCarousel() {
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={finishDrag}
-        onPointerCancel={() => { drag.current = null; setDragOffset(0); setIsDragging(false); }}
+        onPointerCancel={() => { drag.current = null; resetDragOffset(); setIsDragging(false); }}
       >
         <div
           className="work-carousel-track"
-          style={{ transform: `translate3d(calc(${-active * 100}%${gapOffset} + ${dragOffset}px), 0, 0)`, transition: isDragging ? "none" : undefined }}
+          ref={track}
+          style={{ transform: `translate3d(calc(${-active * 100}%${gapOffset} + var(--work-drag-offset, 0px)), 0, 0)`, transition: isDragging ? "none" : undefined }}
         >
           <section
             className={`work-example work-carousel-slide${active === 0 ? " is-active" : ""}`}
