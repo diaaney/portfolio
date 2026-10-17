@@ -606,9 +606,10 @@ a:focus-visible {
   border: 0;
   padding: 0;
   background: transparent;
-  color: #f8edf4;
+  color: #fff;
   cursor: pointer;
-  transition: color 180ms ease, opacity 180ms ease;
+  opacity: 0.62;
+  transition: opacity 180ms ease;
   transform: translateY(-50%);
 }
 
@@ -616,17 +617,18 @@ a:focus-visible {
 .work-carousel-arrow-previous { left: -70px; }
 
 .work-carousel-arrow:hover {
-  color: #ff5faf;
+  opacity: 1;
 }
 
 .work-carousel-arrow:focus-visible {
-  outline: 1px solid #ff5faf;
+  opacity: 1;
+  outline: 1px solid #fff;
   outline-offset: 3px;
 }
 
 .work-carousel-arrow svg {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
 
 .work-example-heading {
