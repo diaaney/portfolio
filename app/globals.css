@@ -1183,14 +1183,13 @@ a:focus-visible {
 .cima-tech-pill-linked:hover, .cima-tech-pill-linked:focus-within { border-color: #b7b4bb; color: #fff; }
 .cima-tech-pill-linked a:focus-visible { outline: 1px solid #fff; outline-offset: 3px; }
 .cima-story { width: min(680px, 100%); margin: 0 auto 40px; color: rgb(255 255 255 / 90%); font-size: 16px; letter-spacing: -0.01em; line-height: 1.5; text-align: justify; }
+.cima-story h4, .cima-fun h4 { margin: 0 0 24px; color: #fff; font-size: clamp(25px, 3vw, 32px); font-weight: 600; letter-spacing: -0.055em; line-height: 1.1; text-align: left; }
 .cima-story p { margin: 0; }
 .cima-story p + p { margin-top: 20px; }
 .cima-preview { overflow: hidden; border: 1px solid #363942; border-radius: 16px; background: #14151b; box-shadow: 0 25px 60px rgb(0 0 0 / 30%); }
 .cima-preview video { display: block; width: 100%; height: auto; background: #111; }
 .cima-fun { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 52px; max-width: 700px; margin: 96px auto 0; }
 .cima-fun-copy { min-width: 0; }
-.cima-fun-eyebrow { display: block; margin-bottom: 15px; color: #aaa6ad; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; }
-.cima-fun h4 { margin: 0 0 24px; color: #fff; font-size: clamp(25px, 3vw, 32px); font-weight: 600; letter-spacing: -0.055em; line-height: 1.1; }
 .cima-fun p { margin: 0; color: rgb(255 255 255 / 90%); font-size: 16px; letter-spacing: -0.01em; line-height: 1.5; text-align: left; }
 .cima-fun p + p { margin-top: 22px; }
 

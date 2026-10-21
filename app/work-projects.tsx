@@ -101,6 +101,7 @@ export function CimabotProject() {
       </div>
 
       <div className="cima-story">
+        <h4>first, we made sure it was you.</h4>
         <p>
           Cimabot is the main utility bot for one of UABC&apos;s biggest Discord
           communities, with over 3,000 members. It handles verification, roles,
@@ -123,7 +124,6 @@ export function CimabotProject() {
 
       <div className="cima-fun">
         <div className="cima-fun-copy">
-          <span className="cima-fun-eyebrow">BEYOND VERIFICATION</span>
           <h4>and then we made it fun.</h4>
           <p>
             I also built games and little commands to give people more reasons
