@@ -93,9 +93,9 @@ export function CimabotProject() {
           ))}
         </ul>
         <p>
-          The bot I made for one of UABC&apos;s biggest Discord communities. It helps
-          3,000+ members find their place with roles, levels, voice rooms and the
-          little things that make a busy server feel alive.
+          I built the main utility bot for one of UABC&apos;s biggest Discord
+          communities. It helps 3,000+ members with verification, roles, voice
+          rooms, and fun games.
         </p>
       </div>
 
