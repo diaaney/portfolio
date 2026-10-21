@@ -33,10 +33,28 @@ export default function Home() {
         <FlyingCat />
         <header className="hero">
           <div className="hero-heading">
-            <h1>
-              hey, i&apos;m diane
-              <br />
-              nice to meet you!
+            <h1 aria-label="hey, i'm diane. nice to meet you! hola, soy diane. mucho gusto! salut, je suis diane. enchantée!">
+              <span className="hero-title-line" aria-hidden="true">
+                <span className="hero-title-window hero-title-greeting">
+                  <span className="hero-title-track">
+                    <span>hey, i&apos;m</span>
+                    <span>hola, soy</span>
+                    <span>salut, je suis</span>
+                    <span>hey, i&apos;m</span>
+                  </span>
+                </span>
+                <span className="hero-title-name">diane</span>
+              </span>
+              <span className="hero-title-line" aria-hidden="true">
+                <span className="hero-title-window">
+                  <span className="hero-title-track">
+                    <span>nice to meet you!</span>
+                    <span>mucho gusto!</span>
+                    <span>enchantée!</span>
+                    <span>nice to meet you!</span>
+                  </span>
+                </span>
+              </span>
             </h1>
             <p className="hero-subtitle">
               ml engineering student @ <a href="https://www.uabc.mx/" target="_blank" rel="noopener noreferrer">UABC</a>
