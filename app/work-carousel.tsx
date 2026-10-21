@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { CimabotProject, LumioseProject, RapierProject } from "./work-projects";
+import { CimabotProject, RapierProject } from "./work-projects";
 
 const projects = [
-  { number: "02", name: "Lumiose Studio", Content: LumioseProject },
   { number: "03", name: "Cimabot", Content: CimabotProject },
   { number: "04", name: "Rapier", Content: RapierProject },
 ] as const;

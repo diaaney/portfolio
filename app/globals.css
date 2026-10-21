@@ -1165,6 +1165,15 @@ a:focus-visible {
 /* Cimabot: a recorded walkthrough of the verification flow. */
 .work-project-heading-cimabot h3 { display: flex; min-height: 69px; align-items: center; justify-content: center; }
 .cima-wordmark { display: block; width: 231px; height: auto; }
+.cima-tech-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 650px; margin: 16px auto 0; padding: 0; list-style: none; }
+.cima-tech-pill { display: inline-flex; align-items: center; gap: 7px; min-height: 29px; border: 1px solid rgb(183 180 187 / 45%); border-radius: 999px; padding: 5px 11px; color: #b7b4bb; font-size: 11px; font-weight: 500; line-height: 1; white-space: nowrap; }
+.cima-tech-icon { display: block; width: 14px; height: 14px; flex: none; mask-position: center; mask-repeat: no-repeat; mask-size: contain; }
+.cima-tech-icon-javascript { background: #f7df1e; mask-image: url("/work/tech/javascript.svg"); }
+.cima-tech-icon-sql { background: #6ca8d9; mask-image: url("/work/tech/sql.svg"); }
+.cima-tech-icon-discorddotjs { background: #5865f2; mask-image: url("/work/tech/discorddotjs.svg"); }
+.cima-tech-icon-sapphire { background: #7892dc; mask-image: url("/work/tech/sapphire.svg"); }
+.cima-tech-icon-supabase { background: #3ecf8e; mask-image: url("/work/tech/supabase.svg"); }
+.cima-tech-icon-githubactions { background: #2088ff; mask-image: url("/work/tech/githubactions.svg"); }
 .cima-preview { overflow: hidden; border: 1px solid #363942; border-radius: 16px; background: #14151b; box-shadow: 0 25px 60px rgb(0 0 0 / 30%); }
 .cima-preview video { display: block; width: 100%; height: auto; aspect-ratio: 1314 / 738; background: #111; }
 
