@@ -502,7 +502,7 @@ a:focus-visible {
 }
 
 .activity-day-outside {
-  visibility: hidden;
+  pointer-events: none;
 }
 
 .activity-day.activity-level-1,

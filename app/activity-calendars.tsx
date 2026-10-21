@@ -108,7 +108,7 @@ function ActivityCard({
             {week.map((day) => {
               const date = dateKey(day);
               const outside = date < start || date > end;
-              const count = days?.[date] ?? 0;
+              const count = outside ? 0 : (days?.[date] ?? 0);
               return (
                 <span
                   className={`activity-day activity-level-${activityLevel(count, kind)}${outside ? " activity-day-outside" : ""}`}
