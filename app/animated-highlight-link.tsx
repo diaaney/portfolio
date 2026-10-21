@@ -7,7 +7,8 @@ type Stroke = {
   top: number;
   width: number;
   height: number;
-  delay: number;
+  enterDelay: number;
+  exitDelay: number;
   duration: number;
 };
 
@@ -40,12 +41,18 @@ export function AnimatedHighlightLink({
             top: rect.top - paragraphRect.top + 2,
             width: rect.width,
             height: rect.height,
-            delay,
+            enterDelay: delay,
+            exitDelay: 0,
             duration,
           };
           delay += duration;
           return stroke;
         });
+      let exitDelay = 0;
+      for (let index = next.length - 1; index >= 0; index--) {
+        next[index].exitDelay = exitDelay;
+        exitDelay += next[index].duration;
+      }
       setStrokes(next);
     };
 
@@ -78,7 +85,8 @@ export function AnimatedHighlightLink({
               top: stroke.top,
               width: stroke.width,
               height: stroke.height,
-              "--stroke-delay": `${stroke.delay}ms`,
+              "--stroke-enter-delay": `${stroke.enterDelay}ms`,
+              "--stroke-exit-delay": `${stroke.exitDelay}ms`,
               "--stroke-duration": `${stroke.duration}ms`,
             } as React.CSSProperties}
           />

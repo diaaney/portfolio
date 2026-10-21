@@ -281,12 +281,13 @@ a:focus-visible {
   background-repeat: no-repeat;
   background-size: max(100%, 540px) 100%;
   clip-path: inset(0 100% 0 0);
-  transition: clip-path var(--stroke-duration) linear var(--stroke-delay);
+  transition: clip-path var(--stroke-duration) linear var(--stroke-exit-delay);
 }
 
 .intro-easter-egg:hover + .intro-easter-egg-strokes .intro-easter-egg-stroke,
 .intro-easter-egg:focus-visible + .intro-easter-egg-strokes .intro-easter-egg-stroke {
   clip-path: inset(0 0 0 0);
+  transition-delay: var(--stroke-enter-delay);
 }
 
 .intro-first {
