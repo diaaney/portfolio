@@ -2,7 +2,21 @@
 
 import { useEffect, useRef } from "react";
 
-export function CimabotPreview() {
+type CimabotPreviewProps = {
+  src?: string;
+  poster?: string;
+  width?: number;
+  height?: number;
+  label?: string;
+};
+
+export function CimabotPreview({
+  src = "/work/cimabot-verification.mp4",
+  poster = "/work/cimabot-verification-poster.jpg",
+  width = 1314,
+  height = 738,
+  label = "Cimabot email verification demo in Discord",
+}: CimabotPreviewProps = {}) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -32,15 +46,16 @@ export function CimabotPreview() {
     <div className="cima-preview">
       <video
         ref={videoRef}
-        src="/work/cimabot-verification.mp4"
-        poster="/work/cimabot-verification-poster.jpg"
-        width={1314}
-        height={738}
+        src={src}
+        poster={poster}
+        width={width}
+        height={height}
+        style={{ aspectRatio: `${width} / ${height}` }}
         preload="none"
         muted
         loop
         playsInline
-        aria-label="Cimabot email verification demo in Discord"
+        aria-label={label}
       >
         Your browser does not support video playback.
       </video>

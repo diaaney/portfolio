@@ -121,6 +121,21 @@ export function CimabotProject() {
 
       <CimabotPreview />
 
+      <div className="cima-fun">
+        <p>
+          I also added a bunch of fun commands to get people interacting more
+          in the server. The counting game and leaderboard gave everyone a reason
+          to jump in, compete a little, and keep the chat going.
+        </p>
+        <CimabotPreview
+          src="/work/cimabot-games.mp4"
+          poster="/work/cimabot-games-poster.jpg"
+          width={692}
+          height={774}
+          label="Cimabot counting game and leaderboard in Discord"
+        />
+      </div>
+
       <div className="work-project-outro cima-outro">
         <span>discord.js · community tools</span>
         <a href="https://github.com/diaaney/cima" target="_blank" rel="noopener noreferrer">view the repo ↗</a>
