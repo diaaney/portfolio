@@ -263,15 +263,20 @@ a:focus-visible {
 
 .intro-easter-egg {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 3px;
-  transition: text-decoration-color 180ms ease;
+  text-decoration: none;
+  padding-block: 0.12em 0.15em;
+  background-image: url("/illustrations/marker-highlight-active.svg"), url("/illustrations/marker-highlight.svg");
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 0% 100%, 100% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .intro-easter-egg:hover,
 .intro-easter-egg:focus-visible {
-  text-decoration-color: currentColor;
+  background-size: 100% 100%, 100% 100%;
 }
 
 .intro-first {
@@ -1332,4 +1337,5 @@ a:focus-visible {
   .work-carousel-slide,
   .work-carousel-arrow,
   .work-carousel-dot span { transition: none; }
+  .intro-easter-egg { transition: none; }
 }
