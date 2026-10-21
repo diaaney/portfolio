@@ -108,10 +108,11 @@ function ActivityCard({
             {week.map((day) => {
               const date = dateKey(day);
               const outside = date < start || date > end;
+              const future = date > end;
               const count = outside ? 0 : (days?.[date] ?? 0);
               return (
                 <span
-                  className={`activity-day activity-level-${activityLevel(count, kind)}`}
+                  className={`activity-day activity-level-${activityLevel(count, kind)}${future ? " activity-day-future" : ""}`}
                   key={date}
                   data-detail={outside ? undefined : `${dayFormatter.format(day)} · ${days ? count : "–"} ${count === 1 ? singularUnit : unit}`}
                   aria-hidden="true"

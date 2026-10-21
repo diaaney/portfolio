@@ -464,6 +464,10 @@ a:focus-visible {
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
+.activity-day-future {
+  visibility: hidden;
+}
+
 .activity-day[data-detail]:hover {
   z-index: 2;
   transform: scale(1.13);
