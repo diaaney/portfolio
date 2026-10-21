@@ -84,11 +84,6 @@ export function CimabotProject() {
         <h3 id="work-03-title">
           <Image className="cima-wordmark" src="/work/cimabot-wordmark.svg" alt="cimabot" width={231} height={58} />
         </h3>
-        <p>
-          I built the main utility bot for one of UABC&apos;s biggest Discord
-          communities. It helps 3,000+ members with verification, roles, voice
-          rooms, and fun games.
-        </p>
         <ul className="cima-tech-list" aria-label="Technologies used">
           {cimaTechnologies.map(({ name, icon }) => (
             <li className="cima-tech-pill" key={icon}>
