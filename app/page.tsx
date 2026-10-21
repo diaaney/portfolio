@@ -61,9 +61,10 @@ export default function Home() {
                 </p>
               </div>
               <p>
-                love shipping apps and new features. i can spend forever designing the
-                ui and working out how the app will work in my head. i started leetcode
-                too, still figuring it out.
+                love shipping apps and new features. i&apos;m a native speaker of spanish
+                and english, and i started learning french a few months ago. once i&apos;m
+                comfortable with it, i&apos;d love to learn russian or chinese. i started
+                leetcode too, still figuring it out.
               </p>
             </div>
 
