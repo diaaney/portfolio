@@ -218,10 +218,6 @@ a:focus-visible {
   white-space: nowrap;
 }
 
-.hero-title-line:first-child {
-  transform: translateX(-0.35em);
-}
-
 .hero-title-window {
   display: grid;
   width: max-content;
@@ -251,6 +247,10 @@ a:focus-visible {
 
 .hero-title-greeting .hero-title-phrase {
   text-align: right;
+}
+
+.hero-title-greeting .hero-title-phrase:nth-child(3) {
+  letter-spacing: -0.05em;
 }
 
 .hero-title-line:not(:first-child) .hero-title-phrase {

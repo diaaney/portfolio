@@ -33,12 +33,12 @@ export default function Home() {
         <FlyingCat />
         <header className="hero">
           <div className="hero-heading">
-            <h1 aria-label="hey, i'm diane. nice to meet you! hola, soy diane. mucho gusto! salut, c'est diane. enchantée!">
+            <h1 aria-label="hello, i'm diane. nice to meet you! hola, soy diane. mucho gusto! moi, c'est diane. enchantée!">
               <span className="hero-title-line" aria-hidden="true">
                 <span className="hero-title-window hero-title-greeting">
-                  <span className="hero-title-phrase">hey, i&apos;m</span>
+                  <span className="hero-title-phrase">hello, i&apos;m</span>
                   <span className="hero-title-phrase">hola, soy</span>
-                  <span className="hero-title-phrase">salut, c&apos;est</span>
+                  <span className="hero-title-phrase">moi, c&apos;est</span>
                 </span>
                 <span className="hero-title-name">diane</span>
               </span>
