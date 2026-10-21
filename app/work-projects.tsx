@@ -91,11 +91,31 @@ export function CimabotProject() {
               {name}
             </li>
           ))}
+          <li className="cima-tech-pill cima-tech-pill-linked">
+            <a href="https://resend.com/" target="_blank" rel="noopener noreferrer">
+              <span className="cima-tech-icon cima-tech-icon-resend" aria-hidden="true" />
+              Resend
+            </a>
+          </li>
         </ul>
         <p>
           I built the main utility bot for one of UABC&apos;s biggest Discord
           communities. It helps 3,000+ members with verification, roles, voice
           rooms, and fun games.
+        </p>
+      </div>
+
+      <div className="cima-story">
+        <p>
+          As the Discord community grew, spam and duplicate accounts became a
+          problem. Verification was just a reaction role back then, so we had no
+          way to tell if someone was affiliated with UABC or already had another
+          account in the server.
+        </p>
+        <p>
+          So we built Cimabot around a one-time password (OTP) sent through
+          Resend to an email ending in @uabc.edu.mx. That lets us check university
+          affiliation and keep each email tied to one Discord account.
         </p>
       </div>
 

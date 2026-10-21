@@ -1176,6 +1176,14 @@ a:focus-visible {
 .cima-tech-icon-sapphire { background: #7892dc; mask-image: url("/work/tech/sapphire.svg"); }
 .cima-tech-icon-supabase { background: #3ecf8e; mask-image: url("/work/tech/supabase.svg"); }
 .cima-tech-icon-githubactions { background: #2088ff; mask-image: url("/work/tech/githubactions.svg"); }
+.cima-tech-icon-resend { background: #fdfdfd; mask-image: url("/work/tech/resend.svg"); mask-size: 180%; }
+.cima-tech-pill-linked { padding: 0; }
+.cima-tech-pill-linked a { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: inherit; color: inherit; text-decoration: none; }
+.cima-tech-pill-linked:hover, .cima-tech-pill-linked:focus-within { border-color: #b7b4bb; color: #fff; }
+.cima-tech-pill-linked a:focus-visible { outline: 1px solid #fff; outline-offset: 3px; }
+.cima-story { width: min(680px, 100%); margin: 0 auto 40px; color: rgb(255 255 255 / 90%); font-size: 16px; letter-spacing: -0.01em; line-height: 1.5; text-align: justify; }
+.cima-story p { margin: 0; }
+.cima-story p + p { margin-top: 20px; }
 .cima-preview { overflow: hidden; border: 1px solid #363942; border-radius: 16px; background: #14151b; box-shadow: 0 25px 60px rgb(0 0 0 / 30%); }
 .cima-preview video { display: block; width: 100%; height: auto; aspect-ratio: 1314 / 738; background: #111; }
 
@@ -1296,6 +1304,7 @@ a:focus-visible {
   .work-project-heading p { font-size: 14px; }
   .work-project-heading-cimabot h3 { min-height: 54px; }
   .cima-wordmark { width: 179px; }
+  .cima-story { font-size: 15px; }
   .work-project-heading-rapier h3 { font-size: 39px; }
   .lumiose-stage-body { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
   .lumiose-brief { min-height: 0; padding: 14px; }
