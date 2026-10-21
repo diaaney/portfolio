@@ -30,10 +30,6 @@ export function CimabotPreview() {
 
   return (
     <div className="cima-preview">
-      <div className="cima-preview-top">
-        <span><i /> cimabot / in action</span>
-        <span>01 / email verification</span>
-      </div>
       <video
         ref={videoRef}
         src="/work/cimabot-verification.mp4"
@@ -44,15 +40,10 @@ export function CimabotPreview() {
         muted
         loop
         playsInline
-        controls
         aria-label="Cimabot email verification demo in Discord"
       >
         Your browser does not support video playback.
       </video>
-      <div className="cima-preview-bottom">
-        <span>from welcome to verified</span>
-        <span>19 sec / walkthrough</span>
-      </div>
     </div>
   );
 }

@@ -1166,14 +1166,7 @@ a:focus-visible {
 .work-project-heading-cimabot h3 { display: flex; min-height: 69px; align-items: center; justify-content: center; }
 .cima-wordmark { display: block; width: 231px; height: auto; }
 .cima-preview { overflow: hidden; border: 1px solid #363942; border-radius: 16px; background: #14151b; box-shadow: 0 25px 60px rgb(0 0 0 / 30%); }
-.cima-preview-top,
-.cima-preview-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 17px; color: #a9abb5; font-size: 10px; letter-spacing: 0.04em; }
-.cima-preview-top { border-bottom: 1px solid #2f313a; text-transform: uppercase; }
-.cima-preview-top span:first-child { display: inline-flex; align-items: center; gap: 8px; color: #e5e8e9; font-weight: 700; }
-.cima-preview-top i { width: 7px; height: 7px; border-radius: 50%; background: #a8efba; }
 .cima-preview video { display: block; width: 100%; height: auto; aspect-ratio: 1314 / 738; background: #111; }
-.cima-preview-bottom { border-top: 1px solid #2f313a; }
-.cima-preview-bottom span:last-child { color: #a8efba; }
 
 /* Rapier: a typographic combat poster. */
 .work-project-heading-rapier h3 { font-family: Impact, "Arial Narrow", sans-serif; font-size: clamp(38px, 5vw, 54px); font-weight: 400; letter-spacing: 0.015em; line-height: 0.98; text-transform: uppercase; }
@@ -1302,7 +1295,6 @@ a:focus-visible {
   .lumiose-direction { min-height: 112px; padding: 9px; }
   .lumiose-direction-visual { inset: 28px 9px 9px; }
   .lumiose-stage-footer { flex-wrap: wrap; gap: 4px; padding: 10px 13px; }
-  .cima-preview-top, .cima-preview-bottom { padding: 10px 12px; font-size: 9px; }
   .rapier-stage { height: 355px; }
   .rapier-stage-center strong { font-size: clamp(72px, 17vw, 100px); }
   .rapier-stage-bottom { flex-wrap: wrap; gap: 8px 14px; padding: 13px; font-size: 9px; }
