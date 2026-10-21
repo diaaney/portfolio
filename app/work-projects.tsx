@@ -26,7 +26,7 @@ export function LumioseProject() {
         <p>
           I built the multi-tenant panel behind Lumiose. Now I&apos;m working on a studio
           that takes a client&apos;s brief and makes four previews of the page and
-          each piece, from the header to the footer. They pick the direction we build from.
+          each piece, from the header to the footer. They pick the direction I build from.
         </p>
       </div>
 
@@ -39,7 +39,7 @@ export function LumioseProject() {
         <div className="lumiose-stage-body">
           <div className="lumiose-brief">
             <span className="lumiose-mini-label">THE BRIEF</span>
-            <strong>First, tell us what you&apos;re imagining.</strong>
+            <strong>First, tell me what you&apos;re imagining.</strong>
             <p>A place for the client&apos;s story, references, needs and the feeling they want their site to have.</p>
             <div className="lumiose-brief-lines" aria-hidden="true"><i /><i /><i /></div>
             <span className="lumiose-brief-bottom">client space / 001</span>
@@ -101,7 +101,7 @@ export function CimabotProject() {
       </div>
 
       <div className="cima-story">
-        <h4>first, we made sure it was you.</h4>
+        <h4>first, i fixed verification.</h4>
         <p>
           Cimabot is the main utility bot for one of UABC&apos;s biggest Discord
           communities, with over 3,000 members. It handles verification, roles,
@@ -109,13 +109,13 @@ export function CimabotProject() {
         </p>
         <p>
           As the Discord community grew, spam and duplicate accounts became a
-          problem. Verification was just a reaction role back then, so we had no
+          problem. Verification was just a reaction role back then, so I had no
           way to tell if someone was affiliated with UABC or already had another
           account in the server.
         </p>
         <p>
-          So we built Cimabot around a one-time password (OTP) sent through
-          Resend to an email ending in @uabc.edu.mx. That lets us check university
+          So I built Cimabot around a one-time password (OTP) sent through
+          Resend to an email ending in @uabc.edu.mx. That lets me check university
           affiliation and keep each email tied to one Discord account.
         </p>
       </div>
@@ -124,7 +124,7 @@ export function CimabotProject() {
 
       <div className="cima-fun">
         <div className="cima-fun-copy">
-          <h4>and then we made it fun.</h4>
+          <h4>and then i made it fun.</h4>
           <p>
             I also built games and little commands to give people more reasons
             to hang out and interact in the server.

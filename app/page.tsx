@@ -56,7 +56,7 @@ export default function Home() {
                 <p>
                   20, based in baja california, and in my second year of uni. i started
                   lumiose labs because i wanted to learn by making real things. right now
-                  we are building a web design agency for local businesses and some
+                  i&apos;m building a web design agency for local businesses and some
                   discord tools.
                 </p>
               </div>
