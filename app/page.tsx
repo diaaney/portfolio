@@ -70,8 +70,16 @@ export default function Home() {
               outside of coding, i love shooters. i played a lot of valorant and even
               made it to radiant o.o. these days i mostly play cs and league (i suck
               at both). i also love decorating discord communities and making bots
-              for them. and I LOVE CROISSANTS and coffee. i would love to be
-              french, but i am chinese. you met me at a very chinese time in my life.
+              for them. and I LOVE CROISSANTS and coffee.{" "}
+              <a
+                className="intro-easter-egg"
+                href="https://www.tiktok.com/@santeluca/video/7691252880585526550"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                i would love to be french, but i am chinese. you met me at a very
+                chinese time in my life.
+              </a>
             </p>
           </div>
         </header>

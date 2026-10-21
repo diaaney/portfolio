@@ -261,6 +261,19 @@ a:focus-visible {
   line-height: 1.5;
 }
 
+.intro-easter-egg {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 180ms ease;
+}
+
+.intro-easter-egg:hover,
+.intro-easter-egg:focus-visible {
+  text-decoration-color: currentColor;
+}
+
 .intro-first {
   position: relative;
 }
