@@ -253,6 +253,8 @@ a:focus-visible {
 }
 
 .intro-personal {
+  position: relative;
+  isolation: isolate;
   max-width: 680px;
   margin: 0 auto;
   color: rgb(255 255 255 / 90%);
@@ -264,19 +266,29 @@ a:focus-visible {
 .intro-easter-egg {
   color: inherit;
   text-decoration: none;
-  padding-block: 0.12em 0.15em;
-  background-image: url("/illustrations/marker-highlight.svg");
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 0% 100%;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  transition: background-size 520ms ease-out;
 }
 
-.intro-easter-egg:hover,
-.intro-easter-egg:focus-visible {
+.intro-easter-egg-strokes {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.intro-easter-egg-stroke {
+  position: absolute;
+  background-image: url("/illustrations/marker-highlight.svg");
+  background-repeat: no-repeat;
   background-size: 100% 100%;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 180ms linear;
+}
+
+.intro-easter-egg:hover + .intro-easter-egg-strokes .intro-easter-egg-stroke,
+.intro-easter-egg:focus-visible + .intro-easter-egg-strokes .intro-easter-egg-stroke {
+  clip-path: inset(0 0 0 0);
+  transition-duration: var(--stroke-duration);
+  transition-delay: var(--stroke-delay);
 }
 
 .intro-first {
@@ -1337,5 +1349,5 @@ a:focus-visible {
   .work-carousel-slide,
   .work-carousel-arrow,
   .work-carousel-dot span { transition: none; }
-  .intro-easter-egg { transition: none; }
+  .intro-easter-egg-stroke { transition: none; }
 }

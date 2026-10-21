@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ActivityCalendars } from "./activity-calendars";
+import { AnimatedHighlightLink } from "./animated-highlight-link";
 import { AnimatedTitle } from "./animated-title";
 import { FlyingCat } from "./flying-cat";
 import { GearSlide } from "./gear-slide";
@@ -71,15 +72,10 @@ export default function Home() {
               made it to radiant o.o. these days i mostly play cs and league (i suck
               at both). i also love decorating discord communities and making bots
               for them. and I LOVE CROISSANTS and coffee.{" "}
-              <a
-                className="intro-easter-egg"
-                href="https://www.tiktok.com/@santeluca/video/7691252880585526550"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <AnimatedHighlightLink href="https://www.tiktok.com/@santeluca/video/7691252880585526550">
                 i would love to be french, but i am chinese. you met me at a very
                 chinese time in my life.
-              </a>
+              </AnimatedHighlightLink>
             </p>
           </div>
         </header>
