@@ -33,26 +33,20 @@ export default function Home() {
         <FlyingCat />
         <header className="hero">
           <div className="hero-heading">
-            <h1 aria-label="hey, i'm diane. nice to meet you! hola, soy diane. mucho gusto! salut, je suis diane. enchantée!">
+            <h1 aria-label="hey, i'm diane. nice to meet you! hola, soy diane. mucho gusto! salut, c'est diane. enchantée!">
               <span className="hero-title-line" aria-hidden="true">
                 <span className="hero-title-window hero-title-greeting">
-                  <span className="hero-title-track">
-                    <span>hey, i&apos;m</span>
-                    <span>hola, soy</span>
-                    <span>salut, je suis</span>
-                    <span>hey, i&apos;m</span>
-                  </span>
+                  <span className="hero-title-phrase">hey, i&apos;m</span>
+                  <span className="hero-title-phrase">hola, soy</span>
+                  <span className="hero-title-phrase">salut, c&apos;est</span>
                 </span>
                 <span className="hero-title-name">diane</span>
               </span>
               <span className="hero-title-line" aria-hidden="true">
                 <span className="hero-title-window">
-                  <span className="hero-title-track">
-                    <span>nice to meet you!</span>
-                    <span>mucho gusto!</span>
-                    <span>enchantée!</span>
-                    <span>nice to meet you!</span>
-                  </span>
+                  <span className="hero-title-phrase">nice to meet you!</span>
+                  <span className="hero-title-phrase">mucho gusto!</span>
+                  <span className="hero-title-phrase">enchantée!</span>
                 </span>
               </span>
             </h1>

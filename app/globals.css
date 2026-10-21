@@ -218,38 +218,66 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+.hero-title-line:first-child {
+  transform: translateX(-0.35em);
+}
+
 .hero-title-window {
-  display: block;
-  height: 1.3em;
-  overflow: hidden;
-}
-
-.hero-title-track {
-  display: flex;
+  display: grid;
   width: max-content;
-  flex-direction: column;
-  animation: hero-language-slide 12s ease-in-out infinite;
-}
-
-.hero-title-track > span {
-  display: block;
-  height: 1.3em;
   line-height: 1.3;
 }
 
-.hero-title-greeting .hero-title-track > span {
+.hero-title-phrase {
+  grid-area: 1 / 1;
+  opacity: 0;
+  animation-duration: 12s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.hero-title-phrase:first-child {
+  opacity: 1;
+  animation-name: hero-phrase-english;
+}
+
+.hero-title-phrase:nth-child(2) {
+  animation-name: hero-phrase-spanish;
+}
+
+.hero-title-phrase:nth-child(3) {
+  animation-name: hero-phrase-french;
+}
+
+.hero-title-greeting .hero-title-phrase {
   text-align: right;
+}
+
+.hero-title-line:not(:first-child) .hero-title-phrase {
+  text-align: center;
 }
 
 .hero-title-name {
   margin-left: 0.22em;
 }
 
-@keyframes hero-language-slide {
-  0%, 24% { transform: translateY(0); }
-  33.33%, 57.33% { transform: translateY(-25%); }
-  66.66%, 90.66% { transform: translateY(-50%); }
-  100% { transform: translateY(-75%); }
+@keyframes hero-phrase-english {
+  0%, 24% { opacity: 1; transform: translateY(0); }
+  27.5% { opacity: 0; transform: translateY(-0.4em); }
+  93.5% { opacity: 0; transform: translateY(0.4em); }
+  97%, 100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-phrase-spanish {
+  0%, 27.5% { opacity: 0; transform: translateY(0.4em); }
+  31%, 57% { opacity: 1; transform: translateY(0); }
+  60.5%, 100% { opacity: 0; transform: translateY(-0.4em); }
+}
+
+@keyframes hero-phrase-french {
+  0%, 60.5% { opacity: 0; transform: translateY(0.4em); }
+  64%, 90% { opacity: 1; transform: translateY(0); }
+  93.5%, 100% { opacity: 0; transform: translateY(-0.4em); }
 }
 
 .hero-subtitle {
@@ -1378,7 +1406,7 @@ a:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-title-track { animation: none; }
+  .hero-title-phrase { animation: none; }
   .hand-strip { animation: none; }
   .activity-day { transition: none; }
   .flying-cat-sprite { animation: none; }
