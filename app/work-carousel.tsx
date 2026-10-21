@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { CimabotProject, RapierProject } from "./work-projects";
+import { CimabotProject, MoreProjectsNote } from "./work-projects";
 
 const projects = [
   { number: "03", name: "Cimabot", Content: CimabotProject },
-  { number: "04", name: "Rapier", Content: RapierProject },
+  { number: "04", name: "More projects soon", Content: MoreProjectsNote },
 ] as const;
 
 const projectCount = projects.length;

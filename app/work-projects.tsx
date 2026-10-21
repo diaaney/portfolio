@@ -151,6 +151,21 @@ export function CimabotProject() {
   );
 }
 
+export function MoreProjectsNote() {
+  return (
+    <div className="work-more-projects">
+      <span className="work-more-projects-symbol" aria-hidden="true">✳</span>
+      <span className="work-project-eyebrow">a little note</span>
+      <h3 id="work-04-title">more projects<br />are coming<span>.</span></h3>
+      <p>
+        i&apos;ve got more projects, i&apos;m just making their pages look real cute
+        before i show them here.
+      </p>
+    </div>
+  );
+}
+
+// Kept for when Rapier is ready to return to the carousel.
 export function RapierProject() {
   return (
     <>
