@@ -464,7 +464,7 @@ a:focus-visible {
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
-.activity-day:not(.activity-day-outside):hover {
+.activity-day[data-detail]:hover {
   z-index: 2;
   transform: scale(1.13);
   box-shadow: 0 0 0 1px var(--activity-accent);
@@ -499,10 +499,6 @@ a:focus-visible {
   right: 0;
   left: auto;
   transform: none;
-}
-
-.activity-day-outside {
-  pointer-events: none;
 }
 
 .activity-day.activity-level-1,
