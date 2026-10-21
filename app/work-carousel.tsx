@@ -47,7 +47,7 @@ export function WorkCarousel() {
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
-    if ((event.target as HTMLElement).closest("a, button")) return;
+    if ((event.target as HTMLElement).closest("a, button, video")) return;
     event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = { startX: event.clientX, startTime: performance.now(), offset: 0 };

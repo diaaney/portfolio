@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CimabotPreview } from "./cimabot-preview";
 
 const directions = [
   { name: "01 / editorial", tone: "editorial" },
@@ -82,39 +83,7 @@ export function CimabotProject() {
         </p>
       </div>
 
-      <div className="cima-stage" aria-label="Concept view of the Cimabot community experience">
-        <div className="cima-server-rail" aria-hidden="true">
-          <span className="cima-server-home">⌂</span>
-          <span className="cima-server-active"><Image src="/work/cimabot-avatar.png" alt="" width={80} height={80} /></span>
-          <span className="cima-server-ghost">+</span>
-        </div>
-        <div className="cima-channels">
-          <div className="cima-server-name">UABC <span>⌄</span></div>
-          <span className="cima-channel-heading">CAMPUS</span>
-          <span className="cima-channel"># general</span>
-          <span className="cima-channel is-selected"># empieza-aquí</span>
-          <span className="cima-channel"># dudas</span>
-          <span className="cima-channel-heading">HANGOUT</span>
-          <span className="cima-channel">◖  sala de estudio</span>
-          <span className="cima-channel">◖  voz libre</span>
-          <div className="cima-channel-user"><span>c</span> cimabot <i>●</i></div>
-        </div>
-        <div className="cima-chat">
-          <div className="cima-chat-top"># <strong>empieza-aquí</strong><span>community, organized</span></div>
-          <div className="cima-chat-content">
-            <div className="cima-welcome-mark"><Image src="/work/cimabot-avatar.png" alt="" width={112} height={112} /></div>
-            <span className="cima-mini-label">HEY, WELCOME IN</span>
-            <strong>there&apos;s room for everyone here.</strong>
-            <p>Get your roles, jump into a voice room, meet your people. Cima keeps the small stuff running in the background.</p>
-            <div className="cima-actions">
-              <span><i>✦</i> pick your roles</span>
-              <span><i>◖</i> make a room</span>
-              <span><i>↗</i> level up</span>
-            </div>
-          </div>
-          <div className="cima-chat-input" aria-hidden="true">Message #empieza-aquí <span>☺</span></div>
-        </div>
-      </div>
+      <CimabotPreview />
 
       <div className="work-project-outro cima-outro">
         <span>discord.js · community tools</span>

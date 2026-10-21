@@ -1162,38 +1162,18 @@ a:focus-visible {
 .lumiose-stage-footer { gap: 10px; border-top: 1px solid #d4ccd1; padding: 11px 20px; color: #817781; font-size: 9px; }
 .lumiose-stage-footer b { padding: 0 4px; color: #aa74a2; font-weight: 600; }
 
-/* Cimabot: a Discord-inspired concept, using the bot's actual avatar. */
+/* Cimabot: a recorded walkthrough of the verification flow. */
 .work-project-heading-cimabot h3 { display: flex; min-height: 69px; align-items: center; justify-content: center; }
 .cima-wordmark { display: block; width: 231px; height: auto; }
-.cima-stage { display: grid; grid-template-columns: 53px 165px minmax(0, 1fr); height: 392px; overflow: hidden; border: 1px solid #34384b; border-radius: 18px; background: #20232e; box-shadow: 0 25px 60px rgb(0 0 0 / 30%); color: #eff0f4; }
-.cima-server-rail { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 14px 0; background: #191c27; }
-.cima-server-home, .cima-server-ghost { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 11px; background: #313644; color: #babecd; font-size: 22px; }
-.cima-server-active { position: relative; display: block; width: 38px; height: 38px; overflow: hidden; border: 2px solid #a9e5bb; border-radius: 13px; }
-.cima-server-active img { width: 100%; height: 100%; object-fit: cover; }
-.cima-server-ghost { color: #a9e5bb; }
-.cima-channels { position: relative; padding: 17px 9px; background: #282c39; }
-.cima-server-name { display: flex; justify-content: space-between; padding: 0 10px 19px; border-bottom: 1px solid #3a3f4f; font-size: 12px; font-weight: 800; letter-spacing: 0.03em; }
-.cima-channel-heading { display: block; margin: 22px 10px 7px; color: #868d9d; font-size: 9px; font-weight: 700; letter-spacing: 0.09em; }
-.cima-channel { display: block; padding: 7px 10px; border-radius: 5px; color: #a6abba; font-size: 11px; }
-.cima-channel.is-selected { background: #3c4255; color: #f2f3f5; }
-.cima-channel-user { position: absolute; right: 0; bottom: 0; left: 0; height: 49px; padding: 11px; background: #222631; font-size: 10px; }
-.cima-channel-user span { display: inline-grid; width: 25px; height: 25px; margin-right: 5px; place-items: center; border-radius: 50%; background: #90c9a3; color: #1c2b23; font-weight: 800; }
-.cima-channel-user i { color: #a8efba; font-size: 8px; font-style: normal; }
-.cima-chat { display: flex; min-width: 0; flex-direction: column; }
-.cima-chat-top { height: 49px; border-bottom: 1px solid #3a3f4f; padding: 17px 19px; color: #b3b8c7; font-size: 12px; }
-.cima-chat-top strong { color: #f2f3f6; font-weight: 700; }
-.cima-chat-top span { margin-left: 14px; padding-left: 12px; border-left: 1px solid #51576a; color: #8790a3; font-size: 10px; }
-.cima-chat-content { flex: 1; padding: 23px 25px 15px; }
-.cima-welcome-mark { width: 66px; height: 66px; overflow: hidden; border-radius: 17px; box-shadow: 0 0 0 1px #456d5a; }
-.cima-welcome-mark img { width: 100%; height: 100%; object-fit: cover; }
-.cima-mini-label { display: block; margin-top: 16px; color: #a8efba; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; }
-.cima-chat-content > strong { display: block; margin-top: 7px; font-size: 21px; letter-spacing: -0.055em; }
-.cima-chat-content > p { max-width: 390px; margin: 8px 0 17px; color: #aeb4c3; font-size: 11px; line-height: 1.5; }
-.cima-actions { display: flex; flex-wrap: wrap; gap: 7px; }
-.cima-actions span { border: 1px solid #4a5260; border-radius: 7px; padding: 8px 9px; background: #2f3544; color: #e4e8ef; font-size: 9px; }
-.cima-actions i { margin-right: 4px; color: #a8efba; font-style: normal; }
-.cima-chat-input { display: flex; justify-content: space-between; margin: 0 17px 17px; border-radius: 8px; padding: 11px 13px; background: #343a49; color: #929aaa; font-size: 10px; }
-.cima-chat-input span { color: #c7cbd4; font-size: 15px; }
+.cima-preview { overflow: hidden; border: 1px solid #363942; border-radius: 16px; background: #14151b; box-shadow: 0 25px 60px rgb(0 0 0 / 30%); }
+.cima-preview-top,
+.cima-preview-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 17px; color: #a9abb5; font-size: 10px; letter-spacing: 0.04em; }
+.cima-preview-top { border-bottom: 1px solid #2f313a; text-transform: uppercase; }
+.cima-preview-top span:first-child { display: inline-flex; align-items: center; gap: 8px; color: #e5e8e9; font-weight: 700; }
+.cima-preview-top i { width: 7px; height: 7px; border-radius: 50%; background: #a8efba; }
+.cima-preview video { display: block; width: 100%; height: auto; aspect-ratio: 1314 / 738; background: #111; }
+.cima-preview-bottom { border-top: 1px solid #2f313a; }
+.cima-preview-bottom span:last-child { color: #a8efba; }
 
 /* Rapier: a typographic combat poster. */
 .work-project-heading-rapier h3 { font-family: Impact, "Arial Narrow", sans-serif; font-size: clamp(38px, 5vw, 54px); font-weight: 400; letter-spacing: 0.015em; line-height: 0.98; text-transform: uppercase; }
@@ -1322,12 +1302,7 @@ a:focus-visible {
   .lumiose-direction { min-height: 112px; padding: 9px; }
   .lumiose-direction-visual { inset: 28px 9px 9px; }
   .lumiose-stage-footer { flex-wrap: wrap; gap: 4px; padding: 10px 13px; }
-  .cima-stage { grid-template-columns: 43px minmax(0, 1fr); height: 410px; }
-  .cima-channels { display: none; }
-  .cima-chat-top span { display: none; }
-  .cima-chat-content { padding: 20px 16px 12px; }
-  .cima-chat-content > strong { font-size: 19px; }
-  .cima-actions span { padding: 7px; }
+  .cima-preview-top, .cima-preview-bottom { padding: 10px 12px; font-size: 9px; }
   .rapier-stage { height: 355px; }
   .rapier-stage-center strong { font-size: clamp(72px, 17vw, 100px); }
   .rapier-stage-bottom { flex-wrap: wrap; gap: 8px 14px; padding: 13px; font-size: 9px; }
