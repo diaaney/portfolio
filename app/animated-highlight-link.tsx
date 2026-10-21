@@ -34,7 +34,7 @@ export function AnimatedHighlightLink({
       const next = Array.from(range.getClientRects())
         .filter((rect) => rect.width > 0)
         .map((rect) => {
-          const duration = rect.width * 1.65;
+          const duration = rect.width * 1.1;
           const stroke = {
             left: rect.left - paragraphRect.left,
             top: rect.top - paragraphRect.top + 2,
