@@ -122,11 +122,18 @@ export function CimabotProject() {
       <CimabotPreview />
 
       <div className="cima-fun">
-        <p>
-          I also added a bunch of fun commands to get people interacting more
-          in the server. The counting game and leaderboard gave everyone a reason
-          to jump in, compete a little, and keep the chat going.
-        </p>
+        <div className="cima-fun-copy">
+          <span className="cima-fun-eyebrow">BEYOND VERIFICATION</span>
+          <h4>and then we made it fun.</h4>
+          <p>
+            I also built games and little commands to give people more reasons
+            to hang out and interact in the server.
+          </p>
+          <p>
+            The counting game and leaderboard add a bit of friendly competition
+            to the chat, so there&apos;s more to do than just pick a role and leave.
+          </p>
+        </div>
         <CimabotPreview
           src="/work/cimabot-games.mp4"
           poster="/work/cimabot-games-poster.jpg"
