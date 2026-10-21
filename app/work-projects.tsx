@@ -102,6 +102,11 @@ export function CimabotProject() {
 
       <div className="cima-story">
         <p>
+          Cimabot is the main utility bot for one of UABC&apos;s biggest Discord
+          communities, with over 3,000 members. It handles verification, roles,
+          voice rooms, and a few games too.
+        </p>
+        <p>
           As the Discord community grew, spam and duplicate accounts became a
           problem. Verification was just a reaction role back then, so we had no
           way to tell if someone was affiliated with UABC or already had another

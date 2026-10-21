@@ -1163,6 +1163,7 @@ a:focus-visible {
 .lumiose-stage-footer b { padding: 0 4px; color: #aa74a2; font-weight: 600; }
 
 /* Cimabot: a recorded walkthrough of the verification flow. */
+.work-project-heading-cimabot { margin-bottom: 48px; }
 .work-project-heading-cimabot h3 { display: flex; min-height: 69px; align-items: center; justify-content: center; }
 .cima-wordmark { display: block; width: 231px; height: auto; }
 .cima-tech-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 650px; margin: 8px auto 0; padding: 0; list-style: none; }
@@ -1300,6 +1301,7 @@ a:focus-visible {
   .work-placeholder-panel-03 .work-placeholder-shape-two { width: 160px; height: 160px; }
   .work-placeholder-panel-03 .work-placeholder-shape-three { width: 90px; height: 200px; }
   .work-project-heading { margin-bottom: 28px; }
+  .work-project-heading-cimabot { margin-bottom: 40px; }
   .work-project-heading h3 { font-size: 32px; }
   .work-project-heading p { font-size: 14px; }
   .work-project-heading-cimabot h3 { min-height: 54px; }
