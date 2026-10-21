@@ -1,19 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { CimabotProject, LumioseProject, RapierProject } from "./work-projects";
 
-const workCards = [
-  { number: "01", title: "placeholder one", line: "M12 73 C 36 48 69 27 108 67" },
-  { number: "02", title: "placeholder two", line: "M23 57 C 27 17 99 20 98 56 C 98 86 32 85 23 57 Z" },
-  { number: "03", title: "placeholder three", line: "M17 29 H103 M17 73 H103 M60 35 V67 M53 42 L60 35 L67 42 M53 60 L60 67 L67 60" },
+const projects = [
+  { number: "02", name: "Lumiose Studio", Content: LumioseProject },
+  { number: "03", name: "Cimabot", Content: CimabotProject },
+  { number: "04", name: "Rapier", Content: RapierProject },
 ] as const;
 
-const placeholderProjects = [
-  { number: "03", title: "small experiments", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae augue eu arcu volutpat commodo." },
-  { number: "04", title: "in progress", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus posuere orci at libero tempus, sed varius massa dictum." },
-] as const;
-
-const projectCount = 2 + placeholderProjects.length;
+const projectCount = projects.length;
 
 export function WorkCarousel() {
   const [active, setActive] = useState(0);
@@ -51,6 +47,7 @@ export function WorkCarousel() {
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
+    if ((event.target as HTMLElement).closest("a, button")) return;
     event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = { startX: event.clientX, startTime: performance.now(), offset: 0 };
@@ -61,8 +58,7 @@ export function WorkCarousel() {
     if (!drag.current) return;
     const raw = event.clientX - drag.current.startX;
     const atEdge = (active === 0 && raw > 0) || (active === projectCount - 1 && raw < 0);
-    const offset = atEdge ? raw * 0.24 : raw;
-    drag.current.offset = offset;
+    drag.current.offset = atEdge ? raw * 0.24 : raw;
     if (!dragFrame.current) {
       dragFrame.current = requestAnimationFrame(() => {
         dragFrame.current = 0;
@@ -113,97 +109,24 @@ export function WorkCarousel() {
           ref={track}
           style={{ transform: `translate3d(calc(${-active * 100}%${gapOffset} + var(--work-drag-offset, 0px)), 0, 0)`, transition: isDragging ? "none" : undefined }}
         >
-          <section
-            className={`work-example work-carousel-slide${active === 0 ? " is-active" : ""}`}
-            aria-labelledby="work-example-one"
-            aria-hidden={active !== 0}
-            inert={active !== 0}
-            ref={(node) => { slides.current[0] = node; }}
-          >
-            <div className="work-example-heading">
-              <h3 id="work-example-one"><em>“project 01”</em> / visual concepts</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-
-            <div className="work-bento-grid">
-              {workCards.map((card) => (
-                <article className="work-bento-card" key={card.number}>
-                  <div className={`work-bento-visual work-bento-visual-${card.number}`} aria-hidden="true">
-                    <span className="work-bento-index">{card.number} / PLACEHOLDER</span>
-                    <span className="work-bento-shape" />
-                    <span className="work-bento-glass">
-                      <svg viewBox="0 0 120 100" fill="none" aria-hidden="true">
-                        <path d={card.line} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  </div>
-                  <h4>{card.title}</h4>
-                  <p>Lorem ipsum dolor sit amet.</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section
-            className={`work-example work-example-talk work-carousel-slide${active === 1 ? " is-active" : ""}`}
-            aria-labelledby="work-example-two"
-            aria-hidden={active !== 1}
-            inert={active !== 1}
-            ref={(node) => { slides.current[1] = node; }}
-          >
-            <div className="work-example-heading">
-              <h3 id="work-example-two"><em>“project 02”</em> / another direction</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt sapien vel mauris cursus, a placerat mi tempor.</p>
-            </div>
-
-            <div className="work-talk-art" aria-hidden="true">
-              <span className="work-talk-bubble work-talk-bubble-one">...</span>
-              <span className="work-talk-bubble work-talk-bubble-two">?</span>
-              <span className="work-talk-bubble work-talk-bubble-three">!</span>
-              <span className="work-talk-orbit" />
-            </div>
-
-            <div className="work-talk-list">
-              <div className="work-talk-row">
-                <span><i aria-hidden="true">◻</i> placeholder one</span>
-                <span>Lorem ipsum dolor sit amet</span>
-              </div>
-              <div className="work-talk-row">
-                <span><i aria-hidden="true">◉</i> placeholder two</span>
-                <span>Consectetur adipiscing elit</span>
-              </div>
-            </div>
-          </section>
-
-          {placeholderProjects.map((project, index) => {
-            const slideIndex = index + 2;
-            return (
-              <section
-                className={`work-example work-carousel-slide work-placeholder-project${active === slideIndex ? " is-active" : ""}`}
-                aria-labelledby={`work-example-${project.number}`}
-                aria-hidden={active !== slideIndex}
-                inert={active !== slideIndex}
-                key={project.number}
-                ref={(node) => { slides.current[slideIndex] = node; }}
-              >
-                <div className="work-example-heading">
-                  <h3 id={`work-example-${project.number}`}><em>“project {project.number}”</em> / {project.title}</h3>
-                  <p>{project.description}</p>
-                </div>
-                <div className={`work-placeholder-panel work-placeholder-panel-${project.number}`} aria-hidden="true">
-                  <span className="work-placeholder-index">{project.number} / PLACEHOLDER</span>
-                  <span className="work-placeholder-shape work-placeholder-shape-one" />
-                  <span className="work-placeholder-shape work-placeholder-shape-two" />
-                  <span className="work-placeholder-shape work-placeholder-shape-three" />
-                </div>
-                <p className="work-placeholder-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </section>
-            );
-          })}
+          {projects.map(({ number, Content }, index) => (
+            <section
+              className={`work-example work-carousel-slide work-project-${number}${active === index ? " is-active" : ""}`}
+              aria-labelledby={`work-${number}-title`}
+              aria-hidden={active !== index}
+              inert={active !== index}
+              key={number}
+              ref={(node) => { slides.current[index] = node; }}
+            >
+              <Content />
+            </section>
+          ))}
         </div>
       </div>
 
-      <span className="chapter-screen-reader-title" aria-live="polite">Project {active + 1} of {projectCount}</span>
+      <span className="chapter-screen-reader-title" aria-live="polite">
+        {projects[active].name}, project {active + 1} of {projectCount}
+      </span>
       <button
         className={`work-carousel-arrow work-carousel-arrow-next${active < projectCount - 1 ? " is-visible" : ""}`}
         type="button"
@@ -223,13 +146,13 @@ export function WorkCarousel() {
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m16 5-7 7 7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </button>
       <div className="work-carousel-dots" role="group" aria-label="Choose a project">
-        {Array.from({ length: projectCount }, (_, index) => (
+        {projects.map((project, index) => (
           <button
             className={`work-carousel-dot${active === index ? " is-active" : ""}`}
             type="button"
-            key={index}
+            key={project.number}
             onClick={() => goTo(index)}
-            aria-label={`Go to project ${index + 1}`}
+            aria-label={`Go to ${project.name}`}
             aria-current={active === index ? "true" : undefined}
           ><span /></button>
         ))}

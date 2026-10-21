@@ -963,6 +963,230 @@ a:focus-visible {
   font-style: normal;
 }
 
+.work-project-heading {
+  max-width: 650px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.work-project-eyebrow {
+  display: block;
+  margin-bottom: 15px;
+  color: #aaa6ad;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.work-project-heading h3 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 43px);
+  font-weight: 600;
+  letter-spacing: -0.065em;
+  line-height: 1.12;
+}
+
+.work-project-heading p {
+  max-width: 580px;
+  margin: 22px auto 0;
+  color: #b7b4bb;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.work-project-outro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 17px;
+  color: #8f8c94;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+.work-project-outro a {
+  color: #d9d6dc;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.work-project-outro a:hover,
+.work-project-outro a:focus-visible { color: #fff; }
+
+/* Lumiose Studio: a small workspace for briefs and four visual directions. */
+.work-project-heading-lumiose h3 em {
+  color: #e7d5ef;
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+
+.lumiose-stage {
+  overflow: hidden;
+  border: 1px solid #a89ea7;
+  border-radius: 20px;
+  background: #eae6e1;
+  box-shadow: 0 25px 60px rgb(0 0 0 / 32%);
+  color: #27242d;
+}
+
+.lumiose-stage-bar,
+.lumiose-stage-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lumiose-stage-bar {
+  height: 45px;
+  border-bottom: 1px solid #d4ccd1;
+  padding: 0 20px;
+  background: #f4f0ed;
+}
+
+.lumiose-wordmark { font-size: 14px; font-weight: 800; letter-spacing: -0.065em; }
+.lumiose-wordmark span { color: #94848e; font-weight: 500; }
+.lumiose-stage-status { color: #7a727a; font-size: 10px; }
+.lumiose-stage-status i { display: inline-block; width: 7px; height: 7px; margin-right: 5px; border-radius: 50%; background: #8aaf78; }
+
+.lumiose-stage-body {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+
+.lumiose-brief {
+  display: flex;
+  min-height: 335px;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #d4cbd2;
+  border-radius: 14px;
+  padding: 19px 17px 16px;
+  background: #f8f5f1;
+}
+
+.lumiose-mini-label {
+  color: #8c778f;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.lumiose-brief strong {
+  margin-top: 17px;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1.12;
+}
+
+.lumiose-brief p { margin: 14px 0 0; color: #7b7379; font-size: 11px; line-height: 1.45; }
+.lumiose-brief-lines { display: grid; width: 100%; gap: 7px; margin-top: 21px; }
+.lumiose-brief-lines i { height: 5px; border-radius: 8px; background: #ded8d8; }
+.lumiose-brief-lines i:nth-child(2) { width: 84%; }
+.lumiose-brief-lines i:nth-child(3) { width: 58%; }
+.lumiose-brief-bottom { margin-top: auto; color: #a49aa2; font-size: 9px; }
+
+.lumiose-direction-area { min-width: 0; }
+.lumiose-direction-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 4px 3px 13px; }
+.lumiose-direction-title > span:last-child { color: #59525a; font-family: Georgia, serif; font-size: 15px; font-style: italic; }
+.lumiose-direction-title b { color: #9f6e9c; font-family: Inter, sans-serif; font-style: normal; font-weight: 400; }
+.lumiose-direction-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+
+.lumiose-direction {
+  position: relative;
+  min-height: 143px;
+  overflow: hidden;
+  border: 1px solid rgb(40 30 40 / 12%);
+  border-radius: 11px;
+  padding: 12px;
+}
+
+.lumiose-direction-name { position: relative; z-index: 1; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; }
+.lumiose-direction-visual { position: absolute; inset: 36px 13px 13px; overflow: hidden; }
+.lumiose-direction-visual i { position: absolute; display: block; }
+
+.lumiose-direction-editorial { background: #ddd0c3; }
+.lumiose-direction-editorial .lumiose-direction-visual { border-top: 1px solid #574943; }
+.lumiose-direction-editorial i:first-child { top: 12px; left: 0; width: 70%; height: 36px; background: #b25847; }
+.lumiose-direction-editorial i:nth-child(2) { right: 3px; bottom: 0; width: 49%; height: 53px; border-radius: 50% 50% 0 0; background: #72675b; }
+.lumiose-direction-editorial i:last-child { bottom: 8px; left: 0; width: 31%; height: 4px; background: #4e413d; }
+
+.lumiose-direction-playful { background: #d5c7e2; }
+.lumiose-direction-playful i:first-child { top: 4px; left: 10%; width: 80px; height: 80px; border-radius: 50%; background: #f9f389; }
+.lumiose-direction-playful i:nth-child(2) { right: 7%; bottom: -15px; width: 83px; height: 83px; border-radius: 22px; background: #8969a9; transform: rotate(23deg); }
+.lumiose-direction-playful i:last-child { bottom: 12px; left: 14%; width: 33px; height: 33px; border: 7px solid #f4eff6; border-radius: 50%; }
+
+.lumiose-direction-minimal { background: #f5f1ec; }
+.lumiose-direction-minimal i:first-child { top: 12px; left: 6%; width: 55%; height: 8px; background: #232228; }
+.lumiose-direction-minimal i:nth-child(2) { top: 42px; left: 6%; width: 76%; height: 1px; background: #8b8788; box-shadow: 0 11px #b9b5b5, 0 22px #b9b5b5; }
+.lumiose-direction-minimal i:last-child { right: 7%; bottom: 0; width: 30%; height: 13px; background: #232228; }
+
+.lumiose-direction-vivid { background: #c5e0d2; }
+.lumiose-direction-vivid i:first-child { top: 4px; right: 1%; width: 84px; height: 84px; border-radius: 50%; background: #ff6d56; }
+.lumiose-direction-vivid i:nth-child(2) { bottom: -10px; left: 0; width: 68%; height: 64px; background: #2569c9; transform: skewX(-13deg); }
+.lumiose-direction-vivid i:last-child { top: 20px; left: 12%; width: 45%; height: 7px; background: #fff6ce; box-shadow: 0 16px #fff6ce; }
+
+.lumiose-stage-footer { gap: 10px; border-top: 1px solid #d4ccd1; padding: 11px 20px; color: #817781; font-size: 9px; }
+.lumiose-stage-footer b { padding: 0 4px; color: #aa74a2; font-weight: 600; }
+
+/* Cimabot: a Discord-inspired concept, using the bot's actual avatar. */
+.work-project-heading-cimabot h3 { font-size: clamp(41px, 6vw, 62px); font-weight: 800; letter-spacing: -0.09em; }
+.cima-heading-spark { display: inline-block; margin-left: 6px; color: #a8efba; font-size: 29px; vertical-align: top; }
+.cima-stage { display: grid; grid-template-columns: 53px 165px minmax(0, 1fr); height: 392px; overflow: hidden; border: 1px solid #34384b; border-radius: 18px; background: #20232e; box-shadow: 0 25px 60px rgb(0 0 0 / 30%); color: #eff0f4; }
+.cima-server-rail { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 14px 0; background: #191c27; }
+.cima-server-home, .cima-server-ghost { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 11px; background: #313644; color: #babecd; font-size: 22px; }
+.cima-server-active { position: relative; display: block; width: 38px; height: 38px; overflow: hidden; border: 2px solid #a9e5bb; border-radius: 13px; }
+.cima-server-active img { width: 100%; height: 100%; object-fit: cover; }
+.cima-server-ghost { color: #a9e5bb; }
+.cima-channels { position: relative; padding: 17px 9px; background: #282c39; }
+.cima-server-name { display: flex; justify-content: space-between; padding: 0 10px 19px; border-bottom: 1px solid #3a3f4f; font-size: 12px; font-weight: 800; letter-spacing: 0.03em; }
+.cima-channel-heading { display: block; margin: 22px 10px 7px; color: #868d9d; font-size: 9px; font-weight: 700; letter-spacing: 0.09em; }
+.cima-channel { display: block; padding: 7px 10px; border-radius: 5px; color: #a6abba; font-size: 11px; }
+.cima-channel.is-selected { background: #3c4255; color: #f2f3f5; }
+.cima-channel-user { position: absolute; right: 0; bottom: 0; left: 0; height: 49px; padding: 11px; background: #222631; font-size: 10px; }
+.cima-channel-user span { display: inline-grid; width: 25px; height: 25px; margin-right: 5px; place-items: center; border-radius: 50%; background: #90c9a3; color: #1c2b23; font-weight: 800; }
+.cima-channel-user i { color: #a8efba; font-size: 8px; font-style: normal; }
+.cima-chat { display: flex; min-width: 0; flex-direction: column; }
+.cima-chat-top { height: 49px; border-bottom: 1px solid #3a3f4f; padding: 17px 19px; color: #b3b8c7; font-size: 12px; }
+.cima-chat-top strong { color: #f2f3f6; font-weight: 700; }
+.cima-chat-top span { margin-left: 14px; padding-left: 12px; border-left: 1px solid #51576a; color: #8790a3; font-size: 10px; }
+.cima-chat-content { flex: 1; padding: 23px 25px 15px; }
+.cima-welcome-mark { width: 66px; height: 66px; overflow: hidden; border-radius: 17px; box-shadow: 0 0 0 1px #456d5a; }
+.cima-welcome-mark img { width: 100%; height: 100%; object-fit: cover; }
+.cima-mini-label { display: block; margin-top: 16px; color: #a8efba; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; }
+.cima-chat-content > strong { display: block; margin-top: 7px; font-size: 21px; letter-spacing: -0.055em; }
+.cima-chat-content > p { max-width: 390px; margin: 8px 0 17px; color: #aeb4c3; font-size: 11px; line-height: 1.5; }
+.cima-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.cima-actions span { border: 1px solid #4a5260; border-radius: 7px; padding: 8px 9px; background: #2f3544; color: #e4e8ef; font-size: 9px; }
+.cima-actions i { margin-right: 4px; color: #a8efba; font-style: normal; }
+.cima-chat-input { display: flex; justify-content: space-between; margin: 0 17px 17px; border-radius: 8px; padding: 11px 13px; background: #343a49; color: #929aaa; font-size: 10px; }
+.cima-chat-input span { color: #c7cbd4; font-size: 15px; }
+
+/* Rapier: a typographic combat poster. */
+.work-project-heading-rapier h3 { font-family: Impact, "Arial Narrow", sans-serif; font-size: clamp(38px, 5vw, 54px); font-weight: 400; letter-spacing: 0.015em; line-height: 0.98; text-transform: uppercase; }
+.work-project-heading-rapier h3 em { color: #fa624f; font-style: normal; }
+.rapier-stage { position: relative; display: flex; height: 390px; flex-direction: column; justify-content: space-between; overflow: hidden; border: 1px solid #6b2a2a; border-radius: 14px; background: radial-gradient(ellipse at 50% 48%, #451b19 0, #1d0e12 52%, #0e0a0c 100%); color: #f6e8dc; }
+.rapier-stage-grid { position: absolute; inset: 0; background-image: linear-gradient(#f0715d17 1px, transparent 1px), linear-gradient(90deg, #f0715d17 1px, transparent 1px); background-size: 28px 28px; mask-image: radial-gradient(ellipse, #000 8%, transparent 78%); }
+.rapier-stage-top, .rapier-stage-bottom { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; }
+.rapier-stage-top { padding: 22px 25px; color: #eeb5a9; font-size: 10px; font-weight: 800; letter-spacing: 0.13em; }
+.rapier-stage-center { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-top: -4px; text-align: center; }
+.rapier-stage-kicker { color: #f69380; font-size: 10px; font-weight: 800; letter-spacing: 0.23em; }
+.rapier-stage-center strong { display: block; margin: 7px 0 0; font-family: Impact, "Arial Narrow", sans-serif; font-size: clamp(78px, 15vw, 132px); font-weight: 400; letter-spacing: 0.015em; line-height: 1; text-shadow: 8px 8px 0 #7e3029; }
+.rapier-stage-center strong span { color: #fa654e; }
+.rapier-stage-subtitle { margin-top: 7px; color: #f3c1b6; font-size: 10px; font-weight: 700; letter-spacing: 0.33em; }
+.rapier-target { position: absolute; z-index: -1; top: 50%; left: 50%; width: 320px; height: 320px; border: 1px solid #f46b5345; border-radius: 50%; transform: translate(-50%, -50%); }
+.rapier-target::before, .rapier-target::after { position: absolute; top: 50%; left: 50%; background: #f46b5345; content: ""; transform: translate(-50%, -50%); }
+.rapier-target::before { width: 420px; height: 1px; }
+.rapier-target::after { width: 1px; height: 420px; }
+.rapier-target i:first-child { position: absolute; inset: 48px; border: 1px solid #f46b5355; border-radius: 50%; }
+.rapier-target i:last-child { position: absolute; inset: 115px; border: 1px solid #f46b5370; border-radius: 50%; }
+.rapier-stage-bottom { border-top: 1px solid #9e4c4059; padding: 17px 25px; background: #120a0c9c; color: #edc5bc; font-size: 10px; text-transform: uppercase; }
+.rapier-stage-bottom b { margin-right: 5px; color: #fa6a52; font-size: 9px; }
+
 .hand-title {
   width: 100%;
   aspect-ratio: 976 / 320;
@@ -1035,7 +1259,7 @@ a:focus-visible {
   .work-carousel-dots { margin-top: 30px; }
   .work-carousel-arrow-next { right: 0; }
   .work-carousel-arrow-previous { left: 0; }
-  .work-carousel-arrow { top: 240px; }
+  .work-carousel-arrow { top: 16px; width: 32px; height: 32px; }
   .work-example-heading { margin-bottom: 42px; }
   .work-example-heading h3 { font-size: 22px; }
   .work-example-heading p { margin-top: 22px; font-size: 14px; }
@@ -1054,6 +1278,30 @@ a:focus-visible {
   .work-placeholder-panel-03 .work-placeholder-shape-one,
   .work-placeholder-panel-03 .work-placeholder-shape-two { width: 160px; height: 160px; }
   .work-placeholder-panel-03 .work-placeholder-shape-three { width: 90px; height: 200px; }
+  .work-project-heading { margin-bottom: 28px; }
+  .work-project-heading h3 { font-size: 32px; }
+  .work-project-heading p { font-size: 14px; }
+  .work-project-heading-cimabot h3 { font-size: 48px; }
+  .work-project-heading-rapier h3 { font-size: 39px; }
+  .lumiose-stage-body { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+  .lumiose-brief { min-height: 0; padding: 14px; }
+  .lumiose-brief strong { margin-top: 8px; font-size: 19px; }
+  .lumiose-brief p { margin-top: 7px; }
+  .lumiose-brief-lines, .lumiose-brief-bottom { display: none; }
+  .lumiose-direction-title > span:last-child { font-size: 12px; }
+  .lumiose-direction { min-height: 112px; padding: 9px; }
+  .lumiose-direction-visual { inset: 28px 9px 9px; }
+  .lumiose-stage-footer { flex-wrap: wrap; gap: 4px; padding: 10px 13px; }
+  .cima-stage { grid-template-columns: 43px minmax(0, 1fr); height: 410px; }
+  .cima-channels { display: none; }
+  .cima-chat-top span { display: none; }
+  .cima-chat-content { padding: 20px 16px 12px; }
+  .cima-chat-content > strong { font-size: 19px; }
+  .cima-actions span { padding: 7px; }
+  .rapier-stage { height: 355px; }
+  .rapier-stage-center strong { font-size: clamp(72px, 17vw, 100px); }
+  .rapier-stage-bottom { flex-wrap: wrap; gap: 8px 14px; padding: 13px; font-size: 9px; }
+  .work-project-outro { flex-wrap: wrap; font-size: 10px; }
 }
 
 @media (max-width: 380px) {
