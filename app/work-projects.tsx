@@ -73,7 +73,7 @@ export function CimabotProject() {
       <div className="work-project-heading work-project-heading-cimabot">
         <span className="work-project-eyebrow">03 / DISCORD · COMMUNITY SYSTEMS</span>
         <h3 id="work-03-title">
-          <Image className="cima-wordmark" src="/work/cimabot-wordmark.svg" alt="cimabot" width={229} height={58} />
+          <Image className="cima-wordmark" src="/work/cimabot-wordmark.svg" alt="cimabot" width={231} height={58} />
         </h3>
         <p>
           The bot I made for one of UABC&apos;s biggest Discord communities. It helps
