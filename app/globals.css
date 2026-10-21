@@ -1164,8 +1164,8 @@ a:focus-visible {
 .lumiose-stage-footer b { padding: 0 4px; color: #aa74a2; font-weight: 600; }
 
 /* Cimabot: a Discord-inspired concept, using the bot's actual avatar. */
-.work-project-heading-cimabot h3 { font-size: clamp(41px, 6vw, 62px); font-weight: 800; letter-spacing: -0.09em; }
-.cima-heading-spark { display: inline-block; margin-left: 6px; color: #a8efba; font-size: 29px; vertical-align: top; }
+.work-project-heading-cimabot h3 { display: flex; min-height: 69px; align-items: center; justify-content: center; }
+.cima-wordmark { display: block; width: 229px; height: auto; }
 .cima-stage { display: grid; grid-template-columns: 53px 165px minmax(0, 1fr); height: 392px; overflow: hidden; border: 1px solid #34384b; border-radius: 18px; background: #20232e; box-shadow: 0 25px 60px rgb(0 0 0 / 30%); color: #eff0f4; }
 .cima-server-rail { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 14px 0; background: #191c27; }
 .cima-server-home, .cima-server-ghost { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 11px; background: #313644; color: #babecd; font-size: 22px; }
@@ -1311,7 +1311,8 @@ a:focus-visible {
   .work-project-heading { margin-bottom: 28px; }
   .work-project-heading h3 { font-size: 32px; }
   .work-project-heading p { font-size: 14px; }
-  .work-project-heading-cimabot h3 { font-size: 48px; }
+  .work-project-heading-cimabot h3 { min-height: 54px; }
+  .cima-wordmark { width: 177px; }
   .work-project-heading-rapier h3 { font-size: 39px; }
   .lumiose-stage-body { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
   .lumiose-brief { min-height: 0; padding: 14px; }

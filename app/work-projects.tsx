@@ -72,7 +72,9 @@ export function CimabotProject() {
     <>
       <div className="work-project-heading work-project-heading-cimabot">
         <span className="work-project-eyebrow">03 / DISCORD · COMMUNITY SYSTEMS</span>
-        <h3 id="work-03-title">cimabot<span className="cima-heading-spark">✳</span></h3>
+        <h3 id="work-03-title">
+          <Image className="cima-wordmark" src="/work/cimabot-wordmark.svg" alt="cimabot" width={229} height={58} />
+        </h3>
         <p>
           The bot I made for one of UABC&apos;s biggest Discord communities. It helps
           3,000+ members find their place with roles, levels, voice rooms and the
