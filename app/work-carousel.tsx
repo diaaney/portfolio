@@ -28,6 +28,35 @@ export function WorkCarousel() {
 
   useEffect(() => {
     const element = hint.current;
+    const container = element?.parentElement;
+    const titleViewport = document.querySelector<HTMLElement>("#work .chapter-animation .hand-title");
+    const titleFrame = titleViewport?.querySelector<SVGSVGElement>(".hand-slide");
+    const titleText = titleFrame?.querySelector<SVGTextElement>("text");
+    const logo = slides.current[0]?.querySelector<HTMLElement>(".cima-wordmark");
+    if (!element || !container || !titleViewport || !titleFrame || !titleText || !logo) return;
+
+    const measure = () => {
+      const titleRect = titleViewport.getBoundingClientRect();
+      const glyph = titleText.getBBox();
+      const titleBottom = titleRect.top + (glyph.y + glyph.height) / titleFrame.viewBox.baseVal.height * titleRect.height;
+      const logoTop = logo.getBoundingClientRect().top;
+      const carouselTop = container.getBoundingClientRect().top;
+      element.style.top = `${Math.round((titleBottom + logoTop) / 2 - carouselTop)}px`;
+    };
+
+    const observer = new ResizeObserver(measure);
+    observer.observe(titleViewport);
+    observer.observe(logo);
+    window.addEventListener("resize", measure);
+    measure();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  useEffect(() => {
+    const element = hint.current;
     if (!element) return;
     const observer = new IntersectionObserver(([entry]) => {
       if (!entry.isIntersecting || hintShown.current) return;
