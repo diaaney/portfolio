@@ -643,6 +643,12 @@ a:focus-visible {
   border-bottom: 0;
 }
 
+#details > .chapter-break {
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
 .chapter-screen-reader-title {
   position: absolute;
   width: 1px;
@@ -662,11 +668,8 @@ a:focus-visible {
 }
 
 .details-placeholder {
-  display: grid;
   width: min(700px, 100%);
-  min-height: 420px;
-  place-items: center;
-  margin: 0 auto 140px;
+  margin: 32px auto 140px;
   color: #fff;
   font-size: 21px;
   font-weight: 400;
@@ -1389,7 +1392,7 @@ a:focus-visible {
   .activity-section { grid-template-columns: 1fr; gap: 14px; margin-bottom: 55px; }
   .chapter-break { width: min(330px, 100%); margin: 90px auto 75px; padding: 40px 0; }
   .work-examples { margin-bottom: 95px; }
-  .details-placeholder { min-height: 320px; margin-bottom: 95px; font-size: 18px; }
+  .details-placeholder { margin-bottom: 95px; font-size: 18px; }
   .gear-placeholder { width: calc(100% - 40px); font-size: clamp(32px, 8vw, 46px); }
   .work-carousel-dots { margin-top: 30px; }
   .work-carousel-arrow-next { right: 0; }
