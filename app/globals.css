@@ -690,29 +690,25 @@ a:focus-visible {
   position: absolute;
   top: -100px;
   left: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  width: max-content;
   max-width: calc(100vw - 32px);
   margin: 0;
-  border: 1px solid #4a484e;
-  border-radius: 999px;
-  padding: 13px 22px;
-  background: #29282e;
-  color: #e1dfe3;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1;
+  color: #c9c4ca;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 650ms ease;
+  text-align: center;
+  transition: opacity 900ms ease;
   transform: translate(-50%, -50%);
-  white-space: nowrap;
 }
 
 .work-swipe-hint.is-visible { opacity: 1; }
-.work-swipe-hint span { font-size: 18px; }
+.work-swipe-hint::after { display: block; width: 42px; height: 1px; margin: 11px auto 0; background: currentColor; content: ""; opacity: 0.5; }
 
 .work-carousel-viewport {
   width: min(1120px, calc(100vw - 48px));
@@ -1425,7 +1421,7 @@ a:focus-visible {
   .chapter-break { width: min(330px, 100%); margin: 90px auto 75px; padding: 40px 0; }
   .work-examples { margin-bottom: 95px; }
   .details-placeholder { margin-bottom: 95px; font-size: 15px; }
-  .work-swipe-hint { top: -80px; padding: 11px 17px; font-size: 13px; }
+  .work-swipe-hint { top: -80px; font-size: 16px; }
   .gear-placeholder { width: calc(100% - 40px); font-size: clamp(32px, 8vw, 46px); }
   .work-carousel-dots { margin-top: 30px; }
   .work-carousel-arrow-next { right: 0; }

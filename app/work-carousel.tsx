@@ -63,7 +63,7 @@ export function WorkCarousel() {
       hintShown.current = true;
       setShowHint(true);
       observer.disconnect();
-      hintTimer.current = window.setTimeout(() => setShowHint(false), 3000);
+      hintTimer.current = window.setTimeout(() => setShowHint(false), 4000);
     }, { threshold: 0.6 });
     observer.observe(element);
     return () => {
@@ -152,7 +152,7 @@ export function WorkCarousel() {
   return (
     <div className="work-examples work-carousel">
       <p className={`work-swipe-hint${showHint ? " is-visible" : ""}`} ref={hint} aria-hidden="true">
-        swipe to see more projects <span aria-hidden="true">→</span>
+        swipe to see more projects
       </p>
       <div
         className={`work-carousel-viewport${isDragging ? " is-dragging" : ""}`}
