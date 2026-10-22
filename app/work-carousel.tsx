@@ -13,14 +13,35 @@ const projectCount = projects.length;
 export function WorkCarousel() {
   const [active, setActive] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const [height, setHeight] = useState<number>();
+  const hint = useRef<HTMLParagraphElement>(null);
+  const hintShown = useRef(false);
+  const hintTimer = useRef(0);
   const viewport = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const slides = useRef<(HTMLElement | null)[]>([]);
-  const drag = useRef<{ startX: number; startTime: number; offset: number } | null>(null);
+  const drag = useRef<{ startX: number; startY: number; startTime: number; offset: number; horizontal: boolean } | null>(null);
   const dragFrame = useRef(0);
 
   useEffect(() => () => cancelAnimationFrame(dragFrame.current), []);
+
+  useEffect(() => {
+    const element = hint.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || hintShown.current) return;
+      hintShown.current = true;
+      setShowHint(true);
+      observer.disconnect();
+      hintTimer.current = window.setTimeout(() => setShowHint(false), 3000);
+    }, { threshold: 0.6 });
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(hintTimer.current);
+    };
+  }, []);
 
   useEffect(() => {
     const slide = slides.current[active];
@@ -40,22 +61,39 @@ export function WorkCarousel() {
   };
 
   const goTo = (next: number) => {
+    const nextIndex = Math.max(0, Math.min(projectCount - 1, next));
+    if (nextIndex === active) return;
+    window.clearTimeout(hintTimer.current);
+    setShowHint(false);
+    const top = viewport.current?.getBoundingClientRect().top;
+    if (top !== undefined && top < 80) {
+      window.scrollTo({
+        top: window.scrollY + top - Math.min(96, window.innerHeight * 0.12),
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+      });
+    }
     resetDragOffset();
-    setActive(Math.max(0, Math.min(projectCount - 1, next)));
+    setActive(nextIndex);
   };
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    if (event.pointerType !== "mouse" && event.pointerType !== "touch") return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
     if ((event.target as HTMLElement).closest("a, button")) return;
-    event.preventDefault();
+    if (event.pointerType === "mouse") event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
-    drag.current = { startX: event.clientX, startTime: performance.now(), offset: 0 };
-    setIsDragging(true);
+    drag.current = { startX: event.clientX, startY: event.clientY, startTime: performance.now(), offset: 0, horizontal: event.pointerType === "mouse" };
+    if (event.pointerType === "mouse") setIsDragging(true);
   };
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current) return;
     const raw = event.clientX - drag.current.startX;
+    if (!drag.current.horizontal) {
+      if (Math.abs(raw) < 8 || Math.abs(raw) <= Math.abs(event.clientY - drag.current.startY)) return;
+      drag.current.horizontal = true;
+      setIsDragging(true);
+    }
     const atEdge = (active === 0 && raw > 0) || (active === projectCount - 1 && raw < 0);
     drag.current.offset = atEdge ? raw * 0.24 : raw;
     if (!dragFrame.current) {
@@ -68,10 +106,10 @@ export function WorkCarousel() {
 
   const finishDrag = () => {
     if (!drag.current) return;
-    const { offset, startTime } = drag.current;
+    const { offset, startTime, horizontal } = drag.current;
     const width = slides.current[active]?.clientWidth ?? viewport.current?.clientWidth ?? 700;
     const quickFlick = Math.abs(offset) > 24 && Math.abs(offset) / Math.max(performance.now() - startTime, 1) > 0.45;
-    if (Math.abs(offset) > Math.min(90, width * 0.16) || quickFlick) {
+    if (horizontal && (Math.abs(offset) > Math.min(90, width * 0.16) || quickFlick)) {
       goTo(active + (offset < 0 ? 1 : -1));
     } else {
       resetDragOffset();
@@ -84,6 +122,9 @@ export function WorkCarousel() {
 
   return (
     <div className="work-examples work-carousel">
+      <p className={`work-swipe-hint${showHint ? " is-visible" : ""}`} ref={hint} aria-hidden="true">
+        swipe to see more projects <span aria-hidden="true">→</span>
+      </p>
       <div
         className={`work-carousel-viewport${isDragging ? " is-dragging" : ""}`}
         ref={viewport}
