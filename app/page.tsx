@@ -66,16 +66,15 @@ export default function Home() {
                   <Image src="/illustrations/diane-with-cat.png" alt="" width={1853} height={1998} />
                 </div>
                 <p>
-                  20, based in baja california, and in my second year of uni. right now
-                  i&apos;m building a web design agency for local businesses and some
-                  discord tools.
+                  20, based in baja california, and in my second year of uni. i love
+                  shipping apps and new features. right now, i&apos;m building a web
+                  design agency for local businesses and creating discord tools.
                 </p>
               </div>
               <p>
-                love shipping apps and new features. i&apos;m a native speaker of spanish
-                and english, and i started learning french a few months ago. once i&apos;m
-                comfortable with it, i&apos;d love to learn russian or chinese. i started
-                leetcode too, still figuring it out.
+                i&apos;m a native speaker of spanish and english, and i started learning
+                french a few months ago. once i&apos;m comfortable with it, i&apos;d love
+                to learn russian or chinese. i started leetcode too, still figuring it out.
               </p>
             </div>
 
