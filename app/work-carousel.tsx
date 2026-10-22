@@ -152,7 +152,8 @@ export function WorkCarousel() {
   return (
     <div className="work-examples work-carousel">
       <p className={`work-swipe-hint${showHint ? " is-visible" : ""}`} ref={hint} aria-hidden="true">
-        swipe to see more projects
+        <span>swipe to see more projects</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="m8 5 7 7-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </p>
       <div
         className={`work-carousel-viewport${isDragging ? " is-dragging" : ""}`}
