@@ -146,7 +146,7 @@ export function CimabotProject() {
       <div className="cima-update">
         <h4>future.</h4>
         <p>
-          I keep updating Cimabot as the server&apos;s needs change. If I add
+          I'll keep updating Cimabot as the server&apos;s needs change. If I add
           something new that deserves a spot here, you&apos;ll see it soon. ouo
         </p>
       </div>
@@ -167,7 +167,7 @@ export function MoreProjectsNote() {
   return (
     <div className="work-more-projects">
       <h3 id="work-04-title">
-        i&apos;ve got more projects, i&apos;m just making their pages look real cute
+        i&apos;ve got more projects, i&apos;m just making sure their pages look real cute
         before i show them here.
       </h3>
     </div>
