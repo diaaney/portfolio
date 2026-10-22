@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <SidebarNavigation />
 
-      <main className="portfolio-page" id="top">
+      <main className="portfolio-page" id="hero">
         <FlyingCat />
         <header className="hero">
           <div className="hero-heading">
@@ -73,8 +73,8 @@ export default function Home() {
               </div>
               <p>
                 i&apos;m a native speaker of spanish and english, and i started learning
-                french a few months ago. once i&apos;m comfortable with it, i&apos;d love
-                to learn russian or chinese. i started leetcode too, still figuring it out.
+                french a few months ago. once i&apos;m fluent, i&apos;d love to learn russian
+                or chinese. i&apos;ve also been practicing on leetcode lately.
               </p>
             </div>
 
