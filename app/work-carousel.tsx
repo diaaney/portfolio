@@ -63,7 +63,7 @@ export function WorkCarousel() {
       hintShown.current = true;
       setShowHint(true);
       observer.disconnect();
-      hintTimer.current = window.setTimeout(() => setShowHint(false), 4000);
+      hintTimer.current = window.setTimeout(() => setShowHint(false), 3200);
     }, { threshold: 0.6 });
     observer.observe(element);
     return () => {

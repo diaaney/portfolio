@@ -98,7 +98,7 @@ function ActivityCard({
     <article className={`activity-card activity-card-${kind}`}>
       <ActivityArt kind={kind} />
       <div
-        className="activity-heatmap"
+        className={`activity-heatmap${loading ? " is-loading" : ""}`}
         role="img"
         aria-label={days ? `${total} ${unit} in the last 3 months` : `${name} activity ${loading ? "loading" : "unavailable"}`}
         style={{ gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))` }}
@@ -149,7 +149,7 @@ function ActivitySkeleton({ kind }: { kind: "github" | "leetcode" }) {
   return (
     <article className={`activity-card activity-card-${kind}`} aria-hidden="true">
       <ActivityArt kind={kind} loading />
-      <div className="activity-heatmap" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
+      <div className="activity-heatmap is-loading" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
         {Array.from({ length: 14 }, (_, week) => (
           <div className="activity-week" key={week}>
             {Array.from({ length: 7 }, (_, day) => <span className="activity-day" key={day} />)}
