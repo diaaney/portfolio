@@ -86,7 +86,7 @@ export function SidebarNavigation() {
       const link = linksRef.current?.querySelector<HTMLAnchorElement>(`a[href="${active}"]`);
       if (!link) return;
 
-      if (window.matchMedia("(max-width: 980px)").matches) {
+      if (window.matchMedia("(max-width: 1220px)").matches) {
         const center = link.offsetLeft + link.offsetWidth / 2;
         const top = active === "#hero" ? -30 : active === "#gear"
           ? link.offsetTop + link.offsetHeight / 2 + 18 : active === "#details"

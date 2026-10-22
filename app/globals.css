@@ -1426,10 +1426,10 @@ a:focus-visible {
   to { transform: translateY(-100%); }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1220px) {
   .work-carousel-viewport { width: 100%; mask-image: none; }
-  .work-carousel-arrow-next { right: -44px; }
-  .work-carousel-arrow-previous { left: -44px; }
+  .work-carousel-arrow-next { right: -24px; }
+  .work-carousel-arrow-previous { left: -24px; }
   .site-rail-inverse { display: none; }
   .site-rail {
     position: relative;
@@ -1461,14 +1461,18 @@ a:focus-visible {
 @media (max-width: 640px) {
   .portfolio-page,
   .site-rail { width: calc(100% - 32px); }
+  .rail-links { width: calc(100% - 66px); }
   .rail-links a { font-size: 11px; }
   .flying-cat { width: 58px; height: 82px; }
   .hero-heading { margin-top: 56px; }
   .hero-heading h1 { font-size: clamp(28px, 7vw, 32px); }
   .intro-columns { --intro-gap: 18px; grid-template-columns: 1fr; margin: 25px auto 55px; }
   .intro-columns p { font-size: 15px; }
+  .intro-columns p,
+  .intro-personal { text-align: left; }
   .intro-personal { font-size: 15px; }
   .activity-section { grid-template-columns: 1fr; gap: 14px; margin-bottom: 55px; }
+  .activity-card { width: min(100%, 400px); margin-inline: auto; }
   .chapter-break { width: min(330px, 100%); margin: 90px auto 75px; padding: 40px 0; }
   .work-examples { margin-bottom: 95px; }
   .details-placeholder { margin-bottom: 95px; font-size: 15px; }
@@ -1502,7 +1506,8 @@ a:focus-visible {
   .work-project-heading p { font-size: 14px; }
   .work-project-heading-cimabot h3 { min-height: 54px; }
   .cima-wordmark { width: 179px; }
-  .cima-story { font-size: 15px; }
+  .cima-tech-list::before { display: none; }
+  .cima-story { font-size: 15px; text-align: left; }
   .cima-fun { grid-template-columns: 1fr; gap: 32px; margin-top: 64px; }
   .cima-fun p { font-size: 15px; }
   .cima-fun .cima-preview { width: min(100%, 400px); margin: 0 auto; }
@@ -1527,6 +1532,10 @@ a:focus-visible {
 
 @media (max-width: 380px) {
   .activity-footer { flex-wrap: wrap; row-gap: 8px; }
+  .rail-links { width: 100%; flex-wrap: wrap; row-gap: 9px; }
+  .rail-links .rail-intro { height: 47px; flex: 0 0 100%; }
+  .rail-links a:not(.rail-intro) { height: 34px; margin-inline: -6px; padding-inline: 6px; }
+  .flying-cat { top: -108px; width: 48px; height: 68px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
