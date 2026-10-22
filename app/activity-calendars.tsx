@@ -95,7 +95,7 @@ function ActivityCard({
     : 0;
 
   return (
-    <article className={`activity-card activity-card-${kind}`}>
+    <article className={`activity-card activity-card-${kind}${loading ? " is-loading" : ""}`}>
       <ActivityArt kind={kind} />
       <div
         className={`activity-heatmap${loading ? " is-loading" : ""}`}
@@ -103,8 +103,8 @@ function ActivityCard({
         aria-label={days ? `${total} ${unit} in the last 3 months` : `${name} activity ${loading ? "loading" : "unavailable"}`}
         style={{ gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))` }}
       >
-        {weeks.map((week) => (
-          <div className="activity-week" key={dateKey(week[0])}>
+        {weeks.map((week, index) => (
+          <div className="activity-week" key={dateKey(week[0])} style={{ transitionDelay: `${index * 24}ms` }}>
             {week.map((day) => {
               const date = dateKey(day);
               const outside = date < start || date > end;
@@ -134,7 +134,12 @@ function ActivityCard({
         })}
       </div>
       <div className="activity-footer">
-        <span className={loading ? "activity-loading-label" : undefined}>{days ? `${total} ${unit} in the last 3 months` : loading ? "Loading activity..." : "Activity unavailable"}</span>
+        <span className="activity-status" aria-live="polite">
+          <span className="activity-loading-label" aria-hidden={!loading}>Loading activity...</span>
+          <span className="activity-status-value" aria-hidden={loading} key={`${kind}-${total}-${Boolean(days)}`}>
+            {days ? `${total} ${unit} in the last 3 months` : "Activity unavailable"}
+          </span>
+        </span>
         <span className="activity-legend" aria-hidden="true">
           less
           {[0, 1, 2, 3, 4].map((level) => <i className={`activity-level-${level}`} key={level} />)}
@@ -147,7 +152,7 @@ function ActivityCard({
 
 function ActivitySkeleton({ kind }: { kind: "github" | "leetcode" }) {
   return (
-    <article className={`activity-card activity-card-${kind}`} aria-hidden="true">
+    <article className={`activity-card activity-card-${kind} is-loading`} aria-hidden="true">
       <ActivityArt kind={kind} loading />
       <div className="activity-heatmap is-loading" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
         {Array.from({ length: 14 }, (_, week) => (
