@@ -529,7 +529,7 @@ a:focus-visible {
   background: #000;
 }
 
-.activity-heatmap.is-loading .activity-week { opacity: 0.35; }
+.activity-heatmap.is-loading .activity-day { opacity: 0.3; }
 
 .activity-heatmap::after {
   position: absolute;
@@ -561,7 +561,6 @@ a:focus-visible {
   display: grid;
   grid-template-rows: repeat(7, minmax(0, 1fr));
   gap: 3px;
-  transition: opacity 420ms ease;
 }
 
 .activity-day,
@@ -639,14 +638,8 @@ a:focus-visible {
   white-space: nowrap;
 }
 
-.activity-status { display: grid; }
-.activity-status > span { grid-area: 1 / 1; }
-.activity-status .activity-loading-label { opacity: 0; }
-.activity-status .activity-status-value { opacity: 1; animation: activity-status-enter 420ms ease both; }
-.activity-card.is-loading .activity-status .activity-loading-label { opacity: 1; }
-.activity-card.is-loading .activity-status .activity-status-value { opacity: 0; animation: none; }
-.activity-status .activity-loading-label,
-.activity-status .activity-status-value { transition: opacity 320ms ease; }
+.activity-status { display: inline-block; }
+.activity-status .activity-status-value { animation: activity-status-enter 360ms ease both; }
 .activity-card.is-loading .activity-loading-label { animation: activity-loading-text 1.4s ease-in-out infinite; }
 
 @keyframes activity-status-enter {
@@ -1544,9 +1537,7 @@ a:focus-visible {
   .hero-title-phrase { animation: none; }
   .hand-strip { animation: none; }
   .activity-day { transition: none; }
-  .activity-week,
   .activity-heatmap::after,
-  .activity-status .activity-loading-label,
   .activity-status .activity-status-value { transition: none; }
   .activity-status .activity-status-value { animation: none; }
   .flying-cat-sprite { animation: none; }

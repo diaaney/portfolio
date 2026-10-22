@@ -103,8 +103,8 @@ function ActivityCard({
         aria-label={days ? `${total} ${unit} in the last 3 months` : `${name} activity ${loading ? "loading" : "unavailable"}`}
         style={{ gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))` }}
       >
-        {weeks.map((week, index) => (
-          <div className="activity-week" key={dateKey(week[0])} style={{ transitionDelay: `${index * 24}ms` }}>
+        {weeks.map((week) => (
+          <div className="activity-week" key={dateKey(week[0])}>
             {week.map((day) => {
               const date = dateKey(day);
               const outside = date < start || date > end;
@@ -112,9 +112,9 @@ function ActivityCard({
               const count = outside ? 0 : (days?.[date] ?? 0);
               return (
                 <span
-                  className={`activity-day activity-level-${activityLevel(count, kind)}${future ? " activity-day-future" : ""}`}
+                  className={`activity-day activity-level-${activityLevel(count, kind)}${future && !loading ? " activity-day-future" : ""}`}
                   key={date}
-                  data-detail={outside ? undefined : `${dayFormatter.format(day)} · ${days ? count : "–"} ${count === 1 ? singularUnit : unit}`}
+                  data-detail={outside || loading ? undefined : `${dayFormatter.format(day)} · ${days ? count : "–"} ${count === 1 ? singularUnit : unit}`}
                   aria-hidden="true"
                 />
               );
@@ -135,10 +135,13 @@ function ActivityCard({
       </div>
       <div className="activity-footer">
         <span className="activity-status" aria-live="polite">
-          <span className="activity-loading-label" aria-hidden={!loading}>Loading activity...</span>
-          <span className="activity-status-value" aria-hidden={loading} key={`${kind}-${total}-${Boolean(days)}`}>
-            {days ? `${total} ${unit} in the last 3 months` : "Activity unavailable"}
-          </span>
+          {loading ? (
+            <span className="activity-loading-label" key="loading">Loading activity...</span>
+          ) : (
+            <span className="activity-status-value" key={`${kind}-${total}-${Boolean(days)}`}>
+              {days ? `${total} ${unit} in the last 3 months` : "Activity unavailable"}
+            </span>
+          )}
         </span>
         <span className="activity-legend" aria-hidden="true">
           less
