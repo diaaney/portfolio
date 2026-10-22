@@ -146,7 +146,7 @@ export function CimabotProject() {
       <div className="cima-update">
         <h4>future.</h4>
         <p>
-          I'll keep updating Cimabot as the server&apos;s needs change. If I add
+          I&apos;ll keep updating Cimabot as the server&apos;s needs change. If I add
           something new that deserves a spot here, you&apos;ll see it soon. ouo
         </p>
       </div>

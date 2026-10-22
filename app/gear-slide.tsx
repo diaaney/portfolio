@@ -54,5 +54,11 @@ export function GearSlide() {
     };
   }, []);
 
-  return <section className="gear-stage" id="gear" aria-label="Gear" ref={sectionRef} />;
+  return (
+    <section className="gear-stage" id="gear" aria-label="Gear" ref={sectionRef}>
+      <h2 className="chapter-screen-reader-title">
+        also working on this... i just wanna launch the page 😭
+      </h2>
+    </section>
+  );
 }

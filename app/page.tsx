@@ -101,6 +101,7 @@ export default function Home() {
 
         <section className="portfolio-section" id="details" aria-label="Details">
           <ChapterTitle label="DETAILS" variant="details" />
+          <p className="details-placeholder">no details for now...</p>
         </section>
 
       </main>

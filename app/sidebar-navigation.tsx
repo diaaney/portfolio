@@ -185,6 +185,9 @@ export function SidebarNavigation() {
       {renderRail(false)}
       <div className="gear-nav-reveal" aria-hidden="true">
         {renderRail(true)}
+        <p className="gear-placeholder">
+          also working on this...<br />i just wanna launch the page 😭
+        </p>
       </div>
     </>
   );
