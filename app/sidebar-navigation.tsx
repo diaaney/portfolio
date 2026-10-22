@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 const navigation = [
-  { label: "INTRO", href: "#top" },
+  { label: "INTRO", href: "#hero" },
   { label: "ABOUT", href: "#about" },
   { label: "WORK", href: "#work" },
   { label: "DETAILS", href: "#details" },
@@ -12,7 +12,7 @@ const navigation = [
 ] as const;
 
 export function SidebarNavigation() {
-  const [active, setActive] = useState<string>("#top");
+  const [active, setActive] = useState<string>("#hero");
   const [pointerTransform, setPointerTransform] = useState<string | null>(null);
   const linksRef = useRef<HTMLElement>(null);
   const scrollFrame = useRef(0);
@@ -48,7 +48,7 @@ export function SidebarNavigation() {
             a.element!.getBoundingClientRect().top - b.element!.getBoundingClientRect().top,
           );
 
-        let current = "#top";
+        let current = "#hero";
         for (const { href, element } of sections) {
           if (element!.getBoundingClientRect().top <= marker) current = href;
         }
@@ -76,19 +76,19 @@ export function SidebarNavigation() {
 
       if (window.matchMedia("(max-width: 980px)").matches) {
         const center = link.offsetLeft + link.offsetWidth / 2;
-        const top = active === "#top" ? -30 : active === "#gear"
+        const top = active === "#hero" ? -30 : active === "#gear"
           ? link.offsetTop + link.offsetHeight / 2 + 18 : active === "#details"
             ? link.offsetTop + link.offsetHeight / 2 - 11 : link.offsetTop - 10;
-        const left = active === "#top" ? -32 : center - (active === "#gear" ? 20 : active === "#details" ? 40 : 50);
+        const left = active === "#hero" ? -32 : center - (active === "#gear" ? 20 : active === "#details" ? 40 : 50);
         const angle = active === "#gear" ? -88 : active === "#details" ? -45 : 55;
         setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(${angle}deg)`);
       } else {
         const center = link.offsetTop + link.offsetHeight / 2;
-        const top = active === "#top" ? -87 : active === "#details" ? center - 22
+        const top = active === "#hero" ? -87 : active === "#details" ? center - 22
           : active === "#gear" ? center + 24 : center - 45;
-        const left = active === "#top" ? -67 : active === "#gear" ? -84
+        const left = active === "#hero" ? -67 : active === "#gear" ? -84
           : active === "#details" ? -112 : -114;
-        const angle = active === "#top" ? 28 : active === "#gear" ? -88 : active === "#details" ? -50 : -18;
+        const angle = active === "#hero" ? 28 : active === "#gear" ? -88 : active === "#details" ? -50 : -18;
         setPointerTransform(`translate3d(${left}px, ${top}px, 0) rotate(${angle}deg)`);
       }
     };
@@ -156,15 +156,15 @@ export function SidebarNavigation() {
         />
         {navigation.map(({ label, href }) => (
           <a
-            className={href === "#top" ? "rail-intro" : undefined}
+            className={href === "#hero" ? "rail-intro" : undefined}
             href={href}
             key={href}
             onClick={(event) => navigate(event, href)}
-            aria-label={href === "#top" ? "Intro" : undefined}
+            aria-label={href === "#hero" ? "Intro" : undefined}
             aria-current={active === href ? "location" : undefined}
             tabIndex={inverse ? -1 : undefined}
           >
-            {href === "#top" && (
+            {href === "#hero" && (
               <Image
                 src="/illustrations/laughing-cat.png"
                 alt=""
@@ -173,7 +173,7 @@ export function SidebarNavigation() {
                 priority={!inverse}
               />
             )}
-            {href !== "#top" && <span>{label}</span>}
+            {href !== "#hero" && <span>{label}</span>}
           </a>
         ))}
       </nav>
