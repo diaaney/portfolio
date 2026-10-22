@@ -19,6 +19,18 @@ export function SidebarNavigation() {
   const navigationTarget = useRef<string | null>(null);
 
   useEffect(() => {
+    const updateLegacyHash = () => {
+      if (window.location.hash === "#top") {
+        window.history.replaceState(window.history.state, "", "#hero");
+      }
+    };
+
+    updateLegacyHash();
+    window.addEventListener("hashchange", updateLegacyHash);
+    return () => window.removeEventListener("hashchange", updateLegacyHash);
+  }, []);
+
+  useEffect(() => {
     const cancelScroll = () => {
       cancelAnimationFrame(scrollFrame.current);
       navigationTarget.current = null;
