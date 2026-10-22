@@ -630,6 +630,13 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+.activity-loading-label { animation: activity-loading-text 1.4s ease-in-out infinite; }
+
+@keyframes activity-loading-text {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
 .activity-legend {
   display: inline-flex;
   align-items: center;
@@ -1510,6 +1517,7 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .activity-heatmap.is-loading::after,
+  .activity-loading-label,
   .work-swipe-hint.is-visible svg { animation: none; }
   .hero-title-phrase { animation: none; }
   .hand-strip { animation: none; }

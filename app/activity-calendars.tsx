@@ -134,7 +134,7 @@ function ActivityCard({
         })}
       </div>
       <div className="activity-footer">
-        <span>{days ? `${total} ${unit} in the last 3 months` : loading ? "Loading activity..." : "Activity unavailable"}</span>
+        <span className={loading ? "activity-loading-label" : undefined}>{days ? `${total} ${unit} in the last 3 months` : loading ? "Loading activity..." : "Activity unavailable"}</span>
         <span className="activity-legend" aria-hidden="true">
           less
           {[0, 1, 2, 3, 4].map((level) => <i className={`activity-level-${level}`} key={level} />)}
@@ -157,7 +157,7 @@ function ActivitySkeleton({ kind }: { kind: "github" | "leetcode" }) {
         ))}
       </div>
       <div className="activity-months" />
-      <div className="activity-footer">Loading activity...</div>
+      <div className="activity-footer"><span className="activity-loading-label">Loading activity...</span></div>
     </article>
   );
 }
