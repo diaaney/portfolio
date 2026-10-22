@@ -143,9 +143,16 @@ export function CimabotProject() {
         />
       </div>
 
+      <p className="cima-update">
+        I keep updating Cimabot as the server&apos;s needs change. If I add
+        something new that deserves a spot here, you&apos;ll see it soon. ouo
+      </p>
+
       <div className="work-project-outro cima-outro">
-        <span>discord.js · community tools</span>
-        <a href="https://github.com/diaaney/cima" target="_blank" rel="noopener noreferrer">view the repo ↗</a>
+        <a href="https://github.com/diaaney/cima" target="_blank" rel="noopener noreferrer">
+          <span className="cima-github-icon" aria-hidden="true" />
+          view on github
+        </a>
       </div>
     </>
   );

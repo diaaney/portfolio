@@ -1261,6 +1261,10 @@ a:focus-visible {
 .cima-fun-copy { min-width: 0; }
 .cima-fun p { margin: 0; color: rgb(255 255 255 / 90%); font-size: 16px; letter-spacing: -0.01em; line-height: 1.5; text-align: left; }
 .cima-fun p + p { margin-top: 22px; }
+.cima-update { max-width: 680px; margin: 72px auto 0; color: rgb(255 255 255 / 90%); font-size: 16px; letter-spacing: -0.01em; line-height: 1.5; }
+.cima-outro { justify-content: flex-start; margin-top: 18px; }
+.cima-outro a { display: inline-flex; align-items: center; gap: 8px; }
+.cima-github-icon { display: block; width: 14px; height: 14px; flex: none; background: currentColor; mask: url("/activity/github.svg") center / contain no-repeat; }
 
 .work-more-projects { display: flex; min-height: 570px; flex-direction: column; align-items: center; justify-content: center; padding: 42px 24px 60px; text-align: center; }
 .work-more-projects h3 { max-width: 540px; margin: 0; color: #fff; font-size: 21px; font-weight: 400; letter-spacing: -0.025em; line-height: 1.5; }
@@ -1387,6 +1391,7 @@ a:focus-visible {
   .cima-fun { grid-template-columns: 1fr; gap: 32px; margin-top: 64px; }
   .cima-fun p { font-size: 15px; }
   .cima-fun .cima-preview { width: min(100%, 400px); margin: 0 auto; }
+  .cima-update { margin-top: 52px; font-size: 15px; }
   .work-project-heading-rapier h3 { font-size: 39px; }
   .work-more-projects { min-height: 430px; padding-inline: 20px; }
   .work-more-projects h3 { font-size: 18px; }
